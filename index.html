@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+        <link
+            rel="stylesheet"
+            as="style"
+            onload="this.rel='stylesheet'"
+            href="https://fonts.googleapis.com/css2?display=swap&family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600"
+        />
+
+        <title>Jashwanth S - AI/ML Engineer</title>
+        <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+        <!-- D3.js for data visualization -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+
+        <!-- Tailwind CSS for rapid UI development -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            // Custom Tailwind theme configuration
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            heading: ["Manrope", "sans-serif"],
+                            body: ["Inter", "sans-serif"],
+                        },
+                        colors: {
+                            navy: "#0a192f",
+                            "light-navy": "#112240",
+                            "lightest-navy": "#233554",
+                            slate: "#8892b0",
+                            "light-slate": "#a8b2d1",
+                            "lightest-slate": "#ccd6f6",
+                            accent: "#64ffda",
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            /* Custom CSS variables and base styles */
+            :root {
+                --header-height: 80px;
+                --scroll-offset: 90px;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background-color: #0a192f;
+                font-family: "Inter", sans-serif;
+                color: #8892b0;
+                overflow-x: hidden; /* Prevent horizontal scroll from animations */
+            }
+
+            .main-content-padding {
+                padding-top: var(--header-height);
+            }
+
+            /* Set scroll margin for smooth anchor link navigation */
+            #about,
+            #experience,
+            #education,
+            #projects,
+            #skills,
+            #contact,
+            #journey {
+                scroll-margin-top: var(--scroll-offset);
+            }
+
+            /* Style for the full-screen background canvas */
+            #background-canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: -1; /* Places the canvas behind all other content */
+                pointer-events: none; /* Allows mouse events to pass through to content below */
+            }
+
+            .nav-indicator {
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                height: 2px;
+                background-color: #64ffda;
+                transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                border-radius: 2px;
+                box-shadow: 0 0 10px #64ffda;
+            }
+
+            .nav-link.active-nav-link {
+                color: #64ffda;
+            }
+
+            .download-btn {
+                background-color: transparent;
+                border: 1px solid #64ffda;
+                color: #64ffda;
+                transition: all 0.3s ease;
+            }
+
+            .download-btn:hover {
+                background-color: rgba(100, 255, 218, 0.1);
+                transform: translateY(-2px);
+            }
+
+            .card {
+                background-color: #112240;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7),
+                    0 0 10px rgba(100, 255, 218, 0.2);
+            }
+
+            .section-heading {
+                font-family: "Manrope", sans-serif;
+                color: #ccd6f6;
+            }
+
+            .logo-container {
+                transition: transform 0.3s ease;
+            }
+            .logo-container:hover {
+                transform: scale(1.2);
+            }
+
+            .social-icon-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background-color: #112240;
+                color: #ccd6f6;
+                transition: all 0.3s ease;
+            }
+            .social-icon-btn:hover {
+                background-color: #64ffda;
+                color: #0a192f;
+                transform: translateY(-3px);
+            }
+
+            .skill-category {
+                background-color: #112240;
+                border-radius: 8px;
+                padding: 1.5rem;
+                transition: all 0.3s ease;
+                overflow: hidden;
+            }
+
+            .skill-category-title {
+                color: #ccd6f6;
+                font-weight: 600;
+                font-size: 1.125rem;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .skill-category-title::after {
+                content: "+";
+                font-size: 1.5rem;
+                transition: transform 0.3s ease;
+            }
+
+            .skill-list {
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    opacity 0.5s ease;
+                list-style-type: none;
+                padding-left: 0;
+                margin-top: 0;
+            }
+
+            .skill-category:hover {
+                background-color: #233554;
+            }
+
+            .skill-category:hover .skill-category-title::after {
+                transform: rotate(45deg);
+            }
+
+            .skill-category:hover .skill-list {
+                max-height: 500px;
+                opacity: 1;
+                margin-top: 1rem;
+            }
+
+            .skill-item {
+                padding: 0.25rem 0;
+                color: #a8b2d1;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .skill-item:hover {
+                color: #64ffda;
+                transform: translateX(5px);
+            }
+
+            .project-link {
+                color: #a8b2d1;
+                /* MODIFICATION 2a: Added transform transition */
+                transition: color 0.3s ease, transform 0.3s ease;
+            }
+            .project-link:hover {
+                color: #64ffda;
+                /* MODIFICATION 2a: Added scale on hover */
+                transform: scale(1.2);
+            }
+
+            .hidden-project {
+                display: none;
+            }
+
+            .gallery {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+                border-radius: 8px;
+            }
+            .gallery-slide {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+            .gallery-slide.active {
+                opacity: 1;
+            }
+            .gallery-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .gallery-dots {
+                position: absolute;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 0.5rem;
+            }
+            .gallery-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.5);
+                transition: background-color 0.3s ease;
+            }
+            .gallery-dot.active {
+                background-color: #64ffda;
+            }
+
+            /* Styles for the D3 Coursework Graph */
+            #coursework-graph-container {
+                background-color: #112240;
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+            .graph-node text {
+                pointer-events: none;
+                font-family: "Inter", sans-serif;
+            }
+            .graph-link {
+                stroke: #233554;
+                stroke-width: 1.5px;
+                stroke-opacity: 0.8;
+            }
+            .graph-tooltip {
+                position: absolute;
+                background-color: #233554;
+                color: #ccd6f6;
+                padding: 10px 15px;
+                border-radius: 6px;
+                border: 1px solid #64ffda;
+                font-size: 14px;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.2s;
+                box-shadow: 0 5px 15px rgba(2, 12, 27, 0.5);
+                z-index: 100;
+            }
+            .skill-bar-container {
+                width: 100%;
+                background-color: #0a192f;
+                border-radius: 5px;
+                height: 10px;
+                margin-top: 8px;
+            }
+            .skill-bar {
+                background-color: #64ffda;
+                height: 100%;
+                border-radius: 5px;
+                /* MODIFICATION 2b: Added transition for animation */
+                transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            .legend-item {
+                display: flex;
+                align-items: center;
+                margin-right: 1.5rem;
+                margin-bottom: 0.5rem;
+                font-size: 0.875rem;
+                transition: opacity 0.2s;
+            }
+            .legend-color {
+                width: 1rem;
+                height: 1rem;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+            }
+
+            /* MODIFICATION 2c: Styles for smooth scroll animations */
+            .fade-in-section {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+
+            .fade-in-section.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* MODIFICATION: Added cursor blink animation */
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+            .animate-cursor {
+                animation: blink 1s step-end infinite;
+            }
+            /* End of MODIFICATION */
+        </style>
+    </head>
+    <body class="bg-navy text-slate">
+        <!-- Full-screen canvas for the constellation background effect -->
+        <canvas id="background-canvas"></canvas>
+
+        <!-- Header section with navigation -->
+        <header
+            class="flex items-center justify-between whitespace-nowrap px-6 md:px-10 py-4 fixed top-0 left-0 right-0 bg-navy/80 backdrop-blur-md z-50 shadow-lg"
+            style="height: var(--header-height)"
+        >
+            <div class="flex items-center gap-4 text-accent">
+                <!-- Inline SVG logo -->
+                <div class="size-8 logo-container">
+                    <svg
+                        viewBox="0 0 100 100"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="48"
+                            stroke="#64ffda"
+                            stroke-width="4"
+                        />
+                        <text
+                            x="50"
+                            y="68"
+                            font-family="Manrope, sans-serif"
+                            font-size="50"
+                            fill="#64ffda"
+                            text-anchor="middle"
+                            font-weight="bold"
+                        >
+                            J
+                        </text>
+                    </svg>
+                </div>
+                <h2 class="text-lightest-slate text-xl font-bold font-heading">
+                    Jashwanth S
+                </h2>
+            </div>
+            <div class="hidden md:flex flex-1 justify-center">
+                <nav class="flex items-center gap-8 relative" id="navbar">
+                    <a
+                        class="text-sm font-medium hover:text-accent transition-colors relative nav-link"
+                        href="#about"
+                        data-section="about"
+                        >About</a
+                    >
+                    <a
+                        class="text-sm font-medium hover:text-accent transition-colors relative nav-link"
+                        href="#education"
+                        data-section="education"
+                        >Education</a
+                    >
+                    <a
+                        class="text-sm font-medium hover:text-accent transition-colors relative nav-link"
+                        href="#experience"
+                        data-section="experience"
+                        >Experience</a
+                    >
+                    <a
+                        class="text-sm font-medium hover:text-accent transition-colors relative nav-link"
+                        href="#projects"
+                        data-section="projects"
+                        >Projects</a
+                    >
+                    <a
+                        class="text-sm font-medium hover:text-accent transition-colors relative nav-link"
+                        href="#skills"
+                        data-section="skills"
+                        >Skills</a
+                    >
+                    <a
+                        class="text-sm font-medium hover:text-accent transition-colors relative nav-link"
+                        href="#journey"
+                        data-section="journey"
+                        >Journey</a
+                    >
+                    <a
+                        class="text-sm font-medium hover:text-accent transition-colors relative nav-link"
+                        href="#contact"
+                        data-section="contact"
+                        >Contact</a
+                    >
+                    <div
+                        id="nav-indicator-container"
+                        class="nav-indicator"
+                    ></div>
+                </nav>
+            </div>
+            <div class="flex gap-3">
+                <button
+                    class="download-btn flex items-center gap-2 text-sm font-bold leading-normal tracking-wider min-w-0 px-4 py-2.5 rounded-md"
+                    onclick="downloadResume()"
+                >
+                    Resume
+                </button>
+            </div>
+        </header>
+
+        <!-- Main content area, positioned above the canvas -->
+        <main class="relative z-20 main-content-padding">
+            <div
+                class="px-6 sm:px-12 md:px-24 lg:px-40 flex flex-1 justify-center py-5"
+            >
+                <div
+                    class="layout-content-container flex flex-col max-w-4xl flex-1"
+                >
+                    <!-- About Section -->
+                    <section
+                        id="about"
+                        class="flex flex-col justify-center items-center text-center min-h-[calc(100vh-var(--header-height))] py-20"
+                    >
+                        <!-- MODIFICATION: Changed "Hi, my name is" to "Who Am I?" -->
+                        <p class="text-accent text-lg font-large mb-">
+                            Who Am I?
+                        </p>
+                        <h1
+                            class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-lightest-slate font-heading"
+                        >
+                            Jashwanth S.
+                        </h1>
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate font-heading mt-2"
+                        >
+                            Turning raw data into real-world AI solutions.
+                        </h2>
+                        <p class="text-lightest-slate mt-6 max-w-xl">
+                            I'm an AI/ML Engineer specializing in deploying
+                            robust machine learning systems. Currently, I'm
+                            focused on building accessible, human-centered
+                            products and exploring the world of Generative AI.
+                        </p>
+                        <p
+                            class="text-lightest-slate mt-4 text-sm font-mono text-slate"
+                        >
+                            E-City, Bangalore | jashwanthsangu07@gmail.com |
+                            +91-9019702498
+                        </p>
+                        <div class="mt-12 flex gap-6">
+                            <a
+                                href="https://github.com/JASHWANTHS07"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="social-icon-btn"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                    ></path>
+                                </svg>
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/jashwanths07/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="social-icon-btn"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                                    ></path>
+                                    <rect
+                                        x="2"
+                                        y="9"
+                                        width="4"
+                                        height="12"
+                                    ></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                            <a
+                                href="mailto:jashwanthsangu07@gmail.com"
+                                class="social-icon-btn"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                                    ></path>
+                                    <polyline
+                                        points="22,6 12,13 2,6"
+                                    ></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Education Section -->
+                    <section
+                        id="education"
+                        class="py-24 fade-in-section"
+                    >
+                        <h2
+                            class="section-heading text-3xl font-bold mb-12 flex items-center"
+                        >
+                            <span class="text-accent text-2xl mr-3">01.</span>
+                            <!-- MODIFICATION: Renamed Header -->
+                            Where Did I Learn All This?
+                            <span
+                                class="ml-6 h-px flex-grow bg-lightest-navy"
+                            ></span>
+                        </h2>
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+                        >
+                            <div class="card p-6 rounded-lg">
+                                <h3
+                                    class="text-2xl font-bold text-lightest-slate"
+                                >
+                                    Visvesvaraya Technological University
+                                </h3>
+                                <ul
+                                    class="mt-4 space-y-2 list-disc list-inside text-light-slate"
+                                >
+                                    <li>
+                                        BE (Honors) in Artificial Intelligence &
+                                        Machine Learning
+                                    </li>
+                                    <li>CGPA: 9.53/10.0</li>
+                                    <li>Bangalore, Karnataka</li>
+                                </ul>
+                                <!-- New Button to View Certificate -->
+                                <div class="mt-6">
+                                    <button
+                                        class="download-btn flex items-center gap-2 text-sm font-bold leading-normal tracking-wider min-w-0 px-4 py-2.5 rounded-md"
+                                        onclick="window.open('./docs/Degree_Certificate.pdf', '_blank')"
+                                    >
+                                        View Credential
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="gallery">
+                                    <div class="gallery-slide active">
+                                        <img
+                                            src="./images/1.png"
+                                            alt="Graduation Photo"
+                                        />
+                                    </div>
+                                    <div class="gallery-slide">
+                                        <img
+                                            src="./images/2.png"
+                                            alt="Academic Excellence Award"
+                                        />
+                                    </div>
+                                    <div class="gallery-slide">
+                                        <img
+                                            src="./images/3.png"
+                                            alt="Volleybal Championship"
+                                        />
+                                    </div>
+                                    <div class="gallery-dots"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Coursework Graph Section -->
+                        <div id="coursework-graph-container" class="mt-16">
+                            <h3
+                                class="text-2xl font-bold text-lightest-slate mb-4 text-center"
+                            >
+                                Interactive Coursework Graph
+                            </h3>
+                            <p class="text-center mb-6 text-light-slate">
+                                A physics-based visualization of my core
+                                subjects. Hover over nodes to see connections
+                                and click for details.
+                            </p>
+                            <div
+                                id="graph-legend"
+                                class="flex flex-wrap justify-center mb-4"
+                            ></div>
+                            <div
+                                id="coursework-graph"
+                                class="w-full h-[600px] rounded-lg"
+                            ></div>
+                            <div id="graph-tooltip" class="graph-tooltip"></div>
+                        </div>
+                    </section>
+
+                    <!-- Experience Section -->
+                    <section
+                        id="experience"
+                        class="py-24 fade-in-section"
+                    >
+                        <h2
+                            class="section-heading text-3xl font-bold mb-12 flex items-center"
+                        >
+                            <span class="text-accent text-2xl mr-3">02.</span>
+                            <!-- MODIFICATION: Renamed Header -->
+                            Where I Put Skills Into Action and Excelled!!! 😁
+                            <span
+                                class="ml-6 h-px flex-grow bg-lightest-navy"
+                            ></span>
+                        </h2>
+
+                        <!-- --- MODIFICATION 1: Added new experience --- -->
+                        <div class="card p-6 rounded-lg mb-8">
+                            <h3 class="text-xl font-bold text-lightest-slate">
+                                Data Engineer (Contractor) @
+                                <a
+                                    href="https://www.globaldata.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-accent hover:underline"
+                                    >GlobalData PLC</a
+                                >
+                            </h3>
+                            <p
+                                class="text-sm font-mono mt-1 mb-4 text-light-slate"
+                            >
+                                Aug 2025 - Present
+                            </p>
+                            <ul class="space-y-2 list-disc list-inside mb-4">
+                                <li>
+                                    Automate Data collections and processing tasks across various platforms.
+                                </li>
+                                <li>
+                                    Coordinate work with interns and generate metrics that appear as data.
+                                </li>
+                                <li>
+                                    Integrate LLMs into traditional ETL pipelines.
+                                </li>
+                                <li>
+                                    Work on Sentiment Models that could run at low cost inside ETL Pipelines.
+                                </li>
+                            
+                            </ul>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Apache Spark</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Airflow</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">AWS</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Prefect</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Git</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Docker</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Langchain</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Langgraph</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Langsmith</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Agentic AI</span>
+                            </div>
+                        </div>
+                        <!-- --- End of modification --- -->
+
+                        <div class="card p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-lightest-slate">
+                                Data Engineering Intern @
+                                <a
+                                    href="https://www.aipalette.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-accent hover:underline"
+                                    >Ai Palette</a
+                                >
+                            </h3>
+                            <p
+                                class="text-sm font-mono mt-1 mb-4 text-light-slate"
+                            >
+                                Aug 2024 - Apr 2025
+                            </p>
+                            <ul class="space-y-2 list-disc list-inside mb-4">
+                                <li>
+                                    Managed and maintained more than 10 million
+                                    records across production and duplicate
+                                    datasets, ensuring data consistency and high
+                                    availability.
+                                </li>
+                                <li>
+                                    Engineered lightweight, optimized processing
+                                    workflows for live scenarios that increased
+                                    system throughput by 35%.
+                                </li>
+                                <li>
+                                    Spearheaded the development of scalable data
+                                    pipelines that automated data movement into
+                                    production environments, resulting in a 40%
+                                    reduction in manual processing time.
+                                </li>
+                            </ul>
+                            <!-- FIXED: Added skill pills for Internship -->
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Python</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">SQL</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">ETL</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Data Pipelines</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Pandas</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Airflow</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Jenkins</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Hugging Face</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Projects Section -->
+                    <section
+                        id="projects"
+                        class="py-24 fade-in-section"
+                    >
+                        <h2
+                            class="section-heading text-3xl font-bold mb-12 flex items-center"
+                        >
+                            <span class="text-accent text-2xl mr-3">03.</span>
+                            <!-- MODIFICATION: Renamed Header -->
+                            Built With Curiosity + Coffee 🤔☕☕
+                            <span
+                                class="ml-6 h-px flex-grow bg-lightest-navy"
+                            ></span>
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div
+                                class="card p-6 rounded-lg flex flex-col relative"
+                            >
+                                <h3
+                                    class="text-xl font-bold text-lightest-slate"
+                                >
+                                    Predictive Maintenance for IoT
+                                </h3>
+                                <p class="mt-2 flex-grow pr-10">
+                                    Engineered an ML system using Python,
+                                    Scikit-learn, and TensorFlow to forecast IoT
+                                    device failures, achieving 92% accuracy.
+                                </p>
+                                <!-- MODIFICATION 1: Added pill badges -->
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Python</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">TensorFlow</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Flask</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">AWS</span>
+                                </div>
+                                <div
+                                    class="absolute bottom-6 right-6 text-slate"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                        ></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div
+                                class="card p-6 rounded-lg flex flex-col relative"
+                            >
+                                <h3
+                                    class="text-xl font-bold text-lightest-slate"
+                                >
+                                    Chat with my Data (RAG System)
+                                </h3>
+                                <p class="mt-2 flex-grow pr-10">
+                                    Engineered a Retrieval-Augmented Generation
+                                    (RAG) system to process 5,000+ documents,
+                                    achieving 2.3-second average retrieval time.
+                                </p>
+                                <!-- MODIFICATION 1: Added pill badges -->
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Python</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">FAISS</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">LangChain</span>
+                                </div>
+                                <a
+                                    href="https://github.com/JASHWANTHS07/Chat_with_my_data"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="absolute bottom-6 right-6 project-link"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div
+                                class="card p-6 rounded-lg flex flex-col relative"
+                            >
+                                <h3
+                                    class="text-xl font-bold text-lightest-slate"
+                                >
+                                    Waste Management System
+                                </h3>
+                                <p class="mt-2 flex-grow pr-10">
+                                    Engineered a CNN-based waste detection
+                                    system that classified 10 distinct material
+                                    categories with 92% test accuracy.
+                                </p>
+                                <!-- MODIFICATION 1: Added pill badges -->
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">PyTorch</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">OpenCV</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">CNN</span>
+                                </div>
+                                <div
+                                    class="absolute bottom-6 right-6 text-slate"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                        ></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div
+                                class="card p-6 rounded-lg flex flex-col relative"
+                            >
+                                <h3
+                                    class="text-xl font-bold text-lightest-slate"
+                                >
+                                    SpeakEasy: Language Translation
+                                </h3>
+                                <p class="mt-2 flex-grow pr-10">
+                                    Optimized transformer models on 100,000
+                                    sentence pairs across 6 Indian languages,
+                                    achieving 23.4 BLEU score.
+                                </p>
+                                <!-- MODIFICATION 1: Added pill badges -->
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Transformers</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">HuggingFace</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">NLP</span>
+                                </div>
+                                <a
+                                    href="https://github.com/JASHWANTHS07/Indian-Language-Translator"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="absolute bottom-6 right-6 project-link"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <!-- FIXED: Removed 'flex' class so hidden-project actually hides it on load -->
+                            <div
+                                class="card p-6 rounded-lg flex-col relative hidden-project"
+                            >
+                                <h3
+                                    class="text-xl font-bold text-lightest-slate"
+                                >
+                                    PatentAnalyzer
+                                </h3>
+                                <p class="mt-2 flex-grow pr-10">
+                                    A tool to analyze and extract key
+                                    information from patent documents using NLP.
+                                </p>
+                                <!-- MODIFICATION 1: Added pill badges -->
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Python</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">NLP</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Streamlit</span>
+                                </div>
+                                <a
+                                    href="https://github.com/JASHWANTHS07/PatentAnalyzer"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="absolute bottom-6 right-6 project-link"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <!-- FIXED: Removed 'flex' class so hidden-project actually hides it on load -->
+                            <div
+                                class="card p-6 rounded-lg flex-col relative hidden-project"
+                            >
+                                <h3
+                                    class="text-xl font-bold text-lightest-slate"
+                                >
+                                    FinancialAnalyzerCLI
+                                </h3>
+                                <p class="mt-2 flex-grow pr-10">
+                                    A command-line interface for performing
+                                    financial analysis on stock data.
+                                </p>
+                                <!-- MODIFICATION 1: Added pill badges -->
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Python</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Pandas</span>
+                                    <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">API</span>
+                                </div>
+                                <a
+                                    href="https://github.com/JASHWANTHS07/FinancialAnalyzerCLI"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="absolute bottom-6 right-6 project-link"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                        ></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="text-center mt-12">
+                            <button
+                                id="show-more-projects"
+                                class="download-btn text-lg font-bold px-8 py-4 rounded-md"
+                            >
+                                Show More
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Skills Section -->
+                    <section id="skills" class="py-24 fade-in-section">
+                        <h2
+                            class="section-heading text-3xl font-bold mb-12 flex items-center"
+                        >
+                            <span class="text-accent text-2xl mr-3">04.</span>
+                            <!-- MODIFICATION: Renamed Header -->
+                            Everything in My Arsenal ⚔️🏹
+                            <span
+                                class="ml-6 h-px flex-grow bg-lightest-navy"
+                            ></span>
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="skill-category">
+                                <h3 class="skill-category-title">
+                                    Programming Languages
+                                </h3>
+                                <ul class="skill-list">
+                                    <li class="skill-item">Python</li>
+                                    <li class="skill-item">Java</li>
+                                    <li class="skill-item">SQL</li>
+                                    <li class="skill-item">R</li>
+                                    <li class="skill-item">JavaScript</li>
+                                    <li class="skill-item">HTML/CSS</li>
+                                </ul>
+                            </div>
+                            <div class="skill-category">
+                                <h3 class="skill-category-title">
+                                    AI/ML Frameworks & Libraries
+                                </h3>
+                                <ul class="skill-list">
+                                    <li class="skill-item">TensorFlow</li>
+                                    <li class="skill-item">PyTorch</li>
+                                    <li class="skill-item">Scikit-learn</li>
+                                    <li class="skill-item">XGBoost</li>
+                                    <li class="skill-item">Pandas & NumPy</li>
+                                    <li class="skill-item">
+                                        LangChain & Transformers
+                                    </li>
+                                    <li class="skill-item">Ollama</li>
+                                    <li class="skill-item">
+                                        FastAPI & Streamlit
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="skill-category">
+                                <h3 class="skill-category-title">
+                                    Databases & Data Stores
+                                </h3>
+                                <ul class="skill-list">
+                                    <li class="skill-item">MySQL</li>
+                                    <li class="skill-item">MongoDB</li>
+                                    <li class="skill-item">Elasticsearch</li>
+                                    <li class="skill-item">Vector Databases</li>
+                                </ul>
+                            </div>
+                            <div class="skill-category">
+                                <h3 class="skill-category-title">
+                                    Platforms & Tools
+                                </h3>
+                                <ul class="skill-list">
+                                    <li class="skill-item">AWS</li>
+                                    <li class="skill-item">
+                                        Google Cloud Platform
+                                    </li>
+                                    <li class="skill-item">Docker</li>
+                                    <li class="skill-item">Kubernetes</li>
+                                    <li class="skill-item">Git & GitHub</li>
+                                    <li class="skill-item">
+                                        Jupyter Notebooks
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="skill-category md:col-span-2">
+                                <h3 class="skill-category-title">
+                                    Core Concepts & Specializations
+                                </h3>
+                                <ul
+                                    class="skill-list grid grid-cols-1 sm:grid-cols-2"
+                                >
+                                    <div>
+                                        <li class="skill-item">
+                                            Deep Learning & NLP
+                                        </li>
+                                        <li class="skill-item">
+                                            Computer Vision
+                                        </li>
+                                        <li class="skill-item">
+                                            Generative AI & RAG
+                                        </li>
+                                        <li class="skill-item">
+                                            LLM Fine-tuning
+                                        </li>
+                                        <li class="skill-item">AI Agents</li>
+                                    </div>
+                                    <div>
+                                        <li class="skill-item">MLOps</li>
+                                        <li class="skill-item">
+                                            Predictive Modeling
+                                        </li>
+                                        <li class="skill-item">
+                                            Feature Engineering
+                                        </li>
+                                        <li class="skill-item">
+                                            Statistical Analysis
+                                        </li>
+                                        <li class="skill-item">
+                                            Data Structures & Algorithms
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Journey Section -->
+                    <section
+                        id="journey"
+                        class="py-24 fade-in-section"
+                    >
+                        <h2
+                            class="section-heading text-3xl font-bold mb-12 flex items-center"
+                        >
+                            <span class="text-accent text-2xl mr-3">05.</span>
+                            <!-- MODIFICATION: Renamed Header -->
+                            The Story Behind the Engineer ⚙️📈🔥
+                            <span
+                                class="ml-6 h-px flex-grow bg-lightest-navy"
+                            ></span>
+                        </h2>
+
+                        <!-- Philosophy Intro -->
+                        <div class="mb-16 text-center max-w-2xl mx-auto">
+                            <h3 class="text-xl font-bold text-lightest-slate mb-4">🧩 What Drives Me</h3>
+                            <!-- MODIFICATION: Highlighted the Quote with larger, bold, brighter text -->
+                            <p class="text-lightest-slate font-bold text-xl md:text-2xl italic">
+                                "I believe AI should be useful, reliable, and accessible. My focus is building systems that combine strong engineering with real user impact—not just model accuracy."
+                            </p>
+                        </div>
+                        
+                        <!-- Timeline Container -->
+                        <div class="relative border-l-2 border-lightest-navy ml-3 md:ml-6 space-y-12">
+                            
+                            <!-- Milestone 1: Current (GlobalData) -->
+                            <div class="relative ml-8 md:ml-12 group transition-all duration-300 hover:translate-x-2">
+                                <span class="absolute -left-[50px] md:-left-[66px] flex items-center justify-center w-10 h-10 rounded-full bg-navy border-2 border-accent text-accent shadow-[0_0_10px_rgba(100,255,218,0.3)] group-hover:bg-accent group-hover:text-navy transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                </span>
+                                <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-accent/30 transition-colors">
+                                    <h3 class="flex flex-wrap items-center gap-2 mb-1 text-lg font-bold text-lightest-slate">
+                                        🚀 Breakthrough & Growth
+                                        <span class="bg-accent/10 text-accent text-xs font-mono font-medium px-2 py-0.5 rounded border border-accent/20">GlobalData PLC</span>
+                                    </h3>
+                                    <time class="block mb-3 text-sm font-mono text-slate">Aug 2025 - Present</time>
+                                    <p class="text-slate mb-3">
+                                        Integration of LLMs into ETL systems and development of sentiment models optimized for production environments.
+                                    </p>
+                                    <p class="text-light-slate text-sm border-l-2 border-accent pl-4 italic">
+                                        "Earned <span class="text-accent font-semibold">Rewards & Recognition Awards</span> for consistently transforming learning into execution."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Milestone 2: Internship (Ai Palette) -->
+                            <div class="relative ml-8 md:ml-12 group transition-all duration-300 hover:translate-x-2">
+                                <span class="absolute -left-[50px] md:-left-[66px] flex items-center justify-center w-10 h-10 rounded-full bg-navy border-2 border-slate text-slate group-hover:border-accent group-hover:text-accent transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                </span>
+                                <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-slate/30 transition-colors">
+                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">🚀 Stepping into Industry</h3>
+                                    <time class="block mb-3 text-sm font-mono text-slate">Aug 2024</time>
+                                    <p class="text-slate">
+                                        Engineered scalable data pipelines processing over <strong>10M+ records</strong>. Improved throughput by 35% and reduced manual workload by 40%.
+                                    </p>
+                                    <p class="text-slate mt-2">
+                                        Learned that AI isn’t just about architecture—it’s about respecting the data, understanding its behavior, and designing pipelines that make models truly intelligent.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Milestone 3: The Builder Phase -->
+                            <div class="relative ml-8 md:ml-12 group transition-all duration-300 hover:translate-x-2">
+                                <span class="absolute -left-[50px] md:-left-[66px] flex items-center justify-center w-10 h-10 rounded-full bg-navy border-2 border-slate text-slate group-hover:border-accent group-hover:text-accent transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                                </span>
+                                <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-slate/30 transition-colors">
+                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">🧠 Building Real-World Solutions</h3>
+                                    <time class="block mb-3 text-sm font-mono text-slate">2023</time>
+                                    <p class="text-slate">
+                                        Transitioned from academic models to solving real problems—like forecasting failures in IoT devices and building efficient RAG systems that reduced query latency by 2.3 seconds for large datasets.
+                                    </p>
+                                    <p class="text-light-slate text-sm mt-3">
+                                        <em>Key Realization:</em> Even advanced models collapse without the right data foundation.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Milestone 4: The Spark -->
+                            <div class="relative ml-8 md:ml-12 group transition-all duration-300 hover:translate-x-2">
+                                <span class="absolute -left-[50px] md:-left-[66px] flex items-center justify-center w-10 h-10 rounded-full bg-navy border-2 border-slate text-slate group-hover:border-accent group-hover:text-accent transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                                </span>
+                                <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-slate/30 transition-colors">
+                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">🌱 From Curiosity to Craft</h3>
+                                    <time class="block mb-3 text-sm font-mono text-slate">Engineering Year 1</time>
+                                    <p class="text-slate">
+                                        It started with a simple question: <span class="text-accent">"How do machines learn?"</span>
+                                    </p>
+                                    <p class="text-slate mt-2">
+                                        Built my first handwritten digit classifier. Watching a model learn from data fascinated me and sparked a drive to explore intelligence at scale.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Vision Footer -->
+                        <div class="mt-16 bg-light-navy p-8 rounded-lg border-l-4 border-accent shadow-lg transform transition-transform hover:-translate-y-1">
+                            <h3 class="text-xl font-bold text-lightest-slate mb-3 flex items-center gap-2">
+                                🔮 Vision Ahead
+                            </h3>
+                            <p class="text-slate text-lg mb-4">
+                                Currently exploring <strong>AI Agents, low-cost inference, and real-time ML systems</strong>—aiming to build products that scale to millions, not just benchmarks.
+                            </p>
+                            <p class="text-light-slate font-mono text-sm">
+                                "My long-term goal is to build scalable and powerful AI systems that solve real-world problems at meaningful scale — systems that don’t just work in research papers, but in everyday life."
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section
+                        id="contact"
+                        class="py-24 text-center fade-in-section"
+                    >
+                        <h2 class="text-accent text-lg font-mono mb-4">
+                            <!-- MODIFICATION: Renamed Header -->
+                            06. Let’s Talk
+                        </h2>
+                        <h3 class="section-heading text-5xl font-bold mb-4">
+                            Get In Touch 🤝✨
+                        </h3>
+                        <p class="text-lightest-slate max-w-xl mx-auto mb-8">
+                            I'm currently open to new opportunities and
+                            collaborations. Whether you have a question or just
+                            want to say hi, I’ll try my best to get back to you!
+                        </p>
+                        <!-- MODIFICATION 3: Added subject line to mailto link -->
+                        <a
+                            href="mailto:jashwanthsangu07@gmail.com?subject=Let's%20connect!"
+                            class="download-btn inline-block text-lg font-bold px-8 py-4 rounded-md"
+                            >Say Hello</a
+                        >
+                    </section>
+
+                    <!-- Footer -->
+                    <footer class="text-center py-8 mb-4">
+                        <p class="text-sm text-slate font-mono hover:text-accent transition-colors cursor-pointer">
+                            Learn. Build. Solve - Jashwanth S<span class="text-accent font-bold animate-cursor">|</span>
+                        </p>
+                    </footer>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // --- Navigation Indicator Script ---
+                const navIndicator = document.getElementById(
+                    "nav-indicator-container"
+                );
+                const navLinks = document.querySelectorAll(".nav-link");
+
+                function moveIndicator(element) {
+                    if (element) {
+                        navIndicator.style.width = `${element.offsetWidth}px`;
+                        navIndicator.style.left = `${element.offsetLeft}px`;
+                        navIndicator.style.opacity = "1";
+                    }
+                }
+
+                const sections = document.querySelectorAll("main section[id]");
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        navLinks.forEach((link) =>
+                            link.classList.remove("active-nav-link")
+                        );
+                        const intersectingEntry = entries.find(
+                            (entry) => entry.isIntersecting
+                        );
+                        if (intersectingEntry) {
+                            const activeId = intersectingEntry.target.id;
+                            const activeLink = document.querySelector(
+                                `.nav-link[data-section="${activeId}"]`
+                            );
+                            if (activeLink) {
+                                activeLink.classList.add("active-nav-link");
+                                moveIndicator(activeLink);
+                            }
+                        }
+                    },
+                    { rootMargin: `-80px 0px -40% 0px`, threshold: 0.1 }
+                );
+
+                sections.forEach((section) => {
+                    if (section) observer.observe(section);
+                });
+                const initialActiveLink = document.querySelector(
+                    '.nav-link[data-section="about"]'
+                );
+                if (initialActiveLink) {
+                    initialActiveLink.classList.add("active-nav-link");
+                    moveIndicator(initialActiveLink);
+                }
+                navLinks.forEach((link) => {
+                    link.addEventListener("click", function (e) {
+                        navLinks.forEach((l) =>
+                            l.classList.remove("active-nav-link")
+                        );
+                        this.classList.add("active-nav-link");
+                        moveIndicator(this);
+                    });
+                });
+
+                // --- MODIFICATION 2c: Scroll Animation Observer ---
+                const sectionObserver = new IntersectionObserver(
+                    (entries, observer) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add("is-visible");
+                                observer.unobserve(entry.target); // Observe only once
+                            }
+                        });
+                    },
+                    { rootMargin: "0px 0px -100px 0px" } // Trigger when 100px from bottom
+                );
+
+                const sectionsToFade =
+                    document.querySelectorAll(".fade-in-section");
+                sectionsToFade.forEach((section) => {
+                    sectionObserver.observe(section);
+                });
+                // --- End of MODIFICATION 2c ---
+
+                // --- Image Gallery Script ---
+                const gallery = document.querySelector(".gallery");
+                if (gallery) {
+                    const slides = gallery.querySelectorAll(".gallery-slide");
+                    const dotsContainer =
+                        gallery.querySelector(".gallery-dots");
+                    let currentSlide = 0;
+
+                    slides.forEach((slide, index) => {
+                        const dot = document.createElement("div");
+                        dot.classList.add("gallery-dot");
+                        if (index === 0) dot.classList.add("active");
+                        dotsContainer.appendChild(dot);
+                    });
+
+                    const dots = dotsContainer.querySelectorAll(".gallery-dot");
+
+                    function showSlide(index) {
+                        slides.forEach((slide, i) => {
+                            slide.classList.toggle("active", i === index);
+                            dots[i].classList.toggle("active", i === index);
+                        });
+                    }
+
+                    function nextSlide() {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        showSlide(currentSlide);
+                    }
+                    setInterval(nextSlide, 3000);
+                }
+
+                // --- D3 Coursework Graph Script ---
+                const graphContainer =
+                    document.getElementById("coursework-graph");
+                if (graphContainer) {
+                    // --- Text Wrapping Function ---
+                    function wrap(text, width) {
+                        text.each(function () {
+                            var text = d3.select(this),
+                                words = text.text().split(/\s+/).reverse(),
+                                word,
+                                line = [],
+                                lineNumber = 0,
+                                lineHeight = 1.1, // ems
+                                y = text.attr("y"),
+                                dy = 0, // We'll calculate dy based on lines
+                                tspan = text
+                                    .text(null)
+                                    .append("tspan")
+                                    .attr("x", 0)
+                                    .attr("y", y)
+                                    .attr("dy", dy + "em");
+
+                            while ((word = words.pop())) {
+                                line.push(word);
+                                tspan.text(line.join(" "));
+                                if (
+                                    tspan.node().getComputedTextLength() > width
+                                ) {
+                                    line.pop();
+                                    tspan.text(line.join(" "));
+                                    line = [word];
+                                    tspan = text
+                                        .append("tspan")
+                                        .attr("x", 0)
+                                        .attr("y", y)
+                                        .attr(
+                                            "dy",
+                                            ++lineNumber * lineHeight +
+                                                dy +
+                                                "em"
+                                        )
+                                        .text(word);
+                                }
+                            }
+                            // Center the text block vertically
+                            const textBlockHeight = lineNumber * lineHeight;
+                            // MODIFICATION: Use font-size to correctly calculate 'y' offset in pixels
+                            const fontSize = parseFloat(text.style("font-size")); // Get font size in px
+                            text.selectAll("tspan").attr(
+                                "y",
+                                (-textBlockHeight / 2) * fontSize // Convert em to px for 'y'
+                            ); // Adjust y based on number of lines
+                        });
+                    }
+
+                    // --- Data Setup ---
+                    const graphNodes = [
+                        // Level 0: Categories (Main Nodes)
+                        {
+                            id: "Mathematics",
+                            type: "category",
+                            color: "#ff6384",
+                        },
+                        {
+                            id: "AI/ML",
+                            type: "category",
+                            color: "#36a2eb",
+                        },
+                        {
+                            id: "Programming & Software Dev",
+                            type: "category",
+                            color: "#ffce56",
+                        },
+                        {
+                            id: "Data Science & Big Data",
+                            type: "category",
+                            color: "#4bc0c0",
+                        },
+                        {
+                            id: "Systems & Infrastructure",
+                            type: "category",
+                            color: "#9966ff",
+                        },
+
+                        // Level 1: Subjects (Sub-Nodes)
+                        {
+                            id: "Math Foundation",
+                            type: "subject",
+                            category: "Mathematics",
+                            level: 90,
+                        },
+                        {
+                            id: "Discrete Math & Stats",
+                            type: "subject",
+                            category: "Mathematics",
+                            level: 85,
+                        },
+                        {
+                            id: "Research & IPR",
+                            type: "subject",
+                            category: "Mathematics",
+                            level: 80,
+                        },
+                        {
+                            id: "R Programming",
+                            type: "subject",
+                            category: "Mathematics",
+                            level: 88,
+                        },
+
+                        {
+                            id: "Intro to AI",
+                            type: "subject",
+                            category: "AI/ML",
+                            level: 95,
+                        },
+                        {
+                            id: "Machine Learning",
+                            type: "subject",
+                            category: "AI/ML",
+                            level: 98,
+                        },
+                        {
+                            id: "Deep Learning",
+                            type: "subject",
+                            category: "AI/ML",
+                            level: 96,
+                        },
+                        {
+                            id: "Generative AI",
+                            type: "subject",
+                            category: "AI/ML",
+                            level: 97,
+                        },
+                        {
+                            id: "AI/ML Ethics",
+                            type: "subject",
+                            category: "AI/ML",
+                            level: 85,
+                        },
+                        {
+                            id: "NLP",
+                            type: "subject",
+                            category: "AI/ML",
+                            level: 94,
+                        },
+
+                        {
+                            id: "Data Structures",
+                            type: "subject",
+                            category: "Programming & Software Dev",
+                            level: 92,
+                        },
+                        {
+                            id: "OOP with Java",
+                            type: "subject",
+                            category: "Programming & Software Dev",
+                            level: 88,
+                        },
+                        {
+                            id: "Operating Systems",
+                            type: "subject",
+                            category: "Programming & Software Dev",
+                            level: 82,
+                        },
+                        {
+                            id: "Software Eng.",
+                            type: "subject",
+                            category: "Programming & Software Dev",
+                            level: 89,
+                        },
+                        {
+                            id: "Web Technology",
+                            type: "subject",
+                            category: "Programming & Software Dev",
+                            level: 85,
+                        },
+                        {
+                            id: "Computer Networks",
+                            type: "subject",
+                            category: "Programming & Software Dev",
+                            level: 87,
+                        },
+
+                        {
+                            id: "Data Science",
+                            type: "subject",
+                            category: "Data Science & Big Data",
+                            level: 93,
+                        },
+                        {
+                            id: "Big Data Tech",
+                            type: "subject",
+                            category: "Data Science & Big Data",
+                            level: 90,
+                        },
+                        {
+                            id: "Data Visualization",
+                            type: "subject",
+                            category: "Data Science & Big Data",
+                            level: 91,
+                        },
+
+                        {
+                            id: "DBMS",
+                            type: "subject",
+                            category: "Systems & Infrastructure",
+                            level: 86,
+                        },
+                        {
+                            id: "Algorithms",
+                            type: "subject",
+                            category: "Systems & Infrastructure",
+                            level: 94,
+                        },
+                        {
+                            id: "Cyber Security",
+                            type: "subject",
+                            category: "Systems & Infrastructure",
+                            level: 80,
+                        },
+                        {
+                            id: "Industrial Automation",
+                            type: "subject",
+                            category: "Systems & Infrastructure",
+                            level: 78,
+                        },
+                    ];
+
+                    const graphLinks = graphNodes
+                        .filter((node) => node.type === "subject")
+                        .map((subjectNode) => ({
+                            source: subjectNode.id,
+                            target: subjectNode.category,
+                        }));
+
+                    const width = graphContainer.clientWidth;
+                    const height = graphContainer.clientHeight;
+
+                    const categories = graphNodes.filter(
+                        (n) => n.type === "category"
+                    );
+                    const colorScale = d3
+                        .scaleOrdinal()
+                        .domain(categories.map((c) => c.id))
+                        .range(categories.map((c) => c.color));
+
+                    const simulation = d3
+                        .forceSimulation(graphNodes)
+                        .force(
+                            "link",
+                            d3
+                                .forceLink(graphLinks)
+                                .id((d) => d.id)
+                                .distance((d) =>
+                                    d.target.type === "category" ? 120 : 60
+                                )
+                                .strength(0.5)
+                        )
+                        .force("charge", d3.forceManyBody().strength(-250))
+                        .force("center", d3.forceCenter(width / 2, height / 2))
+                        .force(
+                            "collide",
+                            d3
+                                .forceCollide()
+                                .radius(
+                                    (d) =>
+                                        (d.type === "category"
+                                            ? 45
+                                            : d.id.length * 2.5 + 10) + 5
+                                )
+                        );
+
+                    const svg = d3
+                        .select("#coursework-graph")
+                        .append("svg")
+                        .attr("viewBox", [0, 0, width, height])
+                        .attr("width", width)
+                        .attr("height", height);
+
+                    const link = svg
+                        .append("g")
+                        .selectAll(".graph-link")
+                        .data(graphLinks)
+                        .join("line")
+                        .attr("class", "graph-link");
+
+                    const node = svg
+                        .append("g")
+                        .selectAll(".graph-node")
+                        .data(graphNodes)
+                        .join("g")
+                        .attr("class", "graph-node")
+                        .call(drag(simulation));
+
+                    const circles = node
+                        .append("circle")
+                        .attr("r", (d) =>
+                            d.type === "category" ? 45 : d.id.length * 2.5 + 5
+                        )
+                        .attr("fill", (d) =>
+                            d.type === "category"
+                                ? d.color
+                                : colorScale(d.category)
+                        )
+                        .attr("stroke", (d) =>
+                            d.type === "category" ? d.color : "#0a192f"
+                        )
+                        .attr("stroke-width", (d) =>
+                            d.type === "category" ? 0 : 3
+                        );
+
+                    const labels = node
+                        .append("text")
+                        .text((d) => d.id)
+                        .attr("text-anchor", "middle")
+                        .attr("dy", 0)
+                        .style("font-size", (d) =>
+                            d.type === "category" ? "12px" : "10px"
+                        )
+                        .style("font-weight", (d) =>
+                            d.type === "category" ? "bold" : "normal"
+                        )
+                        .style("fill", "#0a192f")
+                        .call(wrap, (d) => (d.type === "category" ? 70 : 50));
+
+                    const tooltip = d3.select("#graph-tooltip");
+                    const legendItems = d3
+                        .select("#graph-legend")
+                        .selectAll(".legend-item");
+
+                    // --- Interactivity ---
+                    node.on("mouseover", handleMouseOver)
+                        .on("mouseout", handleMouseOut)
+                        .on("click", handleClick);
+
+                    function handleMouseOver(event, d) {
+                        d3.select(this)
+                            .select("circle")
+                            .transition()
+                            .duration(200)
+                            .attr(
+                                "r",
+                                (d) =>
+                                    (d.type === "category"
+                                        ? 45
+                                        : d.id.length * 2.5 + 5) + 10
+                            );
+
+                        const isCategory = d.type === "category";
+                        const categoryName = isCategory ? d.id : d.category;
+                        const connectedIds = isCategory
+                            ? [
+                                  d.id,
+                                  ...graphNodes
+                                      .filter((n) => n.category === d.id)
+                                      .map((n) => n.id),
+                              ]
+                            : [d.id, d.category];
+
+                        node.style("opacity", (n) =>
+                            connectedIds.includes(n.id) ? 1 : 0.2
+                        );
+                        link.style("stroke", (l) =>
+                            connectedIds.includes(l.source.id) &&
+                            connectedIds.includes(l.target.id)
+                                ? "#64ffda"
+                                : "#233554"
+                        ).style("stroke-width", (l) =>
+                            connectedIds.includes(l.source.id) &&
+                            connectedIds.includes(l.target.id)
+                                ? 2.5
+                                : 1.5
+                        );
+
+                        legendItems.style("opacity", (l) =>
+                            l.id === categoryName ? 1 : 0.3
+                        );
+                    }
+
+                    function handleMouseOut(event, d) {
+                        d3.select(this)
+                            .select("circle")
+                            .transition()
+                            .duration(200)
+                            .attr("r", (d) =>
+                                d.type === "category"
+                                    ? 45
+                                    : d.id.length * 2.5 + 5
+                            );
+                        node.style("opacity", 1);
+                        link.style("stroke", "#233554").style(
+                            "stroke-width",
+                            1.5
+                        );
+                        legendItems.style("opacity", 1);
+                    }
+
+                    function handleClick(event, d) {
+                        // MODIFICATION 2b: Animate skill bar on click
+                        if (d.type === "subject") {
+                            event.stopPropagation();
+                            tooltip
+                                .transition()
+                                .duration(200)
+                                .style("opacity", 1);
+                            tooltip
+                                .html(
+                                    `
+                                <strong>${d.id}</strong>
+                                <div class="text-xs text-light-slate">${d.category}</div>
+                                <div class="mt-2 text-xs">Proficiency:</div>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar" id="tooltip-skill-bar" style="width: 0%;"></div>
+                                </div>
+                            `
+                                )
+                                .style("left", event.pageX + 15 + "px")
+                                .style("top", event.pageY - 28 + "px");
+
+                            // Animate the bar width after it's rendered
+                            setTimeout(() => {
+                                const bar =
+                                    document.getElementById(
+                                        "tooltip-skill-bar"
+                                    );
+                                if (bar) {
+                                    bar.style.width = `${d.level}%`;
+                                }
+                            }, 50); // Small delay to trigger transition
+                        }
+                    }
+
+                    d3.select("body").on("click", () => {
+                        tooltip.transition().duration(200).style("opacity", 0);
+                    });
+
+                    // --- TICK FUNCTION WITH BOUNDARY CONSTRAINTS ---
+                    simulation.on("tick", () => {
+                        link.attr("x1", (d) => d.source.x)
+                            .attr("y1", (d) => d.source.y)
+                            .attr("x2", (d) => d.target.x)
+                            .attr("y2", (d) => d.target.y);
+
+                        node.attr("transform", (d) => {
+                            const radius =
+                                d.type === "category"
+                                    ? 45
+                                    : d.id.length * 2.5 + 5;
+                            d.x = Math.max(
+                                radius,
+                                Math.min(width - radius, d.x)
+                            );
+                            d.y = Math.max(
+                                radius,
+                                Math.min(height - radius, d.y)
+                            );
+                            return `translate(${d.x},${d.y})`;
+                        });
+                    });
+
+                    function drag(simulation) {
+                        function dragstarted(event, d) {
+                            if (!event.active)
+                                simulation.alphaTarget(0.3).restart();
+                            d.fx = d.x;
+                            d.fy = d.y;
+                        }
+                        function dragged(event, d) {
+                            d.fx = event.x;
+                            d.fy = event.y;
+                        }
+                        function dragended(event, d) {
+                            if (!event.active) simulation.alphaTarget(0);
+                            d.fx = null;
+                            d.fy = null;
+                        }
+                        return d3
+                            .drag()
+                            .on("start", dragstarted)
+                            .on("drag", dragged)
+                            .on("end", dragended);
+                    }
+
+                    // --- Legend ---
+                    const legendContainer = d3.select("#graph-legend");
+                    categories.forEach((cat) => {
+                        const legendItem = legendContainer
+                            .append("div")
+                            .attr("class", "legend-item")
+                            .datum(cat);
+                        legendItem
+                            .append("div")
+                            .attr("class", "legend-color")
+                            .style("background-color", cat.color);
+                        legendItem
+                            .append("span")
+                            .text(cat.id)
+                            .style("color", "#a8b2d1");
+                    });
+                }
+            });
+
+            // --- Resume Download Script ---
+            function downloadResume() {
+                const resumeUrl = "./docs/my_resume.pdf";
+                const link = document.createElement("a");
+                link.href = resumeUrl;
+                link.download = "Jashwanth_S_Resume.pdf";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // --- Show More Projects Script ---
+            document
+                .getElementById("show-more-projects")
+                .addEventListener("click", function () {
+                    const hiddenProjects =
+                        document.querySelectorAll(".hidden-project");
+                    // FIX: .trim() handles the whitespace around button text in HTML
+                    const isHidden = this.textContent.trim() === "Show More";
+                    hiddenProjects.forEach((project) => {
+                        project.style.display = isHidden ? "flex" : "none";
+                    });
+                    this.textContent = isHidden ? "Show Less" : "Show More";
+                });
+
+            // --- Constellation Animation Script ---
+            window.addEventListener("load", function () {
+                initCanvas("background-canvas", "#64ffda");
+
+                function initCanvas(canvasId, particleColor) {
+                    const canvas = document.getElementById(canvasId);
+                    if (!canvas) return;
+                    const ctx = canvas.getContext("2d");
+                    let particlesArray = [];
+
+                    function setCanvasSize() {
+                        canvas.width = window.innerWidth;
+                        canvas.height = window.innerHeight;
+                    }
+                    setCanvasSize();
+
+                    class Particle {
+                        constructor(x, y, directionX, directionY, size, color) {
+                            this.x = x;
+                            this.y = y;
+                            this.directionX = directionX;
+                            this.directionY = directionY;
+                            this.size = size;
+                            this.color = color;
+                        }
+                        draw() {
+                            ctx.beginPath();
+                            ctx.arc(
+                                this.x,
+                                this.y,
+                                this.size,
+                                0,
+                                Math.PI * 2,
+                                false
+                            );
+                            ctx.fillStyle = this.color;
+                            ctx.fill();
+                        }
+                        update() {
+                            if (this.x > canvas.width || this.x < 0)
+                                this.directionX = -this.directionX;
+                            if (this.y > canvas.height || this.y < 0)
+                                this.directionY = -this.directionY;
+                            this.x += this.directionX;
+                            this.y += this.directionY;
+                            this.draw();
+                        }
+                    }
+
+                    function initParticles() {
+                        particlesArray = [];
+                        let numberOfParticles =
+                            (canvas.height * canvas.width) / 9000;
+                        for (let i = 0; i < numberOfParticles; i++) {
+                            let size = Math.random() * 2 + 1;
+                            let x =
+                                Math.random() * (canvas.width - size * 4) +
+                                size * 2;
+                            let y =
+                                Math.random() * (canvas.height - size * 4) +
+                                size * 2;
+                            let directionX = Math.random() * 0.4 - 0.2;
+                            let directionY = Math.random() * 0.4 - 0.2;
+                            particlesArray.push(
+                                new Particle(
+                                    x,
+                                    y,
+                                    directionX,
+                                    directionY,
+                                    size,
+                                    particleColor
+                                )
+                            );
+                        }
+                    }
+
+                    function connect() {
+                        let opacityValue = 1;
+                        for (let a = 0; a < particlesArray.length; a++) {
+                            for (let b = a; b < particlesArray.length; b++) {
+                                let distance =
+                                    (particlesArray[a].x -
+                                        particlesArray[b].x) *
+                                        (particlesArray[a].x -
+                                            particlesArray[b].x) +
+                                    (particlesArray[a].y -
+                                        particlesArray[b].y) *
+                                        (particlesArray[a].y -
+                                            particlesArray[b].y);
+                                if (
+                                    distance <
+                                    (canvas.width / 7) * (canvas.height / 7)
+                                ) {
+                                    opacityValue = 1 - distance / 20000;
+                                    ctx.strokeStyle = `rgba(100, 255, 218, ${opacityValue})`;
+                                    ctx.lineWidth = 1;
+                                    ctx.beginPath();
+                                    ctx.moveTo(
+                                        particlesArray[a].x,
+                                        particlesArray[a].y
+                                    );
+                                    ctx.lineTo(
+                                        particlesArray[b].x,
+                                        particlesArray[b].y
+                                    );
+                                    ctx.stroke();
+                                }
+                            }
+                        }
+                    }
+
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        for (let i = 0; i < particlesArray.length; i++) {
+                            particlesArray[i].update();
+                        }
+                        connect();
+                    }
+
+                    window.addEventListener("resize", () => {
+                        setCanvasSize();
+                        initParticles();
+                    });
+
+                    initParticles();
+                    animate();
+                }
+            });
+        </script>
+    </body>
+</html>

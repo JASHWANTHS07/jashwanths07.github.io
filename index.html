@@ -14,9 +14,6 @@
         <title>Jashwanth S - AI/ML Engineer</title>
         <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
-        <!-- D3.js for data visualization -->
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-
         <!-- Tailwind CSS for rapid UI development -->
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
@@ -267,65 +264,6 @@
             }
             .gallery-dot.active {
                 background-color: #64ffda;
-            }
-
-            /* Styles for the D3 Coursework Graph */
-            #coursework-graph-container {
-                background-color: #112240;
-                border-radius: 8px;
-                padding: 1.5rem;
-                margin-top: 2rem;
-            }
-            .graph-node text {
-                pointer-events: none;
-                font-family: "Inter", sans-serif;
-            }
-            .graph-link {
-                stroke: #233554;
-                stroke-width: 1.5px;
-                stroke-opacity: 0.8;
-            }
-            .graph-tooltip {
-                position: absolute;
-                background-color: #233554;
-                color: #ccd6f6;
-                padding: 10px 15px;
-                border-radius: 6px;
-                border: 1px solid #64ffda;
-                font-size: 14px;
-                pointer-events: none;
-                opacity: 0;
-                transition: opacity 0.2s;
-                box-shadow: 0 5px 15px rgba(2, 12, 27, 0.5);
-                z-index: 100;
-            }
-            .skill-bar-container {
-                width: 100%;
-                background-color: #0a192f;
-                border-radius: 5px;
-                height: 10px;
-                margin-top: 8px;
-            }
-            .skill-bar {
-                background-color: #64ffda;
-                height: 100%;
-                border-radius: 5px;
-                /* MODIFICATION 2b: Added transition for animation */
-                transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            }
-            .legend-item {
-                display: flex;
-                align-items: center;
-                margin-right: 1.5rem;
-                margin-bottom: 0.5rem;
-                font-size: 0.875rem;
-                transition: opacity 0.2s;
-            }
-            .legend-color {
-                width: 1rem;
-                height: 1rem;
-                border-radius: 50%;
-                margin-right: 0.5rem;
             }
 
             /* MODIFICATION 2c: Styles for smooth scroll animations */
@@ -638,28 +576,6 @@
                             </div>
                         </div>
 
-                        <!-- Interactive Coursework Graph Section -->
-                        <div id="coursework-graph-container" class="mt-16">
-                            <h3
-                                class="text-2xl font-bold text-lightest-slate mb-4 text-center"
-                            >
-                                Interactive Coursework Graph
-                            </h3>
-                            <p class="text-center mb-6 text-light-slate">
-                                A physics-based visualization of my core
-                                subjects. Hover over nodes to see connections
-                                and click for details.
-                            </p>
-                            <div
-                                id="graph-legend"
-                                class="flex flex-wrap justify-center mb-4"
-                            ></div>
-                            <div
-                                id="coursework-graph"
-                                class="w-full h-[600px] rounded-lg"
-                            ></div>
-                            <div id="graph-tooltip" class="graph-tooltip"></div>
-                        </div>
                     </section>
 
                     <!-- Experience Section -->
@@ -672,7 +588,7 @@
                         >
                             <span class="text-accent text-2xl mr-3">02.</span>
                             <!-- MODIFICATION: Renamed Header -->
-                            Where I Put Skills Into Action and Excelled!!! 😁
+                            Where I Put Skills Into Action and Excelled!!!
                             <span
                                 class="ml-6 h-px flex-grow bg-lightest-navy"
                             ></span>
@@ -681,7 +597,7 @@
                         <!-- --- MODIFICATION 1: Added new experience --- -->
                         <div class="card p-6 rounded-lg mb-8">
                             <h3 class="text-xl font-bold text-lightest-slate">
-                                AI Engineer (Contractor) @
+                                AI Engineer @
                                 <a
                                     href="https://www.globaldata.com/"
                                     target="_blank"
@@ -697,29 +613,31 @@
                             </p>
                             <ul class="space-y-2 list-disc list-inside mb-4">
                                 <li>
-                                    Automate Data collections and processing tasks across various platforms.
+                                    Built LLM-powered automated tagging workflows integrated with Spark, combining NER, TF-IDF/KeyBERT keyword extraction, and embedding-based semantic search to tag content at scale; used zero/few-shot LLM prompting via API for context-aware classification, reducing manual tagging effort by 70%.
                                 </li>
                                 <li>
-                                    Coordinate work with interns and generate metrics that appear as data.
+                                    Automated data pipelines with Apache Airflow, orchestrating multi-step DAGs for ingestion, transformation, and validation across 1M+ rows weekly; incorporated retry logic, alerting, and dependency management to ensure fault-tolerant execution, cutting manual effort by 60%.
                                 </li>
                                 <li>
-                                    Integrate LLMs into traditional ETL pipelines.
+                                    Developed Spark-based enrichment pipelines handling 100GB+ datasets, applying distributed joins and custom UDFs to enrich records against internally validated mapping files and LLM-generated annotations, ensuring consistent, high-quality feature enrichment at scale.
                                 </li>
                                 <li>
-                                    Work on Sentiment Models that could run at low cost inside ETL Pipelines.
+                                    Built a data collection pipeline harvesting Google and YouTube search data using Playwright for browser automation with header caching and intelligent request throttling to avoid API rate limits; integrated LLM-based content classification and relevance scoring, with data stored in S3 and PostgreSQL, improving ingestion speed by 40%.
                                 </li>
-                            
+                                <li>
+                                    Built and automated classification and prediction jobs for 10M+ data points across 200+ dashboards, incorporating metrics like CAGR and rolling windows with MCP integrations, triggered monthly with intelligent monitoring and retry mechanisms.
+                                </li>
                             </ul>
                             <div class="flex flex-wrap gap-2">
                                 <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Apache Spark</span>
                                 <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Airflow</span>
                                 <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">AWS</span>
-                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Prefect</span>
-                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Git</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">PostgreSQL</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Playwright</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">NER</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">KeyBERT</span>
                                 <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Docker</span>
-                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Langchain</span>
-                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Langgraph</span>
-                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Langsmith</span>
+                                <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">LLM APIs</span>
                                 <span class="text-xs font-mono text-accent bg-lightest-navy px-2 py-1 rounded">Agentic AI</span>
                             </div>
                         </div>
@@ -743,21 +661,20 @@
                             </p>
                             <ul class="space-y-2 list-disc list-inside mb-4">
                                 <li>
-                                    Managed and maintained more than 10 million
-                                    records across production and duplicate
-                                    datasets, ensuring data consistency and high
-                                    availability.
+                                    Managed 10M+ records across production
+                                    datasets, ensuring high availability and
+                                    reducing data retrieval errors by 25%.
                                 </li>
                                 <li>
-                                    Engineered lightweight, optimized processing
-                                    workflows for live scenarios that increased
-                                    system throughput by 35%.
+                                    Engineered optimized real-time processing
+                                    workflows, increasing system throughput by
+                                    35% and improving response times by 20%.
                                 </li>
                                 <li>
-                                    Spearheaded the development of scalable data
-                                    pipelines that automated data movement into
-                                    production environments, resulting in a 40%
-                                    reduction in manual processing time.
+                                    Built scalable pipelines automating data
+                                    movement to production, cutting manual
+                                    processing time by 40% and enabling
+                                    near real-time analytics.
                                 </li>
                             </ul>
                             <!-- FIXED: Added skill pills for Internship -->
@@ -784,7 +701,7 @@
                         >
                             <span class="text-accent text-2xl mr-3">03.</span>
                             <!-- MODIFICATION: Renamed Header -->
-                            Built With Curiosity + Coffee 🤔☕☕
+                            Built With Curiosity + Coffee
                             <span
                                 class="ml-6 h-px flex-grow bg-lightest-navy"
                             ></span>
@@ -1055,7 +972,7 @@
                         >
                             <span class="text-accent text-2xl mr-3">04.</span>
                             <!-- MODIFICATION: Renamed Header -->
-                            Everything in My Arsenal ⚔️🏹
+                            Everything in My Arsenal
                             <span
                                 class="ml-6 h-px flex-grow bg-lightest-navy"
                             ></span>
@@ -1173,7 +1090,7 @@
                         >
                             <span class="text-accent text-2xl mr-3">05.</span>
                             <!-- MODIFICATION: Renamed Header -->
-                            The Story Behind the Engineer ⚙️📈🔥
+                            The Story Behind the Engineer
                             <span
                                 class="ml-6 h-px flex-grow bg-lightest-navy"
                             ></span>
@@ -1181,7 +1098,7 @@
 
                         <!-- Philosophy Intro -->
                         <div class="mb-16 text-center max-w-2xl mx-auto">
-                            <h3 class="text-xl font-bold text-lightest-slate mb-4">🧩 What Drives Me</h3>
+                            <h3 class="text-xl font-bold text-lightest-slate mb-4">What Drives Me</h3>
                             <!-- MODIFICATION: Highlighted the Quote with larger, bold, brighter text -->
                             <p class="text-lightest-slate font-bold text-xl md:text-2xl italic">
                                 "I believe AI should be useful, reliable, and accessible. My focus is building systems that combine strong engineering with real user impact—not just model accuracy."
@@ -1198,7 +1115,7 @@
                                 </span>
                                 <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-accent/30 transition-colors">
                                     <h3 class="flex flex-wrap items-center gap-2 mb-1 text-lg font-bold text-lightest-slate">
-                                        🚀 Breakthrough & Growth
+                                        Breakthrough & Growth
                                         <span class="bg-accent/10 text-accent text-xs font-mono font-medium px-2 py-0.5 rounded border border-accent/20">GlobalData PLC</span>
                                     </h3>
                                     <time class="block mb-3 text-sm font-mono text-slate">Aug 2025 - Present</time>
@@ -1217,7 +1134,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                                 </span>
                                 <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-slate/30 transition-colors">
-                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">🚀 Stepping into Industry</h3>
+                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">Stepping into Industry</h3>
                                     <time class="block mb-3 text-sm font-mono text-slate">Aug 2024</time>
                                     <p class="text-slate">
                                         Engineered scalable data pipelines processing over <strong>10M+ records</strong>. Improved throughput by 35% and reduced manual workload by 40%.
@@ -1234,7 +1151,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
                                 </span>
                                 <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-slate/30 transition-colors">
-                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">🧠 Building Real-World Solutions</h3>
+                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">Building Real-World Solutions</h3>
                                     <time class="block mb-3 text-sm font-mono text-slate">2023</time>
                                     <p class="text-slate">
                                         Transitioned from academic models to solving real problems—like forecasting failures in IoT devices and building efficient RAG systems that reduced query latency by 2.3 seconds for large datasets.
@@ -1251,7 +1168,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
                                 </span>
                                 <div class="bg-light-navy/50 p-6 rounded-lg border border-transparent hover:border-slate/30 transition-colors">
-                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">🌱 From Curiosity to Craft</h3>
+                                    <h3 class="text-lg font-bold text-lightest-slate mb-1">From Curiosity to Craft</h3>
                                     <time class="block mb-3 text-sm font-mono text-slate">Engineering Year 1</time>
                                     <p class="text-slate">
                                         It started with a simple question: <span class="text-accent">"How do machines learn?"</span>
@@ -1267,7 +1184,7 @@
                         <!-- Vision Footer -->
                         <div class="mt-16 bg-light-navy p-8 rounded-lg border-l-4 border-accent shadow-lg transform transition-transform hover:-translate-y-1">
                             <h3 class="text-xl font-bold text-lightest-slate mb-3 flex items-center gap-2">
-                                🔮 Vision Ahead
+                                Vision Ahead
                             </h3>
                             <p class="text-slate text-lg mb-4">
                                 Currently exploring <strong>AI Agents, low-cost inference, and real-time ML systems</strong>—aiming to build products that scale to millions, not just benchmarks.
@@ -1288,7 +1205,7 @@
                             06. Let’s Talk
                         </h2>
                         <h3 class="section-heading text-5xl font-bold mb-4">
-                            Get In Touch 🤝✨
+                            Get In Touch
                         </h3>
                         <p class="text-lightest-slate max-w-xl mx-auto mb-8">
                             I'm currently open to new opportunities and
@@ -1423,507 +1340,6 @@
                     setInterval(nextSlide, 3000);
                 }
 
-                // --- D3 Coursework Graph Script ---
-                const graphContainer =
-                    document.getElementById("coursework-graph");
-                if (graphContainer) {
-                    // --- Text Wrapping Function ---
-                    function wrap(text, width) {
-                        text.each(function () {
-                            var text = d3.select(this),
-                                words = text.text().split(/\s+/).reverse(),
-                                word,
-                                line = [],
-                                lineNumber = 0,
-                                lineHeight = 1.1, // ems
-                                y = text.attr("y"),
-                                dy = 0, // We'll calculate dy based on lines
-                                tspan = text
-                                    .text(null)
-                                    .append("tspan")
-                                    .attr("x", 0)
-                                    .attr("y", y)
-                                    .attr("dy", dy + "em");
-
-                            while ((word = words.pop())) {
-                                line.push(word);
-                                tspan.text(line.join(" "));
-                                if (
-                                    tspan.node().getComputedTextLength() > width
-                                ) {
-                                    line.pop();
-                                    tspan.text(line.join(" "));
-                                    line = [word];
-                                    tspan = text
-                                        .append("tspan")
-                                        .attr("x", 0)
-                                        .attr("y", y)
-                                        .attr(
-                                            "dy",
-                                            ++lineNumber * lineHeight +
-                                                dy +
-                                                "em"
-                                        )
-                                        .text(word);
-                                }
-                            }
-                            // Center the text block vertically
-                            const textBlockHeight = lineNumber * lineHeight;
-                            // MODIFICATION: Use font-size to correctly calculate 'y' offset in pixels
-                            const fontSize = parseFloat(text.style("font-size")); // Get font size in px
-                            text.selectAll("tspan").attr(
-                                "y",
-                                (-textBlockHeight / 2) * fontSize // Convert em to px for 'y'
-                            ); // Adjust y based on number of lines
-                        });
-                    }
-
-                    // --- Data Setup ---
-                    const graphNodes = [
-                        // Level 0: Categories (Main Nodes)
-                        {
-                            id: "Mathematics",
-                            type: "category",
-                            color: "#ff6384",
-                        },
-                        {
-                            id: "AI/ML",
-                            type: "category",
-                            color: "#36a2eb",
-                        },
-                        {
-                            id: "Programming & Software Dev",
-                            type: "category",
-                            color: "#ffce56",
-                        },
-                        {
-                            id: "Data Science & Big Data",
-                            type: "category",
-                            color: "#4bc0c0",
-                        },
-                        {
-                            id: "Systems & Infrastructure",
-                            type: "category",
-                            color: "#9966ff",
-                        },
-
-                        // Level 1: Subjects (Sub-Nodes)
-                        {
-                            id: "Math Foundation",
-                            type: "subject",
-                            category: "Mathematics",
-                            level: 90,
-                        },
-                        {
-                            id: "Discrete Math & Stats",
-                            type: "subject",
-                            category: "Mathematics",
-                            level: 85,
-                        },
-                        {
-                            id: "Research & IPR",
-                            type: "subject",
-                            category: "Mathematics",
-                            level: 80,
-                        },
-                        {
-                            id: "R Programming",
-                            type: "subject",
-                            category: "Mathematics",
-                            level: 88,
-                        },
-
-                        {
-                            id: "Intro to AI",
-                            type: "subject",
-                            category: "AI/ML",
-                            level: 95,
-                        },
-                        {
-                            id: "Machine Learning",
-                            type: "subject",
-                            category: "AI/ML",
-                            level: 98,
-                        },
-                        {
-                            id: "Deep Learning",
-                            type: "subject",
-                            category: "AI/ML",
-                            level: 96,
-                        },
-                        {
-                            id: "Generative AI",
-                            type: "subject",
-                            category: "AI/ML",
-                            level: 97,
-                        },
-                        {
-                            id: "AI/ML Ethics",
-                            type: "subject",
-                            category: "AI/ML",
-                            level: 85,
-                        },
-                        {
-                            id: "NLP",
-                            type: "subject",
-                            category: "AI/ML",
-                            level: 94,
-                        },
-
-                        {
-                            id: "Data Structures",
-                            type: "subject",
-                            category: "Programming & Software Dev",
-                            level: 92,
-                        },
-                        {
-                            id: "OOP with Java",
-                            type: "subject",
-                            category: "Programming & Software Dev",
-                            level: 88,
-                        },
-                        {
-                            id: "Operating Systems",
-                            type: "subject",
-                            category: "Programming & Software Dev",
-                            level: 82,
-                        },
-                        {
-                            id: "Software Eng.",
-                            type: "subject",
-                            category: "Programming & Software Dev",
-                            level: 89,
-                        },
-                        {
-                            id: "Web Technology",
-                            type: "subject",
-                            category: "Programming & Software Dev",
-                            level: 85,
-                        },
-                        {
-                            id: "Computer Networks",
-                            type: "subject",
-                            category: "Programming & Software Dev",
-                            level: 87,
-                        },
-
-                        {
-                            id: "Data Science",
-                            type: "subject",
-                            category: "Data Science & Big Data",
-                            level: 93,
-                        },
-                        {
-                            id: "Big Data Tech",
-                            type: "subject",
-                            category: "Data Science & Big Data",
-                            level: 90,
-                        },
-                        {
-                            id: "Data Visualization",
-                            type: "subject",
-                            category: "Data Science & Big Data",
-                            level: 91,
-                        },
-
-                        {
-                            id: "DBMS",
-                            type: "subject",
-                            category: "Systems & Infrastructure",
-                            level: 86,
-                        },
-                        {
-                            id: "Algorithms",
-                            type: "subject",
-                            category: "Systems & Infrastructure",
-                            level: 94,
-                        },
-                        {
-                            id: "Cyber Security",
-                            type: "subject",
-                            category: "Systems & Infrastructure",
-                            level: 80,
-                        },
-                        {
-                            id: "Industrial Automation",
-                            type: "subject",
-                            category: "Systems & Infrastructure",
-                            level: 78,
-                        },
-                    ];
-
-                    const graphLinks = graphNodes
-                        .filter((node) => node.type === "subject")
-                        .map((subjectNode) => ({
-                            source: subjectNode.id,
-                            target: subjectNode.category,
-                        }));
-
-                    const width = graphContainer.clientWidth;
-                    const height = graphContainer.clientHeight;
-
-                    const categories = graphNodes.filter(
-                        (n) => n.type === "category"
-                    );
-                    const colorScale = d3
-                        .scaleOrdinal()
-                        .domain(categories.map((c) => c.id))
-                        .range(categories.map((c) => c.color));
-
-                    const simulation = d3
-                        .forceSimulation(graphNodes)
-                        .force(
-                            "link",
-                            d3
-                                .forceLink(graphLinks)
-                                .id((d) => d.id)
-                                .distance((d) =>
-                                    d.target.type === "category" ? 120 : 60
-                                )
-                                .strength(0.5)
-                        )
-                        .force("charge", d3.forceManyBody().strength(-250))
-                        .force("center", d3.forceCenter(width / 2, height / 2))
-                        .force(
-                            "collide",
-                            d3
-                                .forceCollide()
-                                .radius(
-                                    (d) =>
-                                        (d.type === "category"
-                                            ? 45
-                                            : d.id.length * 2.5 + 10) + 5
-                                )
-                        );
-
-                    const svg = d3
-                        .select("#coursework-graph")
-                        .append("svg")
-                        .attr("viewBox", [0, 0, width, height])
-                        .attr("width", width)
-                        .attr("height", height);
-
-                    const link = svg
-                        .append("g")
-                        .selectAll(".graph-link")
-                        .data(graphLinks)
-                        .join("line")
-                        .attr("class", "graph-link");
-
-                    const node = svg
-                        .append("g")
-                        .selectAll(".graph-node")
-                        .data(graphNodes)
-                        .join("g")
-                        .attr("class", "graph-node")
-                        .call(drag(simulation));
-
-                    const circles = node
-                        .append("circle")
-                        .attr("r", (d) =>
-                            d.type === "category" ? 45 : d.id.length * 2.5 + 5
-                        )
-                        .attr("fill", (d) =>
-                            d.type === "category"
-                                ? d.color
-                                : colorScale(d.category)
-                        )
-                        .attr("stroke", (d) =>
-                            d.type === "category" ? d.color : "#0a192f"
-                        )
-                        .attr("stroke-width", (d) =>
-                            d.type === "category" ? 0 : 3
-                        );
-
-                    const labels = node
-                        .append("text")
-                        .text((d) => d.id)
-                        .attr("text-anchor", "middle")
-                        .attr("dy", 0)
-                        .style("font-size", (d) =>
-                            d.type === "category" ? "12px" : "10px"
-                        )
-                        .style("font-weight", (d) =>
-                            d.type === "category" ? "bold" : "normal"
-                        )
-                        .style("fill", "#0a192f")
-                        .call(wrap, (d) => (d.type === "category" ? 70 : 50));
-
-                    const tooltip = d3.select("#graph-tooltip");
-                    const legendItems = d3
-                        .select("#graph-legend")
-                        .selectAll(".legend-item");
-
-                    // --- Interactivity ---
-                    node.on("mouseover", handleMouseOver)
-                        .on("mouseout", handleMouseOut)
-                        .on("click", handleClick);
-
-                    function handleMouseOver(event, d) {
-                        d3.select(this)
-                            .select("circle")
-                            .transition()
-                            .duration(200)
-                            .attr(
-                                "r",
-                                (d) =>
-                                    (d.type === "category"
-                                        ? 45
-                                        : d.id.length * 2.5 + 5) + 10
-                            );
-
-                        const isCategory = d.type === "category";
-                        const categoryName = isCategory ? d.id : d.category;
-                        const connectedIds = isCategory
-                            ? [
-                                  d.id,
-                                  ...graphNodes
-                                      .filter((n) => n.category === d.id)
-                                      .map((n) => n.id),
-                              ]
-                            : [d.id, d.category];
-
-                        node.style("opacity", (n) =>
-                            connectedIds.includes(n.id) ? 1 : 0.2
-                        );
-                        link.style("stroke", (l) =>
-                            connectedIds.includes(l.source.id) &&
-                            connectedIds.includes(l.target.id)
-                                ? "#64ffda"
-                                : "#233554"
-                        ).style("stroke-width", (l) =>
-                            connectedIds.includes(l.source.id) &&
-                            connectedIds.includes(l.target.id)
-                                ? 2.5
-                                : 1.5
-                        );
-
-                        legendItems.style("opacity", (l) =>
-                            l.id === categoryName ? 1 : 0.3
-                        );
-                    }
-
-                    function handleMouseOut(event, d) {
-                        d3.select(this)
-                            .select("circle")
-                            .transition()
-                            .duration(200)
-                            .attr("r", (d) =>
-                                d.type === "category"
-                                    ? 45
-                                    : d.id.length * 2.5 + 5
-                            );
-                        node.style("opacity", 1);
-                        link.style("stroke", "#233554").style(
-                            "stroke-width",
-                            1.5
-                        );
-                        legendItems.style("opacity", 1);
-                    }
-
-                    function handleClick(event, d) {
-                        // MODIFICATION 2b: Animate skill bar on click
-                        if (d.type === "subject") {
-                            event.stopPropagation();
-                            tooltip
-                                .transition()
-                                .duration(200)
-                                .style("opacity", 1);
-                            tooltip
-                                .html(
-                                    `
-                                <strong>${d.id}</strong>
-                                <div class="text-xs text-light-slate">${d.category}</div>
-                                <div class="mt-2 text-xs">Proficiency:</div>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar" id="tooltip-skill-bar" style="width: 0%;"></div>
-                                </div>
-                            `
-                                )
-                                .style("left", event.pageX + 15 + "px")
-                                .style("top", event.pageY - 28 + "px");
-
-                            // Animate the bar width after it's rendered
-                            setTimeout(() => {
-                                const bar =
-                                    document.getElementById(
-                                        "tooltip-skill-bar"
-                                    );
-                                if (bar) {
-                                    bar.style.width = `${d.level}%`;
-                                }
-                            }, 50); // Small delay to trigger transition
-                        }
-                    }
-
-                    d3.select("body").on("click", () => {
-                        tooltip.transition().duration(200).style("opacity", 0);
-                    });
-
-                    // --- TICK FUNCTION WITH BOUNDARY CONSTRAINTS ---
-                    simulation.on("tick", () => {
-                        link.attr("x1", (d) => d.source.x)
-                            .attr("y1", (d) => d.source.y)
-                            .attr("x2", (d) => d.target.x)
-                            .attr("y2", (d) => d.target.y);
-
-                        node.attr("transform", (d) => {
-                            const radius =
-                                d.type === "category"
-                                    ? 45
-                                    : d.id.length * 2.5 + 5;
-                            d.x = Math.max(
-                                radius,
-                                Math.min(width - radius, d.x)
-                            );
-                            d.y = Math.max(
-                                radius,
-                                Math.min(height - radius, d.y)
-                            );
-                            return `translate(${d.x},${d.y})`;
-                        });
-                    });
-
-                    function drag(simulation) {
-                        function dragstarted(event, d) {
-                            if (!event.active)
-                                simulation.alphaTarget(0.3).restart();
-                            d.fx = d.x;
-                            d.fy = d.y;
-                        }
-                        function dragged(event, d) {
-                            d.fx = event.x;
-                            d.fy = event.y;
-                        }
-                        function dragended(event, d) {
-                            if (!event.active) simulation.alphaTarget(0);
-                            d.fx = null;
-                            d.fy = null;
-                        }
-                        return d3
-                            .drag()
-                            .on("start", dragstarted)
-                            .on("drag", dragged)
-                            .on("end", dragended);
-                    }
-
-                    // --- Legend ---
-                    const legendContainer = d3.select("#graph-legend");
-                    categories.forEach((cat) => {
-                        const legendItem = legendContainer
-                            .append("div")
-                            .attr("class", "legend-item")
-                            .datum(cat);
-                        legendItem
-                            .append("div")
-                            .attr("class", "legend-color")
-                            .style("background-color", cat.color);
-                        legendItem
-                            .append("span")
-                            .text(cat.id)
-                            .style("color", "#a8b2d1");
-                    });
-                }
             });
 
             // --- Resume Download Script ---

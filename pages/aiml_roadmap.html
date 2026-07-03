@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIML Grand Master Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080b12;
+    --surface: #0e1420;
+    --surface2: #131926;
+    --border: #1e2a3a;
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --accent3: #f59e0b;
+    --accent4: #10b981;
+    --accent5: #f43f5e;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(0,229,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(124,58,237,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(245,158,11,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 75%, rgba(16,185,129,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 85%, rgba(0,229,255,0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    position: relative;
+  }
+
+  .header-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    border: 1px solid rgba(0,229,255,0.3);
+    padding: 0.4rem 1.2rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    background: rgba(0,229,255,0.05);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--accent2) 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  /* PROGRESS TIMELINE */
+  .timeline-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 4rem;
+    overflow-x: auto;
+    padding: 0.5rem;
+  }
+
+  .phase-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    min-width: 100px;
+  }
+
+  .phase-dot .dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 2;
+  }
+
+  .phase-dot .line {
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    position: relative;
+    top: -21px;
+    z-index: 1;
+  }
+
+  .phase-dot:last-child .line { display: none; }
+
+  .phase-dot .label {
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -14px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.05em;
+    max-width: 90px;
+  }
+
+  /* PHASES */
+  .phase {
+    margin-bottom: 5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .phase-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 1;
+    opacity: 0.15;
+    color: var(--accent);
+    min-width: 80px;
+  }
+
+  .phase-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  .phase-meta {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .phase-duration {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    border: 1px solid rgba(0,229,255,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .phase-goal {
+    font-size: 0.8rem;
+    color: var(--muted);
+    max-width: 200px;
+  }
+
+  /* TOPIC GRID */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--card-accent, var(--accent));
+    opacity: 0.6;
+  }
+
+  .topic-card:hover {
+    border-color: rgba(0,229,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .topic-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .topic-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  .topic-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* MATH BLOCK */
+  .math-note {
+    background: rgba(0,229,255,0.05);
+    border-left: 2px solid var(--accent);
+    padding: 0.6rem 0.8rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(0,229,255,0.8);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  /* RESOURCES */
+  .resources {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .resource {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    padding: 0.4rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .resource:first-child { border-top: none; }
+
+  .res-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    min-width: 48px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .tag-book { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+  .tag-yt { background: rgba(244,63,94,0.15); color: #f43f5e; border: 1px solid rgba(244,63,94,0.2); }
+  .tag-course { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
+  .tag-site { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.2); }
+  .tag-paper { background: rgba(0,229,255,0.12); color: var(--accent); border: 1px solid rgba(0,229,255,0.2); }
+
+  .res-text {
+    color: var(--text);
+    line-height: 1.4;
+    font-size: 0.78rem;
+  }
+
+  .res-text em {
+    color: var(--muted);
+    font-style: normal;
+    display: block;
+    font-size: 0.72rem;
+  }
+
+  /* PRACTICE BANNER */
+  .practice-banner {
+    background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(0,229,255,0.05) 100%);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .practice-banner .icon { font-size: 1.5rem; flex-shrink: 0; }
+
+  .practice-banner h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #a78bfa;
+  }
+
+  .practice-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+  }
+
+  .practice-tag {
+    font-size: 0.72rem;
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.2);
+    color: #c4b5fd;
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3rem 0 2rem;
+  }
+
+  .section-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .section-divider-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+
+  /* KAGGLE TRACK */
+  .kaggle-track {
+    background: var(--surface);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .kaggle-track h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--accent4);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .kaggle-levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .kaggle-level {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+
+  .kaggle-level h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent4);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .kaggle-level p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* FLOWCHART */
+  .flow-container {
+    overflow-x: auto;
+    padding: 1rem 0;
+    margin-bottom: 3rem;
+  }
+
+  .flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    min-width: max-content;
+    padding: 1rem 2rem;
+  }
+
+  .flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .flow-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    min-width: 130px;
+    font-size: 0.78rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    color: var(--white);
+    position: relative;
+  }
+
+  .flow-box.highlight { border-color: rgba(0,229,255,0.4); background: rgba(0,229,255,0.05); }
+  .flow-box.highlight2 { border-color: rgba(124,58,237,0.4); background: rgba(124,58,237,0.05); }
+  .flow-box.highlight3 { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.05); }
+  .flow-box.highlight4 { border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.05); }
+  .flow-box.highlight5 { border-color: rgba(244,63,94,0.4); background: rgba(244,63,94,0.05); }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.3rem;
+    margin-top: 1.5rem;
+  }
+
+  .flow-arrow span {
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--border), var(--accent));
+    display: block;
+    position: relative;
+  }
+
+  .flow-arrow span::after {
+    content: '▶';
+    position: absolute;
+    right: -8px;
+    top: -7px;
+    font-size: 0.6rem;
+    color: var(--accent);
+  }
+
+  .flow-sub {
+    font-size: 0.6rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    max-width: 130px;
+    line-height: 1.4;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* FULL WIDTH CARD */
+  .full-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .full-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    color: var(--white);
+  }
+
+  .checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text);
+    padding: 0.5rem;
+    background: var(--surface2);
+    border-radius: 4px;
+  }
+
+  .check-item::before {
+    content: '→';
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Stagger animations */
+  .phase:nth-child(1) { animation-delay: 0.1s; }
+  .phase:nth-child(2) { animation-delay: 0.2s; }
+  .phase:nth-child(3) { animation-delay: 0.3s; }
+  .phase:nth-child(4) { animation-delay: 0.4s; }
+  .phase:nth-child(5) { animation-delay: 0.5s; }
+  .phase:nth-child(6) { animation-delay: 0.6s; }
+
+  @media (max-width: 600px) {
+    .topic-grid { grid-template-columns: 1fr; }
+    .phase-header { flex-wrap: wrap; }
+    .phase-meta { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-badge">BE AIML → KAGGLE GRANDMASTER → RESEARCH-LEVEL AI</div>
+    <h1>The Complete<br>AIML Mastery Path</h1>
+    <p class="subtitle">A battle-tested roadmap from mathematical foundations to agentic AI — designed to turn you into a practitioner who can build anything from scratch, win competitions, and read any research paper.</p>
+  </header>
+
+  <!-- MASTER FLOWCHART -->
+  <div class="flow-container">
+    <div class="flow">
+      <div class="flow-node">
+        <div class="flow-box highlight">⚙️ MATHEMATICS<br>& STATS</div>
+        <div class="flow-sub">Weeks 1–8</div>
+      </div>
+      <div class="flow-arrow"><span></span></div>
+      <div class="flow-node">
+        <div class="flow-box highlight2">🤖 CLASSICAL ML<br>FROM SCRATCH</div>
+        <div class="flow-sub">Weeks 9–18</div>
+      </div>
+      <div class="flow-arrow"><span></span></div>
+      <div class="flow-node">
+        <div class="flow-box highlight3">🔥 DEEP LEARNING<br>+ PYTORCH</div>
+        <div class="flow-sub">Weeks 19–32</div>
+      </div>
+      <div class="flow-arrow"><span></span></div>
+      <div class="flow-node">
+        <div class="flow-box highlight4">🧠 MODERN AI<br>LLMs + VISION</div>
+        <div class="flow-sub">Weeks 33–46</div>
+      </div>
+      <div class="flow-arrow"><span></span></div>
+      <div class="flow-node">
+        <div class="flow-box highlight5">🤖 AGENTIC AI<br>+ RESEARCH</div>
+        <div class="flow-sub">Weeks 47–60</div>
+      </div>
+      <div class="flow-arrow"><span></span></div>
+      <div class="flow-node">
+        <div class="flow-box" style="border-color: rgba(245,158,11,0.5); background: rgba(245,158,11,0.05);">🏆 KAGGLE GM<br>+ DEPLOY</div>
+        <div class="flow-sub">Ongoing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase" id="phase1">
+    <div class="phase-header">
+      <div class="phase-number">01</div>
+      <div>
+        <div class="phase-title" style="color: var(--accent);">Mathematical Foundations</div>
+        <div style="font-size:0.85rem; color: var(--muted);">The bedrock. Every algorithm you will ever use lives here.</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-duration">WEEKS 1 – 8</span>
+        <div class="phase-goal">Goal: Derive backprop by hand</div>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+
+      <div class="topic-card" style="--card-accent: var(--accent);">
+        <div class="topic-icon">📐</div>
+        <div class="topic-name">Linear Algebra</div>
+        <div class="topic-desc">Vectors, matrices, eigendecomposition, SVD, matrix calculus. The language of data and neural networks.</div>
+        <div class="math-note">Ax = λx  ·  SVD: A = UΣVᵀ  ·  Rank, null space, span</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Gilbert Strang — <strong>Introduction to Linear Algebra (5e)</strong><em>Gold standard. Read & do every problem.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">3Blue1Brown — <strong>Essence of Linear Algebra</strong><em>16 videos. Visual intuition first.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">MIT OCW 18.06 — <strong>Gilbert Strang lectures</strong><em>Full university course, free.</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>immersivemath.com</strong><em>Interactive visual textbook</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: #7c3aed;">
+        <div class="topic-icon">∂</div>
+        <div class="topic-name">Calculus & Multivariable Calculus</div>
+        <div class="topic-desc">Derivatives, chain rule, Jacobians, Hessians, gradient flow, Taylor series. This IS backpropagation.</div>
+        <div class="math-note">∂L/∂w = ∂L/∂a · ∂a/∂z · ∂z/∂w  (chain rule in NN)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Spivak — <strong>Calculus</strong><em>Rigorous. Then Stewart for applied.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">3Blue1Brown — <strong>Essence of Calculus</strong><em>Visual, intuitive series</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Professor Leonard — <strong>Calculus 1, 2, 3 playlists</strong><em>Most thorough free lectures on YT</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>Khan Academy Multivariable Calc</strong><em>Great supplement for practice</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">🎲</div>
+        <div class="topic-name">Probability & Statistics</div>
+        <div class="topic-desc">Distributions, MLE, MAP, Bayesian inference, hypothesis testing, information theory. Core to every ML model.</div>
+        <div class="math-note">KL(P||Q) = Σ P(x) log(P(x)/Q(x))  ·  Bayes: P(θ|D) ∝ P(D|θ)P(θ)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Blitzstein & Hwang — <strong>Introduction to Probability</strong><em>Harvard Stat 110. Incredible book.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">StatQuest (Josh Starmer) — <strong>Stats & Probability playlist</strong><em>Best intuition-first stats content</em></div></div>
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Bishop — <strong>Pattern Recognition and ML</strong><em>Chapter 1–3 for probabilistic ML</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">MIT OCW 6.041 — <strong>Probabilistic Systems</strong><em>Full rigorous treatment</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent4);">
+        <div class="topic-icon">∑</div>
+        <div class="topic-name">Optimization Theory</div>
+        <div class="topic-desc">Convex optimization, gradient descent variants, Lagrange multipliers, KKT conditions. How models actually learn.</div>
+        <div class="math-note">θ(t+1) = θ(t) − η∇L(θ)  ·  Adam: m̂/(√v̂ + ε)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Boyd & Vandenberghe — <strong>Convex Optimization</strong><em>Free PDF. Industry bible.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Andrej Karpathy — <strong>Neural Networks: Zero to Hero</strong><em>Builds intuition for optimization</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">Stanford CS229 — <strong>Optimization lectures</strong><em>Andrew Ng's notes are legendary</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent5);">
+        <div class="topic-icon">🔢</div>
+        <div class="topic-name">Information Theory</div>
+        <div class="topic-desc">Entropy, cross-entropy, mutual information, KL divergence. Underpins loss functions, VAEs, and all of modern AI.</div>
+        <div class="math-note">H(X) = -Σ p(x) log p(x)  ·  I(X;Y) = H(X) - H(X|Y)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">MacKay — <strong>Information Theory, Inference & Learning Algorithms</strong><em>Free PDF. Profound.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Aubrey Clayton — <strong>Information Theory playlist</strong><em>Connects to ML clearly</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent);">
+        <div class="topic-icon">🐍</div>
+        <div class="topic-name">Scientific Python Stack</div>
+        <div class="topic-desc">NumPy, Pandas, Matplotlib, SciPy. Implement everything from scratch in NumPy before using libraries.</div>
+        <div class="math-note">Rule: If you can't write it in NumPy, you don't understand it yet.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Wes McKinney — <strong>Python for Data Analysis (3e)</strong><em>Pandas author's own book</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>numpy.org/learn</strong> + <strong>scipy-lectures.org</strong><em>Official docs are the best reference</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Sentdex — <strong>NumPy & Pandas tutorials</strong><em>Practical, code-heavy</em></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="practice-banner">
+      <div class="icon">🛠️</div>
+      <div>
+        <h4>Phase 1 — Applied Projects</h4>
+        <p style="font-size:0.82rem; color: var(--muted);">Don't just read. Build these to prove understanding:</p>
+        <div class="practice-items">
+          <span class="practice-tag">Implement PCA from scratch (SVD only)</span>
+          <span class="practice-tag">Derive & code gradient descent for linear regression</span>
+          <span class="practice-tag">Build a Gaussian probability calculator</span>
+          <span class="practice-tag">Visualize 3D loss landscapes</span>
+          <span class="practice-tag">Prove backprop by hand, then in NumPy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase" id="phase2">
+    <div class="phase-header">
+      <div class="phase-number">02</div>
+      <div>
+        <div class="phase-title" style="color: #a78bfa;">Classical Machine Learning</div>
+        <div style="font-size:0.85rem; color: var(--muted);">Every algorithm, every derivation. No sklearn until you've coded it.</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-duration" style="color: #a78bfa; border-color: rgba(124,58,237,0.3);">WEEKS 9 – 18</span>
+        <div class="phase-goal">Goal: Build sklearn from NumPy</div>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+
+      <div class="topic-card" style="--card-accent: #7c3aed;">
+        <div class="topic-icon">📏</div>
+        <div class="topic-name">Linear & Logistic Regression</div>
+        <div class="topic-desc">OLS, Ridge, Lasso, ElasticNet, SGD. MLE derivation of regression. Decision boundary geometry.</div>
+        <div class="math-note">ŷ = Xβ  ·  β̂ = (XᵀX)⁻¹Xᵀy  ·  L2: β̂ = (XᵀX + λI)⁻¹Xᵀy</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Hastie, Tibshirani, Friedman — <strong>Elements of Statistical Learning</strong><em>Free PDF. The ML bible.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">StatQuest — <strong>Regularization (Ridge, Lasso)</strong><em>Crystal clear derivations</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: #7c3aed;">
+        <div class="topic-icon">🌳</div>
+        <div class="topic-name">Trees, Forests & Boosting</div>
+        <div class="topic-desc">Decision Trees (ID3/CART), Random Forests (bagging + feature subspace), Gradient Boosting (GBM, XGBoost, LightGBM, CatBoost). SHAP values.</div>
+        <div class="math-note">GBM: Fₘ(x) = Fₘ₋₁(x) + ν·hₘ(x)  where hₘ fits residuals</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Chen & Guestrin — <strong>XGBoost paper (arXiv:1603.02754)</strong><em>Read the original paper</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">StatQuest — <strong>Random Forests & Gradient Boosting</strong><em>20+ video series</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>xgboost.readthedocs.io</strong><em>Parameter tuning guide is essential</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Abhishek Thakur — <strong>XGBoost/LightGBM tutorials</strong><em>Kaggle grandmaster, practical</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: #7c3aed;">
+        <div class="topic-icon">📊</div>
+        <div class="topic-name">SVMs & Kernel Methods</div>
+        <div class="topic-desc">Maximum margin classifier, soft margin, kernel trick (RBF, polynomial), dual formulation, SMO algorithm.</div>
+        <div class="math-note">min ½||w||² s.t. yᵢ(wᵀxᵢ+b) ≥ 1  ·  K(x,z) = φ(x)ᵀφ(z)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Schölkopf & Smola — <strong>Learning with Kernels</strong><em>Deep treatment</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">CS229 Stanford — <strong>SVM lecture notes (Andrew Ng)</strong><em>Best concise derivation</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: #7c3aed;">
+        <div class="topic-icon">🔵</div>
+        <div class="topic-name">Clustering & Dimensionality Reduction</div>
+        <div class="topic-desc">K-Means, GMM/EM algorithm, DBSCAN, Hierarchical. PCA, t-SNE, UMAP. When and why each method fails.</div>
+        <div class="math-note">EM: E-step P(z|x,θ)  ·  M-step argmax_θ E[log P(x,z|θ)]</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Murphy — <strong>Probabilistic Machine Learning (Vol. 1 & 2)</strong><em>Modern, free PDF. Replaces Bishop.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Lior Pachter — <strong>t-SNE/UMAP theory</strong><em>Rigorous explanation</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">McInnes et al. — <strong>UMAP: arXiv:1802.03426</strong><em>Read the original</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: #7c3aed;">
+        <div class="topic-icon">⚡</div>
+        <div class="topic-name">Feature Engineering & Selection</div>
+        <div class="topic-desc">Target encoding, embeddings, time-series features, polynomial features, mutual information, permutation importance. The most underrated skill in Kaggle.</div>
+        <div class="math-note">Rule: Domain knowledge × creative features beats model choice 80% of the time.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Alice Zheng — <strong>Feature Engineering for ML</strong><em>Practical, direct</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Abhishek Thakur — <strong>Approaching (Almost) Any ML Problem</strong><em>Kaggle grandmaster talk</em></div></div>
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Thakur — <strong>Approaching (Almost) Any ML Problem</strong><em>Free book. Must-read for Kaggle.</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: #7c3aed;">
+        <div class="topic-icon">📈</div>
+        <div class="topic-name">Model Evaluation & Validation</div>
+        <div class="topic-desc">Cross-validation strategies (stratified k-fold, time-series CV, group-CV), metrics (AUC-ROC, PR-AUC, F1, NDCG, MCC), calibration, leakage detection.</div>
+        <div class="math-note">AUC = P(score(pos) > score(neg))  ·  Avoid public LB overfit!</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>Kaggle notebooks</strong> — top solutions every competition<em>Read the top 3 solutions after every competition</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">StatQuest — <strong>ROC, AUC, confusion matrix</strong><em>Foundational metrics</em></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="practice-banner">
+      <div class="icon">🛠️</div>
+      <div>
+        <h4>Phase 2 — Applied Projects</h4>
+        <div class="practice-items">
+          <span class="practice-tag">Build sklearn API from scratch: LinearRegression, LogisticRegression, DecisionTree, KMeans</span>
+          <span class="practice-tag">Code XGBoost in Python (just the math, not the C++ speed)</span>
+          <span class="practice-tag">Join 3 Kaggle Tabular competitions simultaneously</span>
+          <span class="practice-tag">Implement PCA, t-SNE visualizer from scratch</span>
+          <span class="practice-tag">Build a complete AutoML pipeline</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase" id="phase3">
+    <div class="phase-header">
+      <div class="phase-number">03</div>
+      <div>
+        <div class="phase-title" style="color: var(--accent3);">Deep Learning & PyTorch</div>
+        <div style="font-size:0.85rem; color: var(--muted);">Neural networks from neuron to transformer. Implement everything in PyTorch.</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-duration" style="color: var(--accent3); border-color: rgba(245,158,11,0.3);">WEEKS 19 – 32</span>
+        <div class="phase-goal">Goal: Build & train a ViT from scratch</div>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">🧠</div>
+        <div class="topic-name">Neural Networks & Backprop</div>
+        <div class="topic-desc">Forward pass, computational graphs, backpropagation (manually derive for every layer), weight initialization, vanishing/exploding gradients.</div>
+        <div class="math-note">δᴸ = ∇ₐC ⊙ σ'(zᴸ)  ·  δˡ = ((wˡ⁺¹)ᵀδˡ⁺¹) ⊙ σ'(zˡ)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Andrej Karpathy — <strong>makemore & micrograd series</strong><em>Build autograd engine from scratch. Best DL content ever made.</em></div></div>
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Nielsen — <strong>Neural Networks and Deep Learning</strong><em>Free online. Chapter-by-chapter code.</em></div></div>
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Goodfellow et al. — <strong>Deep Learning</strong><em>Free PDF. The authoritative reference.</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">🔥</div>
+        <div class="topic-name">PyTorch Deep Dive</div>
+        <div class="topic-desc">Tensors, autograd, nn.Module, DataLoader, optimizers, custom layers, hooks, CUDA. Writing efficient, clean PyTorch code.</div>
+        <div class="math-note">Understand: .backward(), .grad, detach(), no_grad(), retain_graph</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Andrej Karpathy — <strong>Let's build micrograd</strong><em>Build PyTorch's autograd yourself</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">fast.ai — <strong>Practical Deep Learning for Coders</strong><em>Jeremy Howard. Code-first. Legendary.</em></div></div>
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Stevens, Antiga, Viehmann — <strong>Deep Learning with PyTorch</strong><em>Official PyTorch book</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>pytorch.org/tutorials</strong><em>Official tutorials, always up to date</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">🖼️</div>
+        <div class="topic-name">CNNs & Computer Vision</div>
+        <div class="topic-desc">Convolutions, pooling, receptive fields, modern architectures (ResNet, EfficientNet, ViT). Object detection (YOLO, Faster R-CNN). Segmentation (U-Net, SAM).</div>
+        <div class="math-note">(f★g)[n] = Σₖ f[k]g[n-k]  ·  ResNet: H(x) = F(x) + x</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">Stanford CS231n — <strong>CNNs for Visual Recognition</strong><em>Feifei Li. Best CV course ever. Free notes.</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">He et al. — <strong>Deep Residual Learning (ResNet)</strong><em>Implement from scratch</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Dosovitskiy et al. — <strong>An Image is Worth 16x16 Words (ViT)</strong><em>Vision Transformer original paper</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Aladdin Persson — <strong>PyTorch CNN implementations</strong><em>Implements papers from scratch</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">📝</div>
+        <div class="topic-name">RNNs, LSTMs & Sequence Models</div>
+        <div class="topic-desc">Vanishing gradients, BPTT, LSTM gates, GRU, seq2seq, attention mechanism (the precursor to Transformer). Build a language model from scratch.</div>
+        <div class="math-note">LSTM: fₜ = σ(Wf·[hₜ₋₁,xₜ]+bf)  ·  Attention: softmax(QKᵀ/√d)V</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Andrej Karpathy — <strong>The Unreasonable Effectiveness of RNNs</strong><em>Blog + makemore code series</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Hochreiter & Schmidhuber — <strong>Long Short-Term Memory (1997)</strong><em>Original LSTM paper</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Bahdanau et al. — <strong>Neural Machine Translation by Jointly Learning to Align</strong><em>Original attention paper</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">⚡</div>
+        <div class="topic-name">The Transformer Architecture</div>
+        <div class="topic-desc">Multi-head self-attention, positional encoding, layer norm, encoder-decoder, masked attention. Implement GPT-2 from scratch in PyTorch.</div>
+        <div class="math-note">Attention(Q,K,V) = softmax(QKᵀ/√dₖ)V  ·  MHA = Concat(head₁,...,headₕ)Wᴼ</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Vaswani et al. — <strong>Attention Is All You Need</strong><em>Read 5 times until you can derive everything</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Andrej Karpathy — <strong>Let's build GPT from scratch</strong><em>2hr video. Single best transformer resource.</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Yannic Kilcher — <strong>Attention is All You Need walkthrough</strong><em>Paper explained in depth</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text">Alammar — <strong>The Illustrated Transformer</strong><em>jalammar.github.io. Visual gold.</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">🌀</div>
+        <div class="topic-name">Generative Models</div>
+        <div class="topic-desc">VAEs (ELBO derivation), GANs (minimax, training stability, mode collapse), Diffusion models (DDPM, score matching, DDIM). Build each from scratch.</div>
+        <div class="math-note">ELBO: E[log p(x|z)] - KL(q(z|x)||p(z))  ·  DDPM: xₜ = √ᾱₜx₀ + √(1-ᾱₜ)ε</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Kingma & Welling — <strong>Auto-Encoding Variational Bayes</strong><em>VAE original</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Ho et al. — <strong>Denoising Diffusion Probabilistic Models</strong><em>DDPM paper</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Outlier — <strong>Diffusion Models from scratch</strong><em>Code walkthrough</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Yannic Kilcher — <strong>GAN original paper walkthrough</strong><em>Thorough math coverage</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent3);">
+        <div class="topic-icon">🎯</div>
+        <div class="topic-name">Training Infrastructure</div>
+        <div class="topic-desc">Mixed precision (FP16/BF16), gradient accumulation, distributed training (DDP), profiling, memory optimization, learning rate schedulers, early stopping.</div>
+        <div class="math-note">Rule: A model that trains fast and stable beats one that's theoretically better.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>pytorch.org/docs/stable/notes/amp_examples.html</strong><em>AMP/mixed precision guide</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">Hugging Face — <strong>Accelerate library docs</strong><em>Distributed training made easy</em></div></div>
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Raschka — <strong>Machine Learning with PyTorch and scikit-learn</strong><em>Practical training techniques</em></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="practice-banner">
+      <div class="icon">🛠️</div>
+      <div>
+        <h4>Phase 3 — Applied Projects</h4>
+        <div class="practice-items">
+          <span class="practice-tag">Build micrograd (autograd engine) from scratch</span>
+          <span class="practice-tag">Implement ResNet, VGG, EfficientNet in PyTorch</span>
+          <span class="practice-tag">Train a GPT-2 character-level LM on custom data</span>
+          <span class="practice-tag">Build a DDPM diffusion model on MNIST</span>
+          <span class="practice-tag">Implement a VAE that generates images</span>
+          <span class="practice-tag">Win or top-25% in a Kaggle CV competition</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase" id="phase4">
+    <div class="phase-header">
+      <div class="phase-number">04</div>
+      <div>
+        <div class="phase-title" style="color: var(--accent4);">Modern AI — LLMs, Vision & Multimodal</div>
+        <div style="font-size:0.85rem; color: var(--muted);">State-of-the-art architectures. Reading and implementing 2020–2025 papers.</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-duration" style="color: var(--accent4); border-color: rgba(16,185,129,0.3);">WEEKS 33 – 46</span>
+        <div class="phase-goal">Goal: Fine-tune & deploy a custom LLM</div>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+
+      <div class="topic-card" style="--card-accent: var(--accent4);">
+        <div class="topic-icon">🤗</div>
+        <div class="topic-name">LLM Architecture & Training</div>
+        <div class="topic-desc">GPT family, BERT, T5, LLaMA, Mistral. Pre-training (causal LM), tokenization (BPE, SentencePiece), scaling laws, RLHF, DPO.</div>
+        <div class="math-note">Scaling: L(N) ∝ N⁻⁰·⁰⁷⁶  (Chinchilla laws)  ·  DPO: -log σ(β log(πθ/πref) reward diff)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Touvron et al. — <strong>LLaMA 1 & 2 papers</strong><em>Architecture choices explained</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Hoffmann et al. — <strong>Training Compute-Optimal LLMs (Chinchilla)</strong><em>Scaling laws</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Andrej Karpathy — <strong>Let's reproduce GPT-2 (124M)</strong><em>Full training run walkthrough</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">fast.ai — <strong>Part 2: From Deep Learning Foundations</strong><em>Builds LLMs from scratch</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent4);">
+        <div class="topic-icon">🎯</div>
+        <div class="topic-name">Fine-tuning & PEFT</div>
+        <div class="topic-desc">Full fine-tuning, LoRA, QLoRA, adapters, prompt tuning, instruction tuning. How to fine-tune any model on consumer hardware.</div>
+        <div class="math-note">LoRA: W = W₀ + ΔW = W₀ + BA  (rank decomposition, 0.1% params)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Hu et al. — <strong>LoRA: Low-Rank Adaptation of LLMs</strong><em>Essential reading</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text">Hugging Face — <strong>PEFT library & docs</strong><em>peft.readthedocs.io</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Tim Dettmers — <strong>QLoRA talk & bitsandbytes</strong><em>4-bit quantization</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">DeepLearning.AI — <strong>Finetuning LLMs short course</strong><em>Sharon Zhou, fast and practical</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent4);">
+        <div class="topic-icon">👁️</div>
+        <div class="topic-name">Vision-Language Models</div>
+        <div class="topic-desc">CLIP, ALIGN, Flamingo, LLaVA, GPT-4V. Contrastive learning, image-text alignment, multimodal tokenization. Build a mini-CLIP.</div>
+        <div class="math-note">CLIP: L = -Σᵢ log exp(tᵢᵀiᵢ/τ) / Σⱼ exp(tᵢᵀiⱼ/τ)</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Radford et al. — <strong>Learning Transferable Visual Models (CLIP)</strong><em>Original CLIP paper</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Liu et al. — <strong>LLaVA: Visual Instruction Tuning</strong><em>Simple, powerful VLM</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Umar Jamil — <strong>Coding CLIP from scratch in PyTorch</strong><em>Hands-on implementation</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent4);">
+        <div class="topic-icon">🔍</div>
+        <div class="topic-name">RAG & Vector Databases</div>
+        <div class="topic-desc">Dense retrieval (DPR, Sentence-BERT), FAISS/Chroma/Weaviate, chunking strategies, hybrid search (BM25 + dense), re-ranking, query expansion.</div>
+        <div class="math-note">RAG: p(y|x) = Σz p(y|x,z) · p(z|x)  where z = retrieved docs</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Lewis et al. — <strong>Retrieval-Augmented Generation for NLP</strong><em>RAG original</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>docs.llamaindex.ai</strong><em>Best practical RAG framework</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">James Briggs — <strong>RAG from scratch series</strong><em>Step-by-step Python</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent4);">
+        <div class="topic-icon">🎵</div>
+        <div class="topic-name">Audio & Speech Models</div>
+        <div class="topic-desc">Spectrogram features, Whisper (ASR), WaveNet, audio transformers, Wav2Vec 2.0, music generation. Build a speech-to-text system.</div>
+        <div class="math-note">Mel spectrogram: frequency-compressed STFT. CTC loss for alignment-free ASR.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Radford et al. — <strong>Robust Speech Recognition via Large-Scale Weak Supervision (Whisper)</strong></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Valerio Velardo — <strong>Deep Learning for Audio playlist</strong><em>Audio ML from scratch</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent4);">
+        <div class="topic-icon">📊</div>
+        <div class="topic-name">Time Series Deep Learning</div>
+        <div class="topic-desc">Temporal Fusion Transformer, N-BEATS, PatchTST, TimesNet. Anomaly detection, forecasting, financial ML. Competing in time-series Kaggle competitions.</div>
+        <div class="math-note">TFT uses quantile loss: L = Σq ρq(yₜ - ŷₜ,q)  where ρq is asymmetric</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Lim et al. — <strong>Temporal Fusion Transformers for Time Series</strong></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>Nixtla's statsforecast & neuralforecast</strong><em>Best open-source forecasting</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Rob Mulla — <strong>Kaggle Time Series notebooks</strong><em>Competition-winning approaches</em></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="practice-banner">
+      <div class="icon">🛠️</div>
+      <div>
+        <h4>Phase 4 — Applied Projects</h4>
+        <div class="practice-items">
+          <span class="practice-tag">Fine-tune LLaMA 3 with LoRA on custom dataset</span>
+          <span class="practice-tag">Build a CLIP-style image-text retrieval system</span>
+          <span class="practice-tag">Build RAG pipeline over a 500-page PDF</span>
+          <span class="practice-tag">Deploy Whisper API with FastAPI</span>
+          <span class="practice-tag">Top 10% in a Kaggle NLP competition</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase" id="phase5">
+    <div class="phase-header">
+      <div class="phase-number">05</div>
+      <div>
+        <div class="phase-title" style="color: var(--accent5);">Agentic AI & AI Systems</div>
+        <div style="font-size:0.85rem; color: var(--muted);">Tool use, planning, multi-agent workflows. Building real AI systems that act autonomously.</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-duration" style="color: var(--accent5); border-color: rgba(244,63,94,0.3);">WEEKS 47 – 56</span>
+        <div class="phase-goal">Goal: Build a full agentic pipeline</div>
+      </div>
+    </div>
+
+    <div class="topic-grid">
+
+      <div class="topic-card" style="--card-accent: var(--accent5);">
+        <div class="topic-icon">🤖</div>
+        <div class="topic-name">LLM Reasoning & Planning</div>
+        <div class="topic-desc">Chain-of-Thought, Tree-of-Thought, ReAct, Reflexion, self-consistency, process reward models. How LLMs reason and where they fail.</div>
+        <div class="math-note">ReAct: Reason → Act → Observe loop  ·  ToT: beam search over thought trees</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Wei et al. — <strong>Chain-of-Thought Prompting Elicits Reasoning</strong><em>Original CoT</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Yao et al. — <strong>ReAct: Synergizing Reasoning and Acting</strong><em>Agentic LLMs foundation</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Yao et al. — <strong>Tree of Thoughts</strong><em>Deliberate problem solving</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent5);">
+        <div class="topic-icon">🔧</div>
+        <div class="topic-name">Tool Use & Function Calling</div>
+        <div class="topic-desc">OpenAI/Anthropic function calling, MCP (Model Context Protocol), code execution, web search, API calls. Building LLMs that can use any tool.</div>
+        <div class="math-note">Tool use = structured output parsing + safe execution environment.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>docs.anthropic.com/tool-use</strong><em>Best tool use documentation</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">DeepLearning.AI — <strong>Functions, Tools and Agents with LangChain</strong></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Sam Witteveen — <strong>LangGraph & multi-agent systems</strong><em>Practical agentic pipelines</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent5);">
+        <div class="topic-icon">🕸️</div>
+        <div class="topic-name">Multi-Agent Systems</div>
+        <div class="topic-desc">Orchestrator-subagent pattern, AutoGen, CrewAI, LangGraph. Agent memory (episodic, semantic, procedural). Multi-agent debate and verification.</div>
+        <div class="math-note">Emergent behavior: capability × coordination > sum of individual agents.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>microsoft/autogen</strong> + <strong>langchain-ai/langgraph</strong><em>GitHub repos to study</em></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Park et al. — <strong>Generative Agents: Interactive Simulacra of Human Behavior</strong></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">DeepLearning.AI — <strong>Multi AI Agent Systems with crewAI</strong></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent5);">
+        <div class="topic-icon">💾</div>
+        <div class="topic-name">LLM Memory & Context</div>
+        <div class="topic-desc">Context window management, long-context models (Gemini 1M), memory architectures (MemGPT), KV-cache optimization, streaming.</div>
+        <div class="math-note">KV-cache: store K,V projections across turns. O(n²) attention → O(n) with sliding window.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Packer et al. — <strong>MemGPT: Towards LLMs as Operating Systems</strong></div></div>
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Beltagy et al. — <strong>Longformer: The Long-Document Transformer</strong></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent5);">
+        <div class="topic-icon">🚀</div>
+        <div class="topic-name">MLOps & Production Deployment</div>
+        <div class="topic-desc">Docker, FastAPI, model serving (vLLM, TGI, TorchServe), monitoring (data drift, model drift), CI/CD for ML, experiment tracking (W&B, MLflow).</div>
+        <div class="math-note">Rule: A model in production > 10 perfect models in notebooks.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-book">BOOK</span><div class="res-text">Huyen — <strong>Designing ML Systems</strong><em>Must-read for production ML</em></div></div>
+          <div class="resource"><span class="res-tag tag-course">COURSE</span><div class="res-text">Made With ML — <strong>MLOps Course (Goku Mohandas)</strong><em>Free, comprehensive, GitHub-based</em></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>docs.wandb.ai</strong><em>W&B for experiment tracking</em></div></div>
+        </div>
+      </div>
+
+      <div class="topic-card" style="--card-accent: var(--accent5);">
+        <div class="topic-icon">🔒</div>
+        <div class="topic-name">AI Safety & Alignment Basics</div>
+        <div class="topic-desc">RLHF, Constitutional AI, RLAIF, red-teaming, jailbreaks, hallucination mitigation, interpretability (mechanistic interp).</div>
+        <div class="math-note">RLHF: r̂ = argmax E[r(x,y)] where r fitted on human preferences via Bradley-Terry.</div>
+        <div class="resources">
+          <div class="resource"><span class="res-tag tag-paper">PAPER</span><div class="res-text">Christiano et al. — <strong>Deep Reinforcement Learning from Human Preferences</strong></div></div>
+          <div class="resource"><span class="res-tag tag-site">SITE</span><div class="res-text"><strong>transformer-circuits.pub</strong><em>Anthropic's mechanistic interpretability research</em></div></div>
+          <div class="resource"><span class="res-tag tag-yt">YT</span><div class="res-text">Neel Nanda — <strong>Mechanistic Interpretability lectures</strong></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="practice-banner">
+      <div class="icon">🛠️</div>
+      <div>
+        <h4>Phase 5 — Applied Projects</h4>
+        <div class="practice-items">
+          <span class="practice-tag">Build a coding agent that solves LeetCode</span>
+          <span class="practice-tag">Multi-agent research assistant (search + summarize + cite)</span>
+          <span class="practice-tag">Deploy LLaMA on AWS/GCP with monitoring</span>
+          <span class="practice-tag">Build a personalized AI tutor with memory</span>
+          <span class="practice-tag">Win a Kaggle LLM competition</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 — RESEARCH -->
+  <div class="phase" id="phase6">
+    <div class="phase-header">
+      <div class="phase-number">06</div>
+      <div>
+        <div class="phase-title" style="color: #f59e0b;">Research Paper Mastery</div>
+        <div style="font-size:0.85rem; color: var(--muted);">Read, understand, implement, and extend any paper. Become the person who doesn't wait for libraries.</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-duration" style="color: var(--accent3); border-color: rgba(245,158,11,0.3);">WEEKS 57 – 60+</span>
+        <div class="phase-goal">Goal: Implement a recent SOTA paper</div>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <h3>📖 How to Read a Research Paper (The 3-Pass Method)</h3>
+      <div class="checklist">
+        <div class="check-item"><strong>Pass 1 (15 min):</strong> Abstract, intro, conclusion, headings only. Can you state the contribution?</div>
+        <div class="check-item"><strong>Pass 2 (1 hr):</strong> Read fully, skip proofs. Sketch all figures. Note every equation you don't understand.</div>
+        <div class="check-item"><strong>Pass 3 (4–8 hrs):</strong> Derive every proof. Implement in PyTorch. Re-run their experiments.</div>
+        <div class="check-item"><strong>Annotate papers</strong> using hypothesis.is or PDF annotations. Build a Notion/Obsidian paper database.</div>
+        <div class="check-item"><strong>Read the related work</strong> section like a roadmap — each citation is a prerequisite.</div>
+        <div class="check-item"><strong>Reproduce the key result</strong> within 48 hours of reading. No exceptions.</div>
+      </div>
+    </div>
+
+    <div class="full-card" style="margin-top: 1.5rem;">
+      <h3>🗺️ Essential Papers — Reading Order</h3>
+      <div class="checklist">
+        <div class="check-item">Word2Vec (Mikolov 2013) → GloVe → FastText</div>
+        <div class="check-item">Seq2Seq (Sutskever 2014) → Attention (Bahdanau 2015)</div>
+        <div class="check-item">Attention Is All You Need (Vaswani 2017)</div>
+        <div class="check-item">BERT (Devlin 2018) → RoBERTa → ALBERT</div>
+        <div class="check-item">GPT-2 → GPT-3 → InstructGPT → GPT-4 Tech Report</div>
+        <div class="check-item">LLaMA 1 → LLaMA 2 → LLaMA 3 → Mistral → Mixtral (MoE)</div>
+        <div class="check-item">LoRA → QLoRA → GaLore (memory efficient training)</div>
+        <div class="check-item">DDPM (Ho 2020) → DDIM → Stable Diffusion → SDXL</div>
+        <div class="check-item">CLIP (Radford 2021) → ALIGN → LLaVA → LLaVA-1.5</div>
+        <div class="check-item">ResNet → EfficientNet → ViT → DeiT → Swin Transformer</div>
+        <div class="check-item">Flash Attention 1 & 2 → PagedAttention (vLLM)</div>
+        <div class="check-item">RLHF (Christiano) → PPO → DPO → ORPO</div>
+        <div class="check-item">ReAct → Toolformer → Function Calling</div>
+        <div class="check-item">Mamba (SSM) → RetNet → RWKV (non-attention architectures)</div>
+      </div>
+    </div>
+
+    <div class="full-card" style="margin-top: 1.5rem;">
+      <h3>📡 Stay Current — Daily Reading Sources</h3>
+      <div class="checklist">
+        <div class="check-item"><strong>arxiv.org/list/cs.LG/recent</strong> — daily ML papers</div>
+        <div class="check-item"><strong>arxiv.org/list/cs.CL/recent</strong> — NLP papers</div>
+        <div class="check-item"><strong>Papers With Code</strong> — paperwithcode.com (trending + code)</div>
+        <div class="check-item"><strong>Yannic Kilcher YT</strong> — deep paper walkthroughs</div>
+        <div class="check-item"><strong>Andrej Karpathy Twitter/X</strong> — what matters in research</div>
+        <div class="check-item"><strong>Two Minute Papers YT</strong> — SOTA overview</div>
+        <div class="check-item"><strong>Sebastian Raschka's newsletter</strong> — Ahead of AI Substack</div>
+        <div class="check-item"><strong>The Batch (deeplearning.ai)</strong> — weekly research digest</div>
+        <div class="check-item"><strong>Hugging Face blog</strong> — huggingface.co/blog</div>
+        <div class="check-item"><strong>AI Alignment Forum</strong> — alignmentforum.org</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KAGGLE TRACK -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-text">COMPETITION TRACK</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="kaggle-track">
+    <h3>🏆 Kaggle Grandmaster Progression</h3>
+    <div class="kaggle-levels">
+      <div class="kaggle-level">
+        <h4>NOVICE → CONTRIBUTOR</h4>
+        <p>Join 5 competitions. Focus on Titanic, Housing, Digit Recognizer. Learn notebooks, submissions, LB.</p>
+      </div>
+      <div class="kaggle-level">
+        <h4>EXPERT (1 gold)</h4>
+        <p>Win a solo notebook or discussion medal. Deeply study top-3 solutions of past competitions.</p>
+      </div>
+      <div class="kaggle-level">
+        <h4>MASTER (3 medals)</h4>
+        <p>Ensemble models. Build custom CV pipelines. Join teams. Pseudolabeling, TTA, stochastic weight averaging.</p>
+      </div>
+      <div class="kaggle-level">
+        <h4>GRANDMASTER (5 golds)</h4>
+        <p>Custom architectures. Novel feature engineering. MLM pretraining on competition data. 1st-place writeups.</p>
+      </div>
+      <div class="kaggle-level">
+        <h4>COMPETITION STACK</h4>
+        <p>Tabular: XGBoost + LGBM + CatBoost + NN ensemble. CV: timm + custom augs. NLP: DeBERTa + LLaMA.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5rem;">
+      <h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--accent4); margin-bottom: 0.8rem;">🎓 Kaggle Grandmaster YouTube Channels to Follow</h3>
+      <div class="checklist" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+        <div class="check-item">Abhishek Thakur — @abhi1thakur</div>
+        <div class="check-item">Chris Deotte — @chrisdeotte (Kaggle NB GM)</div>
+        <div class="check-item">Rob Mulla — @robmulla</div>
+        <div class="check-item">Radek Osmulski — blog at radekosmulski.com</div>
+        <div class="check-item">Martin Henze — (Kagglers discussing solutions)</div>
+        <div class="check-item">Kaggle YT channel — competition walkthroughs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK MASTER LIST -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-text">MASTER BOOK LIST</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="full-card">
+    <h3>📚 The Complete Reading List — Ordered by Phase</h3>
+    <div class="checklist">
+      <div class="check-item"><strong>[MATH]</strong> Gilbert Strang — Introduction to Linear Algebra</div>
+      <div class="check-item"><strong>[MATH]</strong> Blitzstein & Hwang — Introduction to Probability</div>
+      <div class="check-item"><strong>[MATH]</strong> Boyd & Vandenberghe — Convex Optimization (free)</div>
+      <div class="check-item"><strong>[MATH]</strong> MacKay — Information Theory, Inference & Learning (free)</div>
+      <div class="check-item"><strong>[ML]</strong> Hastie, Tibshirani, Friedman — Elements of Statistical Learning (free)</div>
+      <div class="check-item"><strong>[ML]</strong> Murphy — Probabilistic Machine Learning Vol. 1 & 2 (free)</div>
+      <div class="check-item"><strong>[ML]</strong> Bishop — Pattern Recognition and Machine Learning</div>
+      <div class="check-item"><strong>[ML]</strong> Thakur — Approaching (Almost) Any ML Problem (free)</div>
+      <div class="check-item"><strong>[DL]</strong> Goodfellow et al. — Deep Learning (free)</div>
+      <div class="check-item"><strong>[DL]</strong> Nielsen — Neural Networks and Deep Learning (free online)</div>
+      <div class="check-item"><strong>[DL]</strong> Stevens et al. — Deep Learning with PyTorch</div>
+      <div class="check-item"><strong>[DL]</strong> Raschka — Machine Learning with PyTorch and scikit-learn</div>
+      <div class="check-item"><strong>[LLM]</strong> Raschka — Build a Large Language Model from Scratch (2024)</div>
+      <div class="check-item"><strong>[SYS]</strong> Chip Huyen — Designing Machine Learning Systems</div>
+      <div class="check-item"><strong>[RL]</strong> Sutton & Barto — Reinforcement Learning: An Introduction (free)</div>
+    </div>
+  </div>
+
+  <footer>
+    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">⚡ FROM GRADUATE TO GRANDMASTER ⚡</div>
+    Built with intention. Every concept, every paper, every competition.
+    <div style="margin-top: 0.5rem; color: rgba(100,116,139,0.5);">60 weeks → lifetime of mastery</div>
+  </footer>
+
+</div>
+</body>
+</html>

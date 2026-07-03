@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Outlier Path — Ultra-Niche AI Career Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a08;
+  --paper: #f5f0e8;
+  --paper2: #ede8dc;
+  --paper3: #e4ddd0;
+  --red: #c0392b;
+  --amber: #d4820a;
+  --green: #1a6b3c;
+  --blue: #1a3a6b;
+  --rust: #8b3a1a;
+  --muted: #6b6456;
+  --border: #c8bfaf;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  overflow-x: hidden;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+.newspaper {
+  background: var(--paper);
+  max-width: 1320px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.masthead {
+  border-bottom: 6px double var(--ink);
+  padding: 2rem 3rem 1.5rem;
+  text-align: center;
+  background: var(--paper);
+}
+.masthead-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.8rem;
+}
+.masthead-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+}
+.masthead-meta.right { text-align: right; }
+.newspaper-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.masthead-tagline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.4rem 0;
+  margin: 0.5rem 0;
+}
+.masthead-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.masthead-sub {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.section-flag {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  padding: 0.4rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-flag .flag-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+.columns-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+.columns-2 { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.columns-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+.col {
+  padding: 1.8rem 2rem;
+  border-right: 1px solid var(--border);
+}
+.col:last-child { border-right: none; }
+.col-head {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.col-head .weeks {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--red);
+  letter-spacing: 0.1em;
+}
+.col-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink); }
+.col-body p { margin-bottom: 0.8rem; }
+.drop-cap::first-letter {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: var(--red);
+}
+.pull-quote {
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  padding: 0.8rem 0;
+  margin: 1.2rem 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.2;
+}
+.resource-box {
+  background: var(--paper3);
+  border: 1px solid var(--border);
+  padding: 0.8rem;
+  margin-top: 1rem;
+}
+.resource-box h5 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+}
+.res-item {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  align-items: flex-start;
+}
+.res-pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 1px;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+  margin-top: 0.1rem;
+}
+.rp-book { background: var(--amber); color: #fff; }
+.rp-yt { background: var(--red); color: #fff; }
+.rp-course { background: var(--blue); color: #fff; }
+.rp-paper { background: var(--green); color: #fff; }
+.rp-site { background: var(--rust); color: #fff; }
+.res-name { color: var(--ink); }
+.res-name em { color: var(--muted); font-style: normal; font-size: 0.68rem; display: block; }
+.byline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dotted var(--border);
+}
+.math-box {
+  background: var(--ink);
+  color: #a8d8a0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  padding: 0.7rem 0.8rem;
+  margin: 0.8rem 0;
+  line-height: 1.6;
+  border-left: 3px solid var(--red);
+}
+.classified {
+  border: 2px solid var(--ink);
+  padding: 1.2rem;
+  margin: 1rem 0;
+  background: var(--paper2);
+  position: relative;
+}
+.classified::before {
+  content: 'POSITION PROFILE';
+  position: absolute;
+  top: -0.7rem;
+  left: 0.8rem;
+  background: var(--paper2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  padding: 0 0.3rem;
+}
+.classified h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--red);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+}
+.classified p { font-size: 0.75rem; line-height: 1.6; color: var(--ink); }
+.salary-tag {
+  display: inline-block;
+  background: var(--green);
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.4rem;
+}
+.stripe-red { background: var(--red); height: 6px; }
+.full-bleed-head {
+  padding: 2rem 3rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--paper);
+}
+.fb-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--red);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.3rem;
+}
+.fb-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  letter-spacing: 0.03em;
+  line-height: 0.95;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.fb-deck {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 800px;
+  line-height: 1.6;
+}
+.timeline-band {
+  display: flex;
+  border-bottom: 2px solid var(--ink);
+  overflow-x: auto;
+}
+.tl-item {
+  flex: 1;
+  min-width: 100px;
+  padding: 0.8rem 1rem;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.tl-item:last-child { border-right: none; }
+.tl-phase { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em; color: var(--red); margin-bottom: 0.3rem; }
+.tl-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.05em; color: var(--ink); line-height: 1.1; }
+.tl-weeks { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; color: var(--muted); margin-top: 0.2rem; }
+.flow-strip {
+  display: flex;
+  align-items: center;
+  padding: 1rem 3rem;
+  gap: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+  background: var(--paper);
+  flex-wrap: wrap;
+  row-gap: 0.8rem;
+}
+.flow-node { text-align: center; min-width: 110px; }
+.flow-box-n {
+  border: 2px solid var(--ink);
+  padding: 0.5rem 0.8rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  background: var(--paper2);
+  line-height: 1.4;
+}
+.flow-box-n.red { background: var(--red); color: #fff; border-color: var(--red); }
+.flow-box-n.blue { background: var(--blue); color: #fff; border-color: var(--blue); }
+.flow-box-n.green { background: var(--green); color: #fff; border-color: var(--green); }
+.flow-box-n.amber { background: var(--amber); color: #fff; border-color: var(--amber); }
+.flow-box-n.rust { background: var(--rust); color: #fff; border-color: var(--rust); }
+.flow-arrow-n { font-family: 'IBM Plex Mono', monospace; color: var(--muted); padding: 0 0.5rem; font-size: 1rem; flex-shrink: 0; }
+.flow-sub-n { font-family: 'IBM Plex Mono', monospace; font-size: 0.5rem; color: var(--muted); margin-top: 0.3rem; }
+.wide-box {
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--paper2);
+}
+.wide-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--ink); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; }
+.skill-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+.skill-tag.hot { background: var(--red); color: var(--paper); border-color: var(--red); }
+.skill-tag.warm { background: var(--amber); color: var(--paper); border-color: var(--amber); }
+.skill-tag.rare { background: var(--green); color: var(--paper); border-color: var(--green); }
+.check-list { list-style: none; font-size: 0.78rem; line-height: 1.8; }
+.check-list li::before { content: '□  '; font-family: 'IBM Plex Mono', monospace; color: var(--red); }
+.footnote-strip {
+  background: var(--paper3);
+  border-top: 2px double var(--ink);
+  padding: 1rem 3rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  line-height: 1.8;
+}
+@media (max-width: 900px) {
+  .columns-3, .columns-4 { grid-template-columns: 1fr; }
+  .columns-2 { grid-template-columns: 1fr; }
+  .col { border-right: none; border-bottom: 1px solid var(--border); }
+  .masthead, .section-flag, .full-bleed-head, .wide-box, .footnote-strip, .flow-strip { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .footnote-strip { grid-template-columns: 1fr; }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.newspaper > * { animation: fadeIn 0.5s ease both; }
+</style>
+</head>
+<body>
+<div class="newspaper">
+<div class="stripe-red"></div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-meta">ISSUE NO. 002 — SPECIALIST EDITION<br>THE OUTLIER CAREER DISPATCH<br>TARGET: BE AIML GRADUATES REFUSING MEDIOCRITY</div>
+    <div class="masthead-meta right">ESTIMATED TIME: 80 WEEKS<br>CAREER HORIZON: 3–5 YEARS<br>GLOBAL COMPETITION AT FINISH: &lt;200 PEOPLE</div>
+  </div>
+  <div class="newspaper-name">THE OUTLIER</div>
+  <div class="masthead-tagline">FOR ENGINEERS WHO REFUSE TO BECOME COMMODITIES</div>
+  <div class="masthead-headline">The Path Nobody Took:<br>Edge AI, Neuromorphic Systems, GPU Compilers & Quantum ML</div>
+  <p class="masthead-sub">A complete roadmap for the engineer who wants to occupy a role so rare, so technically demanding, that fewer than 200 people on Earth can do it — and companies will pay exceptional salaries to find them.</p>
+</div>
+
+<!-- MASTER FLOW -->
+<div class="flow-strip">
+  <div class="flow-node"><div class="flow-box-n red">ADVANCED<br>PYTHON &<br>SYSTEMS</div><div class="flow-sub-n">Wks 1–6</div></div>
+  <div class="flow-arrow-n">→</div>
+  <div class="flow-node"><div class="flow-box-n blue">MATH +<br>ML / DL<br>CORE</div><div class="flow-sub-n">Wks 7–22</div></div>
+  <div class="flow-arrow-n">→</div>
+  <div class="flow-node"><div class="flow-box-n amber">CUDA &<br>GPU KERNEL<br>PROGRAMMING</div><div class="flow-sub-n">Wks 23–30</div></div>
+  <div class="flow-arrow-n">→</div>
+  <div class="flow-node"><div class="flow-box-n green">EDGE AI<br>EMBEDDED<br>SYSTEMS</div><div class="flow-sub-n">Wks 31–42</div></div>
+  <div class="flow-arrow-n">→</div>
+  <div class="flow-node"><div class="flow-box-n rust">RL + SEARCH<br>+ VISION +<br>MECHATRONICS</div><div class="flow-sub-n">Wks 43–54</div></div>
+  <div class="flow-arrow-n">→</div>
+  <div class="flow-node"><div class="flow-box-n red">QUANTUM<br>AI &<br>NEUROMORPHIC</div><div class="flow-sub-n">Wks 55–66</div></div>
+  <div class="flow-arrow-n">→</div>
+  <div class="flow-node"><div class="flow-box-n blue">AUTONOMOUS<br>EDGE<br>PROTOTYPE</div><div class="flow-sub-n">Wks 67–80</div></div>
+</div>
+
+<!-- TIMELINE BAND -->
+<div class="timeline-band">
+  <div class="tl-item"><div class="tl-phase">PHASE 1</div><div class="tl-label">Advanced Python</div><div class="tl-weeks">WK 1–6</div></div>
+  <div class="tl-item"><div class="tl-phase">PHASE 2</div><div class="tl-label">Math + ML/DL</div><div class="tl-weeks">WK 7–22</div></div>
+  <div class="tl-item"><div class="tl-phase">PHASE 3</div><div class="tl-label">CUDA + GPU</div><div class="tl-weeks">WK 23–30</div></div>
+  <div class="tl-item"><div class="tl-phase">PHASE 4</div><div class="tl-label">Edge AI + Embedded</div><div class="tl-weeks">WK 31–42</div></div>
+  <div class="tl-item"><div class="tl-phase">PHASE 5</div><div class="tl-label">RL + Vision + Robots</div><div class="tl-weeks">WK 43–54</div></div>
+  <div class="tl-item"><div class="tl-phase">PHASE 6</div><div class="tl-label">Quantum + Neuromorphic</div><div class="tl-weeks">WK 55–66</div></div>
+  <div class="tl-item"><div class="tl-phase">PHASE 7</div><div class="tl-label">Autonomous Prototype</div><div class="tl-weeks">WK 67–80</div></div>
+</div>
+
+<!-- JOB PROFILES -->
+<div class="section-flag"><span>TARGET POSITIONS — WHERE THIS PATH LEADS</span><span class="flag-num">§ I</span></div>
+<div class="columns-3">
+  <div class="col">
+    <div class="byline">NVIDIA / SEMICONDUCTOR SECTOR</div>
+    <div class="classified"><h4>Deep Learning Compiler Engineer</h4><p>Translates neural network graphs (PyTorch/ONNX) into GPU/NPU machine code. Tunes TensorRT, Triton kernels, custom CUDA. NVIDIA, Qualcomm, Apple Silicon.</p><div class="salary-tag">$280K–$600K+ TC (NVIDIA)</div></div>
+    <div class="classified"><h4>AI Hardware Architect</h4><p>Designs NPU dataflow architectures, memory hierarchies, and systolic array topologies. Bridges ML research and silicon design.</p><div class="salary-tag">$350K–$700K+ TC</div></div>
+    <div class="classified"><h4>CUDA / Triton Kernel Engineer</h4><p>Hand-writes GPU kernels for attention, matmuls, custom ops. FlashAttention-level work. Only 3–4 such engineers exist at most top labs.</p><div class="salary-tag">$300K–$500K TC</div></div>
+  </div>
+  <div class="col">
+    <div class="byline">EDGE AI / EMBEDDED / DEFENSE</div>
+    <div class="classified"><h4>Edge AI Systems Engineer</h4><p>Deploys full ML pipelines on microcontrollers, FPGAs, SoCs (Jetson, Coral, STM32). Quantization, pruning, distillation. Defense, medical, autonomous robotics.</p><div class="salary-tag">$220K–$450K</div></div>
+    <div class="classified"><h4>Autonomous Systems Architect</h4><p>Designs the complete perception-planning-actuation stack for robots, drones, or vehicles. Fully offline, real-time, power-constrained. SpaceX, Boston Dynamics, defense.</p><div class="salary-tag">$250K–$550K</div></div>
+    <div class="classified"><h4>Neuromorphic Computing Engineer</h4><p>Programs Intel Loihi, BrainScaleS using spiking neural networks. Ultra-low-power AI. Fewer than 500 such engineers exist globally.</p><div class="salary-tag">$200K–$400K + equity</div></div>
+  </div>
+  <div class="col">
+    <div class="byline">QUANTUM / PHOTONIC / FRONTIER</div>
+    <div class="classified"><h4>Quantum ML Researcher</h4><p>Designs quantum circuits for ML primitives — VQE, quantum kernel methods, quantum advantage for optimization. IBM, Google Quantum AI, IonQ.</p><div class="salary-tag">$250K–$500K + stock</div></div>
+    <div class="classified"><h4>AI Chip Verification Engineer</h4><p>Tests and validates AI accelerator designs using formal methods and ML-assisted verification. Rare intersection of hardware and ML. Intel, AMD, Arm.</p><div class="salary-tag">$200K–$380K</div></div>
+    <div class="classified"><h4>Photonic AI Compute Engineer</h4><p>Builds optical neural network hardware — matrix multiplications at the speed of light. Lightmatter, Lightelligence. Tiny field, enormous upside.</p><div class="salary-tag">$180K–$400K + early equity</div></div>
+  </div>
+</div>
+
+<!-- PHASE 1: ADVANCED PYTHON -->
+<div class="section-flag"><span>PHASE 1 — ADVANCED PYTHON & SYSTEMS PROGRAMMING</span><span class="flag-num">WEEKS 1–6</span></div>
+<div class="full-bleed-head">
+  <div class="fb-number">PHASE 01 / PYTHON MASTERY</div>
+  <div class="fb-title">Beyond Scripts: Python as a Systems Language</div>
+  <p class="fb-deck">Most engineers use Python. You will understand it. The interpreter, the GIL, memory layout, C extensions, async I/O, concurrent programming — all the way down to the metal.</p>
+</div>
+<div class="columns-3">
+  <div class="col">
+    <div class="col-head">File I/O & Storage Systems <span class="weeks">WK 1</span></div>
+    <div class="col-body drop-cap">
+      <p>Master Python's file system at OS level: mmap (memory-mapped files for zero-copy data loading), buffered vs unbuffered I/O, async file I/O with aiofiles, HDF5 (h5py) for ML datasets, Parquet/Arrow for columnar data, protocol buffers, and custom binary serialization with struct.</p>
+      <div class="math-box">mmap: maps file → virtual address space (zero-copy)
+PagedIO: OS handles caching transparently
+struct.pack/unpack: C-level binary I/O
+HDF5: hierarchical, chunked, compressed datasets</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">David Beazley — Python Cookbook (3e), Ch. 5–6<em>Most advanced Python I/O coverage available</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">ArjanCodes — Advanced Python File I/O<em>Clean, modern patterns</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">docs.python.org/3/library/mmap.html<em>Official mmap reference</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Concurrency & Parallelism <span class="weeks">WK 2–3</span></div>
+    <div class="col-body">
+      <p><strong>Threading:</strong> GIL mechanics, thread-safe data structures, locks, RLocks, semaphores, thread pools. When threads help (I/O-bound) and when they hurt (CPU-bound).</p>
+      <p><strong>Multiprocessing:</strong> fork vs spawn, shared memory (mp.Array, mp.Value), message passing, process pools — the right tool for CPU-bound ML preprocessing.</p>
+      <p><strong>Asyncio:</strong> Event loop, coroutines, tasks, gather, async generators, async context managers. Essential for serving ML models at scale.</p>
+      <div class="math-box">GIL: only 1 thread runs Python bytecode at once
+→ Use multiprocessing for CPU-bound work
+→ Use asyncio for I/O-bound work
+→ Use C extensions (NumPy) to release the GIL</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Fluent Python (Ramalho, 2e), Ch. 19–21<em>Best concurrency coverage in any Python book</em></div></div>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">David Beazley — Python Concurrency Workshop<em>Free PDF from dabeaz.com</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Real Python — Async IO Deep Dive<em>Clear conceptual walkthrough</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">GPU Programming in Python <span class="weeks">WK 4–6</span></div>
+    <div class="col-body">
+      <p><strong>CuPy, Numba CUDA JIT, PyCUDA:</strong> NumPy-style GPU arrays, JIT-compiled CUDA kernels from Python. Understand CUDA thread hierarchy: grids, blocks, warps (32 threads), SIMT execution model.</p>
+      <p><strong>Triton:</strong> OpenAI's Python-like GPU kernel language. Write FlashAttention-style kernels without raw CUDA C++. The skill NVIDIA interviews for most aggressively.</p>
+      <div class="math-box">GPU: 32 threads = 1 warp (SIMT execution)
+Shared mem: 48KB/SM, ~100x faster than global
+Bandwidth: A100 = 2TB/s vs CPU 50GB/s
+Roofline model: compute-bound vs memory-bound</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Kirk & Hwu — Programming Massively Parallel Processors (4e)<em>The CUDA bible. Read cover to cover.</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">NVIDIA Deep Learning Institute — CUDA Python<em>Official NVIDIA training</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">CoffeeBeforeArch — CUDA for Beginners series<em>Best YT CUDA channel, 50+ videos</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">triton-lang.org/tutorials<em>Write kernels from day 1, official tutorials</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="columns-3">
+  <div class="col">
+    <div class="col-head">Metaprogramming & Python Internals <span class="weeks">WK 3</span></div>
+    <div class="col-body">
+      <p>Descriptors, metaclasses, __slots__, __init_subclass__, class decorators. Python's data model end-to-end. How PyTorch's autograd registers backward hooks. Write your own @dataclass-style decorator from scratch.</p>
+      <div class="math-box">type(cls) → metaclass controls class creation
+descriptor: __get__ __set__ __delete__
+__slots__: fixed layout, no __dict__, less memory</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Fluent Python (Ramalho) — Ch. 1–4, 22–24<em>Ramalho is unmatched for Python internals</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Raymond Hettinger — Super considered super (PyCon)<em>Canonical Python metaprogramming talk</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">C Extensions & Cython <span class="weeks">WK 5</span></div>
+    <div class="col-body">
+      <p>Write Python extensions in C using the CPython C API. Cython: annotated Python compiles to C. ctypes and cffi for calling C/C++ libraries from Python. Essential for writing custom PyTorch operators and hardware interfaces (serial, SPI, I2C).</p>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Kurt Smith — Cython (O'Reilly)<em>Comprehensive and practical</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">docs.python.org/3/extending/<em>Official CPython extension guide</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Raymond Hettinger — How CPython works internals<em>PyCon talk series</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Profiling & Low-Level Optimization <span class="weeks">WK 6</span></div>
+    <div class="col-body">
+      <p>cProfile, line_profiler, memory_profiler, py-spy, scalene. CUDA profiling with NVIDIA Nsight Systems and Nsight Compute. Roofline analysis. Finding and fixing memory and compute bottlenecks before they kill inference latency.</p>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">docs.nvidia.com/nsight-systems<em>Official NVIDIA profiling tools</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Brendan Gregg — Performance Methodology talks<em>Systems performance legend</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">pythonspeed.com/articles/<em>Practical Python optimization guides</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2: MATH + ML + DL -->
+<div class="section-flag"><span>PHASE 2 — MATHEMATICS, ML & DEEP LEARNING CORE + NICHE EXTENSIONS</span><span class="flag-num">WEEKS 7–22</span></div>
+<div class="wide-box">
+  <h3>Foundation Layer — Everything Else Rests Here</h3>
+  <p style="font-size:0.82rem; color: var(--muted); margin-bottom: 1rem; font-style: italic;">Full coverage in Roadmap v1. Key additions for the specialist path are highlighted below. Red = must-have, Amber = differentiator, Green = unicorn-rare.</p>
+  <div class="skills-grid">
+    <div class="skill-tag hot">Linear Algebra (SVD, eigendecomp)</div>
+    <div class="skill-tag hot">Matrix Calculus & Backprop derivation</div>
+    <div class="skill-tag hot">Probability & Information Theory</div>
+    <div class="skill-tag hot">Convex Optimization (Boyd)</div>
+    <div class="skill-tag hot">Deep Learning (full derivations)</div>
+    <div class="skill-tag hot">PyTorch internals + autograd engine</div>
+    <div class="skill-tag hot">Transformer (full math derivation)</div>
+    <div class="skill-tag warm">Quantization theory (INT8/FP8/FP16)</div>
+    <div class="skill-tag warm">Knowledge distillation</div>
+    <div class="skill-tag warm">Neural Architecture Search (DARTS)</div>
+    <div class="skill-tag warm">TensorRT & ONNX graph optimization</div>
+    <div class="skill-tag warm">Custom CUDA ops for PyTorch</div>
+    <div class="skill-tag rare">FlashAttention math + implementation</div>
+    <div class="skill-tag rare">DL compilers (TVM, XLA internals)</div>
+  </div>
+</div>
+<div class="columns-3">
+  <div class="col">
+    <div class="col-head">Model Quantization (Deep) <span class="weeks">WK 18</span></div>
+    <div class="col-body">
+      <p>Post-training quantization (PTQ), quantization-aware training (QAT), GPTQ, AWQ, SmoothQuant. INT8, INT4, FP8. This is what makes a 7B model run on a microcontroller. The core skill for any edge AI or chip company role.</p>
+      <div class="math-box">Q(w) = round(w / scale) · scale
+Per-channel vs per-tensor quantization
+Calibration: minimize ‖W − Q(W)‖ over data
+GPTQ: layer-wise second-order weight update</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Frantar et al. — GPTQ: Accurate Post-Training Quantization</div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Lin et al. — AWQ: Activation-aware Weight Quantization</div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">huggingface.co/docs/optimum<em>Quantization tools guide</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Tim Dettmers — Quantization Explained<em>Author of bitsandbytes library</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">DL Compilers & TVM <span class="weeks">WK 19–20</span></div>
+    <div class="col-body">
+      <p>How ML compilers work: computation graph → operator fusion → code generation → hardware-specific tuning. Apache TVM, MLIR, XLA. This is what the DL Compiler Engineer role at NVIDIA is built around.</p>
+      <div class="math-box">Graph optimizations: op fusion, constant folding,
+dead code elimination, layout transformation
+Auto-tuning: MetaSchedule searches op implementations
+Target: minimize latency on specific hardware</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">tvm.apache.org/docs — Tutorial series<em>Official TVM, hands-on from day 1</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">CMU 15-849 — ML Systems (free lectures)<em>Covers TVM, MLIR, XLA in depth</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Chen et al. — TVM: An Automated End-to-End Optimizing Compiler</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">FlashAttention & Efficient Transformers <span class="weeks">WK 21–22</span></div>
+    <div class="col-body">
+      <p>FlashAttention rewrote how attention is computed — tiling to avoid materializing the full N×N matrix, reducing memory I/O from O(N²) to O(N). Understand the math, then implement it in Triton. This is the single most impressive thing to show in a NVIDIA/ML systems interview.</p>
+      <div class="math-box">Standard: write O(N²) attn matrix to HBM
+Flash: tile Q,K,V → compute in SRAM → no materialize
+Memory: O(N²) → O(N), 2–4× faster in practice
+Key insight: memory bandwidth, not FLOPs, is bottleneck</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Dao et al. — FlashAttention-2: Faster Attention with Better Parallelism</div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">github.com/Dao-AILab/flash-attention<em>Read the Triton implementation</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Tri Dao — FlashAttention talk at Stanford<em>Author explains the full algorithm</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4: EDGE AI -->
+<div class="section-flag"><span>PHASE 4 — EDGE AI, EMBEDDED SYSTEMS & HARDWARE DEPLOYMENT</span><span class="flag-num">WEEKS 31–42</span></div>
+<div class="full-bleed-head">
+  <div class="fb-number">PHASE 04 / EDGE AI</div>
+  <div class="fb-title">Intelligence Without the Cloud:<br>Running Real AI on $5 Hardware</div>
+  <p class="fb-deck">This is where 99% of ML engineers stop. The ability to take a trained model, compress it, optimize it, and deploy it onto a power-constrained device with zero internet — completely offline — is one of the rarest engineering skills on the planet.</p>
+</div>
+<div class="columns-3">
+  <div class="col">
+    <div class="col-head">Embedded Systems & C/C++ <span class="weeks">WK 31–33</span></div>
+    <div class="col-body drop-cap">
+      <p>Think like the hardware. Bare-metal C for microcontrollers, memory-mapped I/O, interrupts, DMA transfers, RTOS basics (FreeRTOS), hardware abstraction layers (HAL). Learn enough to interface with cameras, IMUs, lidars, and motor controllers over SPI/I2C/UART.</p>
+      <div class="math-box">Memory map: Flash | SRAM | Peripheral registers
+Interrupt latency: must be deterministic for RT AI
+DMA: moves data without CPU → frees cycles for inference
+Stack vs heap: MCUs often have no dynamic allocation</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Elecia White — Making Embedded Systems (O'Reilly)<em>The embedded book for software engineers</em></div></div>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Ballantyne — Real-Time C++ (Springer)<em>Modern C++ on microcontrollers</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Shawn Hymel — Getting Started with FreeRTOS<em>Practical RTOS video series</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">Coursera — Introduction to Embedded Systems (UC Berkeley)</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">TFLite Micro & ONNX Runtime <span class="weeks">WK 34–36</span></div>
+    <div class="col-body">
+      <p>Deploy models to microcontrollers with no OS, no heap, and 256KB RAM. TensorFlow Lite for Microcontrollers, ONNX Runtime Edge, Edge Impulse. Understand the full stack: model → flatbuffer → interpreter → kernel dispatch → hardware op.</p>
+      <div class="pull-quote">"A model running in 3ms on a $2 chip is worth more than a model needing a $30,000 GPU server."</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Warden & Situnayake — TinyML (O'Reilly)<em>THE book. Authors built TFLite Micro at Google.</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">Harvard edX — TinyML Specialization (Pete Warden)<em>3-course series. The most complete TinyML course.</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">edgeimpulse.com/docs<em>Best end-to-end Edge ML platform</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Shawn Hymel — TinyML on Arduino/RPi series<em>Project-based, practical</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">NVIDIA Jetson & TensorRT <span class="weeks">WK 37–40</span></div>
+    <div class="col-body">
+      <p>Jetson Orin/AGX for edge AI. TensorRT: layer fusion, kernel auto-tuning, FP16/INT8 engines. DeepStream SDK for video analytics. Understand memory bandwidth constraints and design models around them. Also: Google Coral (Edge TPU), Apple Neural Engine, Qualcomm AI Engine, Hailo-8.</p>
+      <div class="math-box">TensorRT: ONNX → parse → optimize → serialize engine
+Layer fusion: Conv+BN+ReLU → single CUDA kernel
+INT8 calibration: minimize KL on activation distributions
+Throughput: batch latency trade-off on fixed hardware</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">developer.nvidia.com/tensorrt<em>Official TRT developer guide — read in full</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">NVIDIA — Jetson AI Courses (free, official)<em>Official Jetson platform training</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Liang et al. — Survey on Edge AI: Opportunities and Challenges</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="columns-2">
+  <div class="col">
+    <div class="col-head">FPGAs for AI Inference <span class="weeks">WK 41–42</span></div>
+    <div class="col-body">
+      <p>FPGAs offer the lowest latency for AI inference — no OS, no driver stack, deterministic microsecond response. HLS (High-Level Synthesis) converts C/C++ to hardware circuits. Xilinx Vitis AI deploys neural networks directly to FPGAs. Qualifies you for AMD/Xilinx, Intel Altera, and aerospace/defense AI.</p>
+      <div class="math-box">FPGA: programmable logic gates → custom datapath
+HLS: C++ with pragmas → RTL (Verilog/VHDL)
+Pipeline depth × clock freq = max throughput
+LUT / DSP / BRAM = the 3 resources to budget</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">Xilinx — Vitis AI Tutorial (free, GitHub)<em>Official FPGA AI deployment course</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">FPGA Systems — HLS & Vitis tutorials<em>Best free FPGA AI channel on YT</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Nane et al. — Survey and Evaluation of FPGA HLS Tools</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Power Budget & Thermal Optimization <span class="weeks">WK 42</span></div>
+    <div class="col-body">
+      <p>Battery life is a first-class constraint. DVFS, power gating, sleep modes, thermal throttling. Calculate inference energy: ops × energy/op. Design models to hit milliwatt budgets. This separates TinyML engineers from everyone else. Wearables, implantables, satellites, agricultural sensors.</p>
+      <div class="math-box">Energy = Power × Time = CV²f × (ops / throughput)
+Minimize ops/inference AND energy/cycle
+Duty cycling: sleep 99% → wake on sensor trigger
+Target: &lt;1mW always-on, &lt;100mW active inference</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">MIT 6.5930 — Hardware Architecture for Deep Learning<em>Lectures 10–14 focus on power modeling</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Canziani et al. — Evaluation of DNNs for Embedded Systems</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 5: RL + ROBOTICS + VISION -->
+<div class="section-flag"><span>PHASE 5 — REINFORCEMENT LEARNING, SEARCH, COMPUTER VISION & MECHATRONICS</span><span class="flag-num">WEEKS 43–54</span></div>
+<div class="full-bleed-head">
+  <div class="fb-number">PHASE 05 / AUTONOMOUS SYSTEMS</div>
+  <div class="fb-title">Making Things That Move, See & Decide</div>
+  <p class="fb-deck">A robot that runs entirely offline — navigates real environments, understands what it sees, and plans its own actions. No cloud. No internet. This is the prototype target.</p>
+</div>
+<div class="columns-4">
+  <div class="col">
+    <div class="col-head">Reinforcement Learning <span class="weeks">WK 43–46</span></div>
+    <div class="col-body">
+      <p>MDP, Bellman equations, dynamic programming, Monte Carlo, TD learning, Q-Learning. Deep RL: DQN, Double DQN, Dueling, policy gradients (REINFORCE), Actor-Critic, PPO, SAC. Model-based RL for robotics.</p>
+      <div class="math-box">Bellman: V(s)=maxₐ[R+γV(s')]
+PPO clip: L=min(r_t Â, clip(r_t,1±ε)Â)
+SAC: max E[r] + α·H(π) (entropy reg)</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Sutton & Barto — Reinforcement Learning: An Introduction (free PDF)<em>The RL bible</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">David Silver (DeepMind) — RL Course (UCL, free on YT)<em>Best RL course that exists</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Phil Tabor — Deep RL from scratch in PyTorch<em>Implements every algorithm clean</em></div></div>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Lapan — Deep Reinforcement Learning Hands-On<em>Best practical RL book</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Search Algorithms <span class="weeks">WK 47</span></div>
+    <div class="col-body">
+      <p>A*, Dijkstra, BFS/DFS, MCTS (what AlphaGo uses). Graph search for robot path planning. IDA*, D* Lite for dynamic environments. Sampling-based planners: RRT, RRT*, PRM for high-dimensional robot configuration spaces.</p>
+      <div class="math-box">A*: f(n) = g(n) + h(n)
+MCTS: select→expand→simulate→backprop
+UCT: exploit/explore via UCB1 score
+RRT*: asymptotically optimal path planning</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Russell & Norvig — AIMA (4e) Ch. 3–4<em>A*, MCTS, heuristic search coverage</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Silver et al. — Mastering Go with Deep Neural Networks (AlphaGo)</div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">redblobgames.com<em>Best visual A*/pathfinding reference</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Vision & SLAM <span class="weeks">WK 48–51</span></div>
+    <div class="col-body">
+      <p>Stereo vision, depth estimation, optical flow, visual odometry (VO), SLAM. ORB-SLAM3, OpenVINS for visual-inertial odometry. Object detection & tracking on edge hardware (YOLO-NAS, RT-DETR quantized to INT8).</p>
+      <div class="math-box">SLAM: p(x,m|z,u) ∝ p(z|x,m)·p(x|u,x₀)
+EKF-SLAM: linearize around current estimate
+Bag-of-Words: loop closure detection
+ORB features: rotation/scale invariant</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Thrun, Burgard, Fox — Probabilistic Robotics (free PDF)<em>SLAM bible</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">Cyrill Stachniss — SLAM Course (YouTube, Uni Bonn)<em>50+ lecture full course, free</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">opencv.org — Camera Calibration, Stereo tutorials<em>Foundation for robotic vision</em></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Mechatronics & ROS2 <span class="weeks">WK 52–54</span></div>
+    <div class="col-body">
+      <p>Kinematics, dynamics, actuators (servo, stepper, BLDC), motor control, PID loops, sensors (IMU, lidar, encoders). ROS2 for robot middleware: nodes, topics, services, tf2 transforms, Nav2 for autonomous navigation.</p>
+      <div class="math-box">PID: u(t) = Kp·e + Ki∫e dt + Kd·ė
+Forward kinematics: T = DH transforms chain
+IMU fusion: Mahony/Madgwick complementary filter
+Nav2: behavior trees + Costmap2D + DWA planner</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Lynch & Park — Modern Robotics (free PDF + Coursera)<em>Complete robotics mathematics</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">The Construct — ROS2 for Beginners (free tier)<em>Best practical ROS2 platform</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Articulated Robotics — ROS2 + Python series<em>Excellent project-based YT channel</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 6: QUANTUM + NEUROMORPHIC -->
+<div class="section-flag"><span>PHASE 6 — QUANTUM COMPUTING FOR AI & NEUROMORPHIC SYSTEMS</span><span class="flag-num">WEEKS 55–66</span></div>
+<div class="full-bleed-head">
+  <div class="fb-number">PHASE 06 / FRONTIER COMPUTING</div>
+  <div class="fb-title">The Next 20 Years:<br>Computing Paradigms That Will Replace Silicon</div>
+  <p class="fb-deck">Quantum advantage for ML optimization, spiking neural networks on neuromorphic chips, photonic computing. These fields are pre-competitive — engineers who build fluency now will define the next decade.</p>
+</div>
+<div class="columns-2">
+  <div class="col">
+    <div class="col-head">Quantum Computing & Quantum ML <span class="weeks">WK 55–59</span></div>
+    <div class="col-body drop-cap">
+      <p>Qubits, superposition, entanglement, quantum gates (Hadamard, CNOT, Pauli X/Y/Z), quantum circuits, measurement postulate. Quantum algorithms: Grover's search (quadratic speedup), Shor's factoring. Then quantum ML: VQE (variational quantum eigensolver), QAOA (optimization), quantum kernel methods, barren plateau problem.</p>
+      <div class="math-box">|ψ⟩ = α|0⟩ + β|1⟩  (|α|²+|β|²=1)
+Hadamard: |0⟩ → (|0⟩+|1⟩)/√2 (superposition)
+CNOT: |10⟩ → |11⟩ (entanglement)
+VQE: min⟨ψ(θ)|H|ψ(θ)⟩ over circuit params θ
+QAOA: p-layer variational circuit for combinatorial opt</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Nielsen & Chuang — Quantum Computation and Quantum Information<em>The textbook. Ch. 1–4 first.</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">qiskit.org/learn<em>IBM Qiskit — run on real quantum hardware free</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">MIT OCW 8.370 — Quantum Computing (free)<em>Rigorous mathematical treatment</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">Xanadu — PennyLane QML tutorials<em>Best quantum ML hands-on resource</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Qiskit — Quantum Computing Series (IBM, 60+ videos)<em>Official IBM quantum education</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Biamonte et al. — Quantum Machine Learning (Nature, 2017)</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Neuromorphic Computing & Spiking NNs <span class="weeks">WK 60–66</span></div>
+    <div class="col-body">
+      <p><strong>Spiking Neural Networks:</strong> Leaky integrate-and-fire neurons, spike timing dependent plasticity (STDP), rate vs temporal coding, surrogate gradient training for backprop on discrete spikes. SNNs are sparse event-driven — 100x more energy efficient than ANNs for always-on sensing.</p>
+      <p><strong>Hardware:</strong> Intel Loihi 2 (1M neurons/chip, available via INRC), IBM TrueNorth, BrainScaleS (Heidelberg), SpiNNaker (Manchester). Program Loihi using Intel's Lava framework.</p>
+      <div class="pull-quote">"The brain runs on 20 watts. Your A100 runs on 400 watts. The gap is the neuromorphic opportunity."</div>
+      <div class="math-box">LIF neuron: C dV/dt = −(V−V_rest)/R + I_syn
+Fire when V ≥ V_thresh → emit spike → reset V
+STDP: Δw ∝ exp(−|Δt|/τ) · sgn(Δt)
+Surrogate gradient: dL/dspike ≈ dL/dσ(V−Vth)</div>
+      <div class="resource-box"><h5>RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Gerstner et al. — Neuronal Dynamics (free: neuronaldynamics.epfl.ch)<em>Complete neuron model textbook</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">lava-nc.org<em>Intel Lava framework for Loihi 2 programming</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">snntorch.readthedocs.io<em>PyTorch-based SNN training — best library</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Davies et al. — Loihi: A Neuromorphic Manycore Processor (IEEE Micro)</div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">NeuroEdge Summer School (EPFL) — apply each year<em>Intensive neuromorphic training program</em></div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">Jason Eshraghian — snnTorch tutorial series<em>Best SNN practical YT channel</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 7: PROTOTYPE -->
+<div class="section-flag"><span>PHASE 7 — THE AUTONOMOUS EDGE AI PROTOTYPE</span><span class="flag-num">WEEKS 67–80</span></div>
+<div class="full-bleed-head">
+  <div class="fb-number">PHASE 07 / CAPSTONE BUILD</div>
+  <div class="fb-title">Build the Thing Nobody Else Can Build:<br>A Fully Offline Autonomous Robot</div>
+  <p class="fb-deck">One prototype that integrates every skill: edge CV perception, offline RL decision-making, SLAM navigation, ROS2 actuation, running on Jetson Orin — zero cloud dependency. This is your portfolio. This is what gets you the call.</p>
+</div>
+<div class="columns-3">
+  <div class="col">
+    <div class="col-head">Hardware BOM (~$800)</div>
+    <div class="col-body">
+      <ul class="check-list">
+        <li>NVIDIA Jetson Orin Nano ($250) — main compute</li>
+        <li>Intel RealSense D435i — RGBD + IMU camera</li>
+        <li>RPLidar A1/A2 — 2D lidar for SLAM</li>
+        <li>STM32 or Arduino Mega — low-level motor control</li>
+        <li>BLDC motors + encoders — differential drive base</li>
+        <li>4S LiPo battery pack — ~3hr runtime</li>
+        <li>MPU-9250 IMU — orientation + accel</li>
+        <li>Optional: Arduino Nicla Sense — TinyML subnode</li>
+      </ul>
+      <div class="pull-quote">Total BOM: ~$600–900. Capability: priceless portfolio.</div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Software Architecture</div>
+    <div class="col-body">
+      <ul class="check-list">
+        <li>ROS2 Humble — robot middleware + tf2</li>
+        <li>ORB-SLAM3 — visual-inertial SLAM (no GPS)</li>
+        <li>Nav2 — autonomous navigation + behavior trees</li>
+        <li>YOLOv8 + TensorRT INT8 — real-time detection</li>
+        <li>PPO agent (custom PyTorch) — task policy</li>
+        <li>ONNX Runtime — cross-hardware model serving</li>
+        <li>FastAPI — onboard REST for monitoring</li>
+        <li>TFLite Micro on STM32 — gesture/wake detection</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Performance Targets</div>
+    <div class="col-body">
+      <ul class="check-list">
+        <li>Navigate unknown room autonomously (no prior map)</li>
+        <li>Detect and avoid humans in real-time (&lt;30ms)</li>
+        <li>Recognize and approach a target object class</li>
+        <li>Operate 100% offline for 2+ continuous hours</li>
+        <li>Handle lighting changes and partial occlusion</li>
+        <li>Log all sensor + inference metrics to disk</li>
+        <li>Achieve &lt;5W idle inference power budget</li>
+        <li>Full ROS2 launch file — one-command reproducible</li>
+      </ul>
+      <div class="resource-box"><h5>REFERENCE PROJECTS</h5>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">Turtlebot4 (Clearpath) — open source nav base</div></div>
+        <div class="res-item"><span class="res-pill rp-yt">YT</span><div class="res-name">James Bruton — OpenDog builds<em>Best DIY advanced robotics channel</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">github.com/ros-planning/navigation2</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NVIDIA CAREER -->
+<div class="section-flag"><span>THE NVIDIA & SEMICONDUCTOR AI CAREER PATH — WHAT THEY ACTUALLY INTERVIEW FOR</span><span class="flag-num">§ VI</span></div>
+<div class="columns-2">
+  <div class="col">
+    <div class="col-head">NVIDIA-Specific Preparation</div>
+    <div class="col-body drop-cap">
+      <p>NVIDIA's hardest-to-fill roles are not ML engineer roles. They are at the intersection of ML and systems. The interview tests deep CUDA knowledge, understanding of memory hierarchies, ability to reason about GPU performance, and the ability to write and optimize kernels. Read TensorRT source, contribute to open GPU kernels, and implement FlashAttention in Triton.</p>
+      <div class="resource-box"><h5>CRITICAL NVIDIA-SPECIFIC RESOURCES</h5>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">CUDA C++ Programming Guide (docs.nvidia.com)<em>Read end-to-end. Not optional for any NVIDIA role.</em></div></div>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Kirk & Hwu — Programming Massively Parallel Processors<em>NVIDIA uses this as interview preparation material</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">github.com/tinygrad/tinygrad<em>George Hotz's ML framework — read the full codebase</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Dao et al. — FlashAttention-2<em>Implement in Triton. Single most impressive interview piece.</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">MIT 6.5930 — Hardware Architecture for Deep Learning (free)<em>Joel Emer. Best free DL hardware architecture course.</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">github.com/NVIDIA/TensorRT — read source + contribute</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="col-head">Semiconductor AI Architecture Papers</div>
+    <div class="col-body">
+      <p>To work on AI at chip companies, understand how neural networks map to hardware: dataflows, systolic arrays, memory hierarchies, roofline analysis, and compute-communication trade-offs.</p>
+      <div class="resource-box"><h5>HARDWARE AI ARCHITECTURE READING LIST</h5>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Chen et al. — Eyeriss: Spatial Architecture for Energy-Efficient CNN<em>Foundational DNN accelerator paper</em></div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Jouppi et al. — In-Datacenter Performance Analysis of a Tensor Processing Unit (Google TPU)</div></div>
+        <div class="res-item"><span class="res-pill rp-paper">PAPER</span><div class="res-name">Chen et al. — Survey of Accelerator Architectures for DNNs</div></div>
+        <div class="res-item"><span class="res-pill rp-book">BOOK</span><div class="res-name">Patterson & Hennessy — Computer Organization and Design (RISC-V ed.)<em>Architecture fundamentals</em></div></div>
+        <div class="res-item"><span class="res-pill rp-course">COURSE</span><div class="res-name">Stanford EE382C — Embedded Systems Design (free notes)</div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">mlsys.org — MLSys conference proceedings<em>Where systems + ML research lives</em></div></div>
+        <div class="res-item"><span class="res-pill rp-site">SITE</span><div class="res-name">hotchips.org — Hot Chips talks (free, annual)<em>Industry AI chip presentations from NVIDIA, Google, Apple</em></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FULL SKILLS INVENTORY -->
+<div class="wide-box">
+  <h3>Your Complete Skill Stack — The Full Inventory</h3>
+  <p style="font-size:0.82rem; color: var(--muted); margin-bottom: 0.8rem; font-style:italic;">RED = core requirement for any target role · AMBER = strong differentiator · GREEN = unicorn-level rare, &lt;200 people globally</p>
+  <div class="skills-grid">
+    <div class="skill-tag hot">Advanced Python (async, multiprocessing)</div>
+    <div class="skill-tag hot">C Extensions & CPython internals</div>
+    <div class="skill-tag hot">CUDA & GPU kernel programming</div>
+    <div class="skill-tag hot">Triton kernel writing</div>
+    <div class="skill-tag hot">PyTorch internals + custom C++ ops</div>
+    <div class="skill-tag hot">Deep Learning (all derivations)</div>
+    <div class="skill-tag hot">Transformer architecture (full math)</div>
+    <div class="skill-tag hot">Model quantization (GPTQ, AWQ, INT8)</div>
+    <div class="skill-tag hot">Knowledge distillation</div>
+    <div class="skill-tag warm">TensorRT optimization</div>
+    <div class="skill-tag warm">DL compilers (TVM, MLIR)</div>
+    <div class="skill-tag warm">FlashAttention implementation</div>
+    <div class="skill-tag warm">Embedded C/C++ & RTOS (FreeRTOS)</div>
+    <div class="skill-tag warm">TFLite Micro (MCU deployment)</div>
+    <div class="skill-tag warm">Edge AI hardware (Jetson, Coral, Hailo)</div>
+    <div class="skill-tag warm">FPGA HLS (Vitis AI, Xilinx)</div>
+    <div class="skill-tag warm">Reinforcement Learning (PPO, SAC)</div>
+    <div class="skill-tag warm">SLAM & Visual Odometry</div>
+    <div class="skill-tag warm">ROS2 & robot middleware</div>
+    <div class="skill-tag warm">Computer Vision on edge hardware</div>
+    <div class="skill-tag warm">Mechatronics & PID control</div>
+    <div class="skill-tag warm">Neural Architecture Search (NAS)</div>
+    <div class="skill-tag rare">Spiking Neural Networks (SNNs)</div>
+    <div class="skill-tag rare">Intel Loihi / Lava programming</div>
+    <div class="skill-tag rare">Quantum circuits & variational QML</div>
+    <div class="skill-tag rare">Qiskit / PennyLane</div>
+    <div class="skill-tag rare">AI hardware architecture (systolic arrays)</div>
+    <div class="skill-tag rare">Photonic computing concepts</div>
+  </div>
+</div>
+
+<!-- FOOTNOTE -->
+<div class="footnote-strip">
+  <div><strong>PROTOTYPE COST ESTIMATE</strong><br>Hardware BOM: ~$700–$950<br>Cloud GPU training (Vast.ai): ~$200–$400<br>Books (most available free as PDF): ~$0–$100<br>Total: &lt;$1,500 for a portfolio that<br>opens $300K+ job conversations.</div>
+  <div><strong>RARITY FUNNEL</strong><br>Python + CUDA fluency: ~50,000 engineers<br>+ Edge AI deployment: ~5,000 engineers<br>+ RL + SLAM + Robotics: ~500 engineers<br>+ Neuromorphic or Quantum: &lt;200 engineers<br><em>This path builds toward that last number.</em></div>
+  <div><strong>COMMUNITIES & CONFERENCES</strong><br>TinyML Foundation — tinyml.org<br>IROS / ICRA — robotics (apply to attend)<br>Hot Chips — semiconductor AI (free talks)<br>MLSys Conference — systems + ML research<br>Intel Neuromorphic Research Community (INRC)<br>IEEE Quantum Week (annual, apply for access)</div>
+</div>
+
+</div>
+</body>
+</html>

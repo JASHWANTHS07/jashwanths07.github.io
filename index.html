@@ -139,6 +139,27 @@
                 font-variant-numeric: tabular-nums;
             }
 
+            /* Explained terms: dotted underline, tooltip on hover, focus or tap */
+            .term {
+                text-decoration: underline dotted var(--accent);
+                text-decoration-thickness: 2px;
+                text-underline-offset: 4px;
+                cursor: help;
+            }
+            #tip {
+                position: fixed;
+                z-index: 60;
+                max-width: min(300px, calc(100vw - 16px));
+                padding: 10px 14px;
+                border-radius: 8px;
+                background: var(--ink);
+                color: var(--bg);
+                font-size: 0.9375rem;
+                font-weight: 400;
+                line-height: 1.4;
+                pointer-events: none;
+            }
+
             /* Buttons and pills */
             .btn {
                 display: inline-flex;
@@ -1235,21 +1256,21 @@
                             </h3>
                             <ul class="bullets">
                                 <li>
-                                    Built an end-to-end orchestration platform for the <strong>Monthly Refresh (MR)</strong>
+                                    Built an end-to-end orchestration platform for the <strong><span class="term" tabindex="0" data-tip="The monthly job that reloads and recomputes the data behind every dashboard.">Monthly Refresh (MR)</span></strong>
                                     that keeps 200+ country-category dashboards current, covering vendor data ingestion,
-                                    enrichment, Elasticsearch indexing, trend metrics (CAGR, engagement score),
-                                    <strong>DeepAR time-series forecasting</strong> on social and video data, and
+                                    enrichment, Elasticsearch indexing, trend metrics (<span class="term" tabindex="0" data-tip="Compound annual growth rate: the average yearly growth over a period.">CAGR</span>, engagement score),
+                                    <strong><span class="term" tabindex="0" data-tip="A neural forecasting model trained across many related time series. It predicts future values with an uncertainty range.">DeepAR</span> time-series forecasting</strong> on social and video data, and
                                     classification; <strong>cut the monthly cycle from 10 days to 2 days</strong>.
                                 </li>
                                 <li>
-                                    Built LLM-powered automated tagging workflows integrated with Spark, combining NER,
-                                    TF-IDF/KeyBERT keyword extraction, and embedding-based semantic search to tag content at
+                                    Built LLM-powered automated tagging workflows integrated with Spark, combining <span class="term" tabindex="0" data-tip="Named entity recognition: finding names of people, companies and places in text.">NER</span>,
+                                    <span class="term" tabindex="0" data-tip="Scores a word by how often it appears in one document compared with all documents.">TF-IDF</span>/<span class="term" tabindex="0" data-tip="Keyword extraction that uses BERT embeddings to pick phrases closest to a document's meaning.">KeyBERT</span> keyword extraction, and embedding-based semantic search to tag content at
                                     scale; used zero/few-shot LLM prompting via API for context-aware classification,
                                     reducing manual tagging effort by <strong>70%</strong>.
                                 </li>
                                 <li>
                                     Developed Spark-based enrichment pipelines handling <strong>100GB+</strong> datasets, applying
-                                    distributed joins and custom UDFs to enrich records against internally validated mapping
+                                    distributed joins and custom <span class="term" tabindex="0" data-tip="User-defined functions: custom logic that Spark runs on every row.">UDFs</span> to enrich records against internally validated mapping
                                     files and LLM-generated annotations, ensuring consistent, high-quality feature
                                     enrichment at scale.
                                 </li>
@@ -1259,7 +1280,7 @@
                                 <ul class="bullets">
                                     <li>
                                         Replaced manual VM- and command-driven runs across multiple repos with Jenkins jobs and
-                                        an Airflow DAG that uses a shared database as job state, checking it <strong>every 10 seconds</strong> to
+                                        an Airflow <span class="term" tabindex="0" data-tip="Directed acyclic graph: tasks linked by dependencies, so each one runs only after the tasks it needs.">DAG</span> that uses a shared database as job state, checking it <strong>every 10 seconds</strong> to
                                         trigger dependent jobs, with built-in validation and QA at every stage.
                                     </li>
                                     <li>
@@ -1338,8 +1359,8 @@
                                 </ol>
                                 <ul class="bullets">
                                     <li>
-                                        Designed and built a Retrieval-Augmented Generation (RAG) agent using Python,
-                                        SentencePiece, and FAISS to process 5,000+ documents with 2.3s average retrieval
+                                        Designed and built a Retrieval-Augmented Generation (<span class="term" tabindex="0" data-tip="The model first looks up relevant documents, then writes its answer using them.">RAG</span>) agent using Python,
+                                        SentencePiece, and <span class="term" tabindex="0" data-tip="A library for fast similarity search over embedding vectors.">FAISS</span> to process 5,000+ documents with 2.3s average retrieval
                                         time and 85% relevance accuracy.
                                     </li>
                                     <li>
@@ -1381,7 +1402,7 @@
                                 </ol>
                                 <ul class="bullets">
                                     <li>
-                                        Trained a CNN to classify 10 waste material categories with 92% accuracy on 15,000
+                                        Trained a <span class="term" tabindex="0" data-tip="Convolutional neural network: the standard model family for image tasks.">CNN</span> to classify 10 waste material categories with 92% accuracy on 15,000
                                         images; augmented dataset 3× to improve cross-validation accuracy from 87% to 92%.
                                     </li>
                                     <li>
@@ -1420,8 +1441,8 @@
                                         device failures with 92% accuracy and 87% recall across 500 simulated devices.
                                     </li>
                                     <li>
-                                        Applied advanced feature extraction (rolling averages, FFT) and ensemble models
-                                        (Random Forest, XGBoost, LSTM), achieving 15% improvement in recall over baseline.
+                                        Applied advanced feature extraction (rolling averages, <span class="term" tabindex="0" data-tip="Fast Fourier transform: breaks a signal into the frequencies it contains.">FFT</span>) and ensemble models
+                                        (Random Forest, XGBoost, <span class="term" tabindex="0" data-tip="Long short-term memory network: a neural network built for sequences such as sensor readings.">LSTM</span>), achieving 15% improvement in recall over baseline.
                                     </li>
                                     <li>
                                         Deployed models via Flask on AWS with 1.2s average response time; built Streamlit
@@ -1458,7 +1479,7 @@
                                 <ul class="bullets">
                                     <li>
                                         Fine-tuned transformer models on 100,000 parallel sentence pairs across 6 Indian
-                                        languages, achieving 23.4 BLEU (English-Hindi) and 21.8 BLEU (English-Tamil).
+                                        languages, achieving 23.4 <span class="term" tabindex="0" data-tip="A translation quality score from 0 to 100, based on overlap with a reference translation.">BLEU</span> (English-Hindi) and 21.8 BLEU (English-Tamil).
                                     </li>
                                     <li>
                                         Delivered real-time translations at 1.8s latency per sentence with batch processing
@@ -1499,7 +1520,7 @@
                             </article>
                             <article class="card">
                                 <p class="when narrow">Feb 2026</p>
-                                <h3>GATE 2026, DA qualified</h3>
+                                <h3><span class="term" tabindex="0" data-tip="Graduate Aptitude Test in Engineering: India's national exam for postgraduate engineering admission. DA is the Data Science and AI paper.">GATE</span> 2026, DA qualified</h3>
                                 <p>Data Science and AI</p>
                                 <p class="when">Score: 476. Subjects covered:</p>
                                 <ul class="chips">
@@ -1570,7 +1591,30 @@
             <div class="wrap">Jashwanth S, Bangalore, India</div>
         </footer>
 
+        <div id="tip" role="tooltip" hidden></div>
+
         <script>
+            // Tooltips for explained terms: one shared bubble, kept inside the viewport
+            const tipEl = document.getElementById("tip");
+            const showTip = (e) => {
+                const term = e.target.closest?.(".term");
+                if (!term) return;
+                tipEl.textContent = term.dataset.tip;
+                tipEl.hidden = false;
+                const r = term.getBoundingClientRect();
+                const above = r.top - tipEl.offsetHeight - 8;
+                tipEl.style.left = Math.max(8, Math.min(r.left, innerWidth - tipEl.offsetWidth - 8)) + "px";
+                tipEl.style.top = (above > 72 ? above : r.bottom + 8) + "px";
+                term.setAttribute("aria-describedby", "tip");
+            };
+            const hideTip = () => (tipEl.hidden = true);
+            document.addEventListener("mouseover", showTip);
+            document.addEventListener("focusin", showTip);
+            document.addEventListener("mouseout", (e) => e.target.closest?.(".term") && hideTip());
+            document.addEventListener("focusout", hideTip);
+            document.addEventListener("scroll", hideTip, { passive: true });
+            document.addEventListener("keydown", (e) => e.key === "Escape" && hideTip());
+
             // Theme toggle: starts from the system setting, remembers an explicit choice
             document.getElementById("theme-toggle").addEventListener("click", () => {
                 const root = document.documentElement;

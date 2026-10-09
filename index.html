@@ -3,11 +3,19 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Jashwanth S — Data Scientist, AI Engineer, Data Engineer</title>
+        <title>Jashwanth S — AI Engineer</title>
         <meta
             name="description"
             content="Jashwanth S builds time-series forecasting, classification and LLM-powered systems on top of scalable data pipelines. AI Engineer at GlobalData, Bangalore."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jashwanths07.github.io/" />
+        <meta property="og:title" content="Jashwanth S — AI Engineer" />
+        <meta property="og:description" content="Forecasting, classification and LLM systems on pipelines that run themselves. AI Engineer at GlobalData, Bangalore." />
+        <meta property="og:image" content="https://jashwanths07.github.io/images/og.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232447D6'/%3E%3Ctext x='16' y='23' font-family='Arial' font-weight='700' font-size='20' fill='white' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E" />
         <script>
             // Apply a saved theme before first paint
@@ -511,14 +519,34 @@
                 opacity: 0;
                 animation: swap 15s infinite;
             }
-            .frame img:nth-child(1) {
+            .frame img:nth-of-type(1) {
                 opacity: 1;
             }
-            .frame img:nth-child(2) {
+            .frame img:nth-of-type(2) {
                 animation-delay: -10s;
             }
-            .frame img:nth-child(3) {
+            .frame img:nth-of-type(3) {
                 animation-delay: -5s;
+            }
+            .frame:hover img,
+            .frame.paused img {
+                animation-play-state: paused;
+            }
+            .frame-toggle {
+                position: absolute;
+                right: 8px;
+                bottom: 8px;
+                z-index: 1;
+                min-height: 44px;
+                padding: 0 14px;
+                border: 1.5px solid var(--ink);
+                border-radius: 999px;
+                background: var(--surface);
+                color: var(--ink);
+                font: inherit;
+                font-size: 0.875rem;
+                font-weight: 600;
+                cursor: pointer;
             }
             @keyframes swap {
                 0%,
@@ -611,6 +639,17 @@
             }
             .job .chips {
                 margin-top: 22px;
+            }
+            /* Company wordmarks are dark, so they sit on a white tile in both themes */
+            .job .logo {
+                float: right;
+                width: auto;
+                height: 44px;
+                margin: 0 0 12px 16px;
+                padding: 10px 14px;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                background: #fff;
             }
 
             /* Projects */
@@ -733,6 +772,7 @@
                 background: var(--band);
                 color: var(--muted);
                 font-size: 0.9375rem;
+                text-align: center;
             }
 
             @media (max-width: 960px) {
@@ -819,6 +859,10 @@
                 .card {
                     padding: 22px;
                 }
+                .job .logo {
+                    height: 36px;
+                    padding: 8px 10px;
+                }
                 .brand {
                     font-size: 0.9375rem;
                 }
@@ -827,6 +871,9 @@
                 }
             }
             @media (prefers-reduced-motion: reduce) {
+                .frame-toggle {
+                    display: none;
+                }
                 html {
                     scroll-behavior: auto;
                 }
@@ -871,7 +918,7 @@
                     <p class="place">Bangalore, India</p>
                     <h1><span>Jashwanth</span> <span>S</span></h1>
                     <p class="statement">
-                        Data scientist and AI engineer building forecasting and LLM systems on pipelines that run themselves.
+                        AI Engineer building forecasting and LLM systems on pipelines that run themselves.
                     </p>
                     <div class="actions">
                         <a class="btn primary" href="#projects">See the work</a>
@@ -905,7 +952,7 @@
 
                     <dl class="stats">
                         <div>
-                            <dt>CGPA, BE (Honors) in AI &amp; ML</dt>
+                            <dt>CGPA, ranked 10th in the AIML department</dt>
                             <dd class="narrow">9.53</dd>
                         </div>
                         <div>
@@ -917,8 +964,8 @@
                             <dd class="narrow">200+</dd>
                         </div>
                         <div>
-                            <dt>Less manual tagging with LLM workflows</dt>
-                            <dd class="narrow">70%</dd>
+                            <dt>Patent filed, CNN waste detection</dt>
+                            <dd class="narrow">1</dd>
                         </div>
                     </dl>
                 </div>
@@ -929,14 +976,15 @@
                     <div class="sec-side">
                         <h2>About</h2>
                         <div class="frame">
-                            <img src="./images/1.png" alt="Jashwanth receiving an award on stage at the New Horizon College of Engineering graduation ceremony" />
-                            <img src="./images/2.png" alt="Framed Academic Excellence Award, rank 10, Bachelor of Engineering in Artificial Intelligence and Machine Learning" />
-                            <img src="./images/3.png" alt="Volleyball team with the trophy at New Horizon Cup 2023" />
+                            <button class="frame-toggle" id="frame-toggle" type="button" aria-pressed="false">Pause photos</button>
+                            <img src="./images/1.webp" alt="Jashwanth receiving an award on stage at the New Horizon College of Engineering graduation ceremony" />
+                            <img src="./images/2.webp" alt="Framed Academic Excellence Award, rank 10, Bachelor of Engineering in Artificial Intelligence and Machine Learning" />
+                            <img src="./images/3.webp" alt="Volleyball team with the trophy at New Horizon Cup 2023" />
                         </div>
                     </div>
                     <div>
                         <p class="lead">
-                            Data Scientist and AI Engineer with hands-on experience building time-series forecasting,
+                            AI Engineer with hands-on experience building time-series forecasting,
                             classification, and LLM-powered systems on top of scalable data pipelines.
                         </p>
                         <p>
@@ -1081,6 +1129,7 @@
                     </div>
                     <div>
                         <article class="card job" id="globaldata">
+                            <img class="logo" src="./images/globaldata.png" alt="" width="1541" height="306" />
                             <p class="when narrow">Aug 2025 – Present</p>
                             <h3>
                                 AI Engineer,
@@ -1144,6 +1193,7 @@
                         </article>
 
                         <article class="card job" id="aipalette">
+                            <img class="logo" src="./images/aipalette.png" alt="" width="738" height="159" />
                             <p class="when narrow">Aug 2024 – Apr 2025</p>
                             <h3>
                                 Data Engineering Intern,
@@ -1172,41 +1222,6 @@
                 <div class="wrap">
                     <div class="sec-side"><h2>Projects</h2></div>
                     <div>
-                        <article class="project">
-                            <div>
-                                <p class="when narrow">Jan 2025 – Mar 2025</p>
-                                <h3>Predictive Maintenance for IoT Devices</h3>
-                                <ul class="bullets">
-                                    <li>
-                                        Engineered an ML system using Python, Scikit-learn, and TensorFlow to forecast IoT
-                                        device failures with 92% accuracy and 87% recall across 500 simulated devices.
-                                    </li>
-                                    <li>
-                                        Applied advanced feature extraction (rolling averages, FFT) and ensemble models
-                                        (Random Forest, XGBoost, LSTM), achieving 15% improvement in recall over baseline.
-                                    </li>
-                                    <li>
-                                        Deployed models via Flask on AWS with 1.2s average response time; built Streamlit
-                                        dashboards processing 10,000+ data points per device.
-                                    </li>
-                                </ul>
-                                <ul class="chips" aria-label="Tools used">
-                                    <li data-i="python">Python</li>
-                                    <li data-i="tensorflow">TensorFlow</li>
-                                    <li data-i="scikitlearn">Scikit-learn</li>
-                                    <li>XGBoost</li>
-                                    <li>Flask</li>
-                                    <li data-i="amazonwebservices/amazonwebservices-original-wordmark">AWS</li>
-                                    <li data-i="streamlit">Streamlit</li>
-                                </ul>
-                            </div>
-                            <dl class="metrics">
-                                <div><dt>accuracy</dt><dd class="narrow">92%</dd></div>
-                                <div><dt>recall</dt><dd class="narrow">87%</dd></div>
-                                <div><dt>average response</dt><dd class="narrow">1.2s</dd></div>
-                            </dl>
-                        </article>
-
                         <article class="project">
                             <div>
                                 <p class="when narrow">Oct 2023 – Dec 2023</p>
@@ -1245,6 +1260,69 @@
 
                         <article class="project">
                             <div>
+                                <p class="when narrow">Oct 2023 – Dec 2023</p>
+                                <h3>Waste Management System: CNN Object Detection</h3>
+                                <ul class="bullets">
+                                    <li>
+                                        Trained a CNN to classify 10 waste material categories with 92% accuracy on 15,000
+                                        images; augmented dataset 3× to improve cross-validation accuracy from 87% to 92%.
+                                    </li>
+                                    <li>
+                                        Integrated with OpenCV for real-time inference at 150ms per image with 90%
+                                        precision.
+                                    </li>
+                                </ul>
+                                <p class="note">Patent filed: 202341082049 A. Source code is not public because of the patent filing.</p>
+                                <ul class="chips" aria-label="Tools used">
+                                    <li>CNN</li>
+                                    <li data-i="opencv">OpenCV</li>
+                                    <li data-i="python">Python</li>
+                                </ul>
+                            </div>
+                            <dl class="metrics">
+                                <div><dt>accuracy</dt><dd class="narrow">92%</dd></div>
+                                <div><dt>training images</dt><dd class="narrow">15,000</dd></div>
+                                <div><dt>per image</dt><dd class="narrow">150ms</dd></div>
+                            </dl>
+                        </article>
+
+                        <article class="project">
+                            <div>
+                                <p class="when narrow">Jan 2025 – Mar 2025</p>
+                                <h3>Predictive Maintenance for IoT Devices</h3>
+                                <ul class="bullets">
+                                    <li>
+                                        Engineered an ML system using Python, Scikit-learn, and TensorFlow to forecast IoT
+                                        device failures with 92% accuracy and 87% recall across 500 simulated devices.
+                                    </li>
+                                    <li>
+                                        Applied advanced feature extraction (rolling averages, FFT) and ensemble models
+                                        (Random Forest, XGBoost, LSTM), achieving 15% improvement in recall over baseline.
+                                    </li>
+                                    <li>
+                                        Deployed models via Flask on AWS with 1.2s average response time; built Streamlit
+                                        dashboards processing 10,000+ data points per device.
+                                    </li>
+                                </ul>
+                                <ul class="chips" aria-label="Tools used">
+                                    <li data-i="python">Python</li>
+                                    <li data-i="tensorflow">TensorFlow</li>
+                                    <li data-i="scikitlearn">Scikit-learn</li>
+                                    <li>XGBoost</li>
+                                    <li>Flask</li>
+                                    <li data-i="amazonwebservices/amazonwebservices-original-wordmark">AWS</li>
+                                    <li data-i="streamlit">Streamlit</li>
+                                </ul>
+                            </div>
+                            <dl class="metrics">
+                                <div><dt>accuracy</dt><dd class="narrow">92%</dd></div>
+                                <div><dt>recall</dt><dd class="narrow">87%</dd></div>
+                                <div><dt>average response</dt><dd class="narrow">1.2s</dd></div>
+                            </dl>
+                        </article>
+
+                        <article class="project">
+                            <div>
                                 <p class="when narrow">Jul 2024 – Dec 2024</p>
                                 <h3>SpeakEasy: Real-Time Indian Language Translation</h3>
                                 <ul class="bullets">
@@ -1268,34 +1346,6 @@
                                 <div><dt>BLEU, English-Hindi</dt><dd class="narrow">23.4</dd></div>
                                 <div><dt>BLEU, English-Tamil</dt><dd class="narrow">21.8</dd></div>
                                 <div><dt>per sentence</dt><dd class="narrow">1.8s</dd></div>
-                            </dl>
-                        </article>
-
-                        <article class="project">
-                            <div>
-                                <p class="when narrow">Oct 2023 – Dec 2023</p>
-                                <h3>Waste Management System: CNN Object Detection</h3>
-                                <ul class="bullets">
-                                    <li>
-                                        Trained a CNN to classify 10 waste material categories with 92% accuracy on 15,000
-                                        images; augmented dataset 3× to improve cross-validation accuracy from 87% to 92%.
-                                    </li>
-                                    <li>
-                                        Integrated with OpenCV for real-time inference at 150ms per image with 90%
-                                        precision.
-                                    </li>
-                                </ul>
-                                <p class="note">Patent filed: 202341082049 A</p>
-                                <ul class="chips" aria-label="Tools used">
-                                    <li>CNN</li>
-                                    <li data-i="opencv">OpenCV</li>
-                                    <li data-i="python">Python</li>
-                                </ul>
-                            </div>
-                            <dl class="metrics">
-                                <div><dt>accuracy</dt><dd class="narrow">92%</dd></div>
-                                <div><dt>training images</dt><dd class="narrow">15,000</dd></div>
-                                <div><dt>per image</dt><dd class="narrow">150ms</dd></div>
                             </dl>
                         </article>
                     </div>
@@ -1366,7 +1416,7 @@
                     <div>
                         <p>Email is the fastest way to reach me.</p>
                         <a class="email" href="mailto:jashwanthsangu07@gmail.com">jashwanthsangu07@gmail.com</a>
-                        <p class="narrow"><a href="tel:+919019702498">+91-9019702498</a>, Bangalore, India</p>
+                        <p>Bangalore, India</p>
                         <div class="actions">
                             <a class="btn" href="https://github.com/JASHWANTHS07" target="_blank" rel="noopener noreferrer">GitHub</a>
                             <a class="btn" href="https://www.linkedin.com/in/jashwanths07/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -1392,6 +1442,13 @@
                 try {
                     localStorage.setItem("theme", root.dataset.theme);
                 } catch (e) {}
+            });
+
+            // Pause or resume the About photo rotation
+            document.getElementById("frame-toggle").addEventListener("click", (e) => {
+                const paused = e.target.parentElement.classList.toggle("paused");
+                e.target.setAttribute("aria-pressed", paused);
+                e.target.textContent = paused ? "Play photos" : "Pause photos";
             });
 
             // Tech logos for chips; a chip stays text-only if its logo fails to load

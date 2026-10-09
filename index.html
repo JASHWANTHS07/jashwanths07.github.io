@@ -36,7 +36,7 @@
                 --band: #e9edf5;
                 --surface: #ffffff;
                 --ink: #0e1730;
-                --muted: #55607a;
+                --muted: #47516a;
                 --line: #d9dfeb;
                 --accent: #2447d6;
                 --on-accent: #ffffff;
@@ -50,7 +50,7 @@
                     --band: #101633;
                     --surface: #141a36;
                     --ink: #e8ecf8;
-                    --muted: #9aa5c4;
+                    --muted: #aeb8d4;
                     --line: #262e52;
                     --accent: #7c96ff;
                     --on-accent: #0c1024;
@@ -63,7 +63,7 @@
                 --band: #101633;
                 --surface: #141a36;
                 --ink: #e8ecf8;
-                --muted: #9aa5c4;
+                --muted: #aeb8d4;
                 --line: #262e52;
                 --accent: #7c96ff;
                 --on-accent: #0c1024;
@@ -117,7 +117,7 @@
                 border-radius: 4px;
             }
             .wrap {
-                max-width: 1120px;
+                max-width: 1240px;
                 margin: 0 auto;
                 padding: 0 24px;
             }
@@ -186,6 +186,26 @@
                 backdrop-filter: blur(10px);
                 border-bottom: 1.5px solid var(--ink);
             }
+            @supports (animation-timeline: scroll()) {
+                .site-header::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: -3px;
+                    height: 3px;
+                    background: var(--accent);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    animation: progress linear both;
+                    animation-timeline: scroll();
+                }
+                @keyframes progress {
+                    to {
+                        transform: scaleX(1);
+                    }
+                }
+            }
             .site-header .wrap {
                 height: 100%;
                 display: flex;
@@ -234,7 +254,7 @@
                 gap: 14px;
                 max-width: 420px;
                 color: var(--muted);
-                font-size: 0.9375rem;
+                font-size: 1rem;
             }
             .place::after {
                 content: "";
@@ -243,16 +263,20 @@
                 background: var(--line);
             }
             .hero h1 {
-                margin: 12px 0 28px -0.04em;
-                font-size: clamp(2.5rem, 12vw, 9rem);
+                margin: 12px 0 40px -0.04em;
+                font-size: clamp(2rem, 10vw, 7.25rem);
                 font-weight: 900;
                 font-stretch: 112%;
-                line-height: 0.86;
+                line-height: 0.9;
+                white-space: nowrap;
                 letter-spacing: -0.035em;
                 text-transform: uppercase;
             }
-            .hero h1 span {
-                display: block;
+            .hero-main {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 500px);
+                gap: 40px 56px;
+                align-items: end;
             }
             .statement {
                 max-width: 27ch;
@@ -291,11 +315,9 @@
 
             /* Run graph: the monthly refresh pipeline */
             .run {
-                margin-top: 64px;
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) auto;
-                gap: 24px 48px;
-                align-items: center;
+                grid-template-columns: minmax(0, 1fr);
+                gap: 24px;
                 padding: 28px;
                 background: var(--surface);
                 border: 1.5px solid var(--ink);
@@ -375,7 +397,7 @@
             }
             .run-result span {
                 color: var(--muted);
-                font-size: 0.9375rem;
+                font-size: 1rem;
             }
 
             .stats {
@@ -398,7 +420,7 @@
             }
             .stats dt {
                 color: var(--muted);
-                font-size: 0.9375rem;
+                font-size: 1rem;
             }
 
             /* Sections: heading on the left, content on the right */
@@ -411,7 +433,7 @@
             }
             .sec > .wrap {
                 display: grid;
-                grid-template-columns: 260px minmax(0, 1fr);
+                grid-template-columns: 17.5rem minmax(0, 1fr);
                 gap: 32px 56px;
                 align-items: start;
             }
@@ -420,7 +442,7 @@
                 top: calc(var(--header-h) + 32px);
             }
             .sec h2 {
-                font-size: clamp(1.75rem, 3vw, 2.25rem);
+                font-size: clamp(1.75rem, 3vw, 2rem);
                 font-weight: 800;
                 font-stretch: 112%;
                 line-height: 1.1;
@@ -438,7 +460,8 @@
             }
             .when {
                 color: var(--muted);
-                font-size: 0.9375rem;
+                font-size: 1rem;
+                font-stretch: 88%;
             }
             h3 {
                 font-size: 1.3125rem;
@@ -481,6 +504,10 @@
                 background: var(--surface);
                 font-size: 0.9375rem;
                 line-height: 1.2;
+                transition: border-color 0.15s ease;
+            }
+            .chips li:hover {
+                border-color: var(--accent);
             }
             .chips li:not(:has(img)) {
                 padding-left: 12px;
@@ -640,6 +667,31 @@
             .job .chips {
                 margin-top: 22px;
             }
+            .more {
+                margin-top: 8px;
+            }
+            .more summary {
+                display: inline-flex;
+                align-items: center;
+                min-height: 44px;
+                font-weight: 600;
+                cursor: pointer;
+                list-style: none;
+                text-decoration: underline;
+                text-decoration-color: var(--accent);
+                text-decoration-thickness: 2px;
+                text-underline-offset: 4px;
+            }
+            .more summary::-webkit-details-marker {
+                display: none;
+            }
+            .more[open] .closed,
+            .more:not([open]) .open {
+                display: none;
+            }
+            .more .bullets {
+                margin-top: 6px;
+            }
             /* Company wordmarks are dark, so they sit on a white tile in both themes */
             .job .logo {
                 float: right;
@@ -653,10 +705,16 @@
             }
 
             /* Projects */
+            #projects > .wrap {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            #projects .sec-side {
+                position: static;
+            }
             .project {
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) 220px;
-                gap: 24px 36px;
+                grid-template-columns: minmax(0, 1fr) 340px;
+                gap: 24px 64px;
                 align-items: start;
                 padding: 36px 0;
                 border-top: 1px solid var(--line);
@@ -669,10 +727,38 @@
                 padding-bottom: 0;
             }
             .project:nth-child(even) {
-                grid-template-columns: 220px minmax(0, 1fr);
+                grid-template-columns: 340px minmax(0, 1fr);
             }
             .project:nth-child(even) .metrics {
                 order: -1;
+            }
+            /* Flow strip: the project's pipeline, step by step */
+            .flow {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px 30px;
+                margin-top: 16px;
+            }
+            .flow li {
+                position: relative;
+                padding: 6px 12px;
+                border: 1.5px solid var(--ink);
+                border-radius: 8px;
+                background: var(--surface);
+                font-size: 0.9375rem;
+                font-weight: 600;
+                line-height: 1.3;
+            }
+            .flow li:not(:last-child)::after {
+                content: "";
+                position: absolute;
+                left: calc(100% + 5px);
+                top: 50%;
+                width: 22px;
+                height: 10px;
+                margin-top: -5px;
+                background: var(--accent);
+                clip-path: polygon(0 40%, 68% 40%, 68% 0, 100% 50%, 68% 100%, 68% 60%, 0 60%);
             }
             .project .chips {
                 margin-top: 18px;
@@ -681,11 +767,18 @@
                 margin-top: 20px;
             }
             .metrics {
-                padding: 6px 22px;
+                padding: 10px 28px;
                 background: var(--surface);
                 border: 1.5px solid var(--ink);
                 border-radius: 12px;
                 box-shadow: 4px 4px 0 var(--ink);
+            }
+            .metrics {
+                transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            }
+            .project:hover .metrics {
+                border-color: var(--accent);
+                box-shadow: 4px 4px 0 var(--accent);
             }
             .metrics div {
                 display: flex;
@@ -696,13 +789,13 @@
                 border-top: 1px solid var(--line);
             }
             .metrics dd {
-                font-size: 1.875rem;
+                font-size: 2.5rem;
                 font-weight: 800;
                 line-height: 1.1;
             }
             .metrics dt {
                 color: var(--muted);
-                font-size: 0.875rem;
+                font-size: 1rem;
             }
             .note {
                 margin-top: 14px;
@@ -722,22 +815,39 @@
             .edu p {
                 margin-top: 8px;
             }
+            .edu .card {
+                display: flex;
+                flex-direction: column;
+            }
+            /* Certificate button: larger, centred in the space left under the text */
             .edu .btn {
-                margin-top: 20px;
+                margin: auto;
+                min-height: 54px;
+                padding: 0 30px;
+                font-size: 1.0625rem;
+            }
+            .edu p:has(+ .btn) {
+                margin-bottom: 24px;
+            }
+            .edu .chips {
+                margin-top: 12px;
             }
             /* Certifications */
-            .certs li {
+            .certs {
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) auto auto;
-                gap: 4px 24px;
-                padding: 14px 0;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0 48px;
+            }
+            .certs li {
+                padding: 16px 0;
                 border-top: 1px solid var(--line);
             }
-            .certs li:first-child {
-                border-top: 0;
-                padding-top: 0;
+            .certs b {
+                display: block;
+                line-height: 1.35;
             }
             .certs span {
+                margin-right: 12px;
                 color: var(--muted);
             }
 
@@ -775,7 +885,15 @@
                 text-align: center;
             }
 
+            @media (min-width: 1600px) {
+                html {
+                    font-size: 112.5%;
+                }
+            }
             @media (max-width: 960px) {
+                .hero-main {
+                    grid-template-columns: minmax(0, 1fr);
+                }
                 .nav {
                     display: none;
                 }
@@ -850,11 +968,8 @@
                 .skills dt {
                     padding-top: 0;
                 }
-                .certs li {
-                    grid-template-columns: minmax(0, 1fr) auto;
-                }
-                .certs li b {
-                    grid-column: 1 / -1;
+                .certs {
+                    grid-template-columns: minmax(0, 1fr);
                 }
                 .card {
                     padding: 22px;
@@ -916,7 +1031,9 @@
             <section class="hero" id="top">
                 <div class="wrap">
                     <p class="place">Bangalore, India</p>
-                    <h1><span>Jashwanth</span> <span>S</span></h1>
+                    <h1>Jashwanth S</h1>
+                    <div class="hero-main">
+                    <div>
                     <p class="statement">
                         AI Engineer building forecasting and LLM systems on pipelines that run themselves.
                     </p>
@@ -934,6 +1051,7 @@
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                     </nav>
+                    </div>
 
                     <div class="run">
                         <ol aria-label="Stages of the monthly refresh pipeline I built at GlobalData">
@@ -948,6 +1066,7 @@
                             <strong><s>10 days</s> 2 days</strong>
                             <span>to refresh 200+ dashboards, every month</span>
                         </p>
+                    </div>
                     </div>
 
                     <dl class="stats">
@@ -1003,38 +1122,37 @@
                     <div class="sec-side"><h2>Skills</h2></div>
                     <dl class="skills">
                         <div>
-                            <dt>Languages</dt>
+                            <dt>Languages and data</dt>
                             <dd>
                                 <ul class="chips">
                                     <li data-i="python">Python</li>
-                                    <li>SQL</li>
                                     <li data-i="r">R</li>
                                     <li data-i="javascript">JavaScript</li>
+                                    <li data-i="pandas">Pandas</li>
+                                    <li data-i="numpy">NumPy</li>
+                                    <li data-i="mysql">MySQL</li>
+                                    <li data-i="postgresql">PostgreSQL</li>
+                                    <li data-i="mongodb">MongoDB</li>
+                                    <li data-i="elasticsearch">Elasticsearch</li>
+                                    <li>SQL</li>
                                 </ul>
                             </dd>
                         </div>
                         <div>
-                            <dt>Data science and forecasting</dt>
+                            <dt>Machine learning and forecasting</dt>
                             <dd>
                                 <ul class="chips">
+                                    <li data-i="tensorflow">TensorFlow</li>
+                                    <li data-i="pytorch">PyTorch</li>
+                                    <li data-i="scikitlearn">Scikit-learn</li>
+                                    <li data-i="keras">Keras</li>
+                                    <li>XGBoost</li>
                                     <li>Time-series forecasting (DeepAR)</li>
                                     <li>Classification</li>
                                     <li>Predictive modeling</li>
                                     <li>Feature engineering</li>
                                     <li>Model evaluation</li>
                                     <li>Data validation and QA</li>
-                                </ul>
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>ML and DL frameworks</dt>
-                            <dd>
-                                <ul class="chips">
-                                    <li data-i="tensorflow">TensorFlow</li>
-                                    <li data-i="pytorch">PyTorch</li>
-                                    <li data-i="scikitlearn">Scikit-learn</li>
-                                    <li>XGBoost</li>
-                                    <li data-i="keras">Keras</li>
                                 </ul>
                             </dd>
                         </div>
@@ -1047,6 +1165,9 @@
                                     <li>LLM fine-tuning</li>
                                     <li>RAG</li>
                                     <li>AI agents</li>
+                                    <li>Agentic workflows</li>
+                                    <li>Generative AI</li>
+                                    <li>Embedding techniques</li>
                                     <li>Ollama</li>
                                     <li>SentencePiece</li>
                                     <li>FAISS</li>
@@ -1075,36 +1196,13 @@
                                     <li data-i="docker">Docker</li>
                                     <li data-i="amazonwebservices/amazonwebservices-original-wordmark">AWS</li>
                                     <li data-i="googlecloud">GCP</li>
-                                    <li>SageMaker</li>
                                     <li data-i="fastapi">FastAPI</li>
                                     <li data-i="streamlit">Streamlit</li>
                                     <li data-i="apacheairflow">Apache Airflow</li>
                                     <li data-i="apachespark">Apache Spark</li>
                                     <li data-i="jenkins">Jenkins</li>
-                                </ul>
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>Data and databases</dt>
-                            <dd>
-                                <ul class="chips">
-                                    <li data-i="pandas">Pandas</li>
-                                    <li data-i="numpy">NumPy</li>
-                                    <li data-i="mysql">MySQL</li>
-                                    <li data-i="postgresql">PostgreSQL</li>
-                                    <li data-i="mongodb">MongoDB</li>
-                                    <li data-i="elasticsearch">Elasticsearch</li>
-                                </ul>
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>Specializations</dt>
-                            <dd>
-                                <ul class="chips">
-                                    <li>Generative AI</li>
-                                    <li>Agentic workflows</li>
+                                    <li>SageMaker</li>
                                     <li>Workflow orchestration</li>
-                                    <li>Embedding techniques</li>
                                 </ul>
                             </dd>
                         </div>
@@ -1144,40 +1242,45 @@
                                     classification; <strong>cut the monthly cycle from 10 days to 2 days</strong>.
                                 </li>
                                 <li>
-                                    Replaced manual VM- and command-driven runs across multiple repos with Jenkins jobs and
-                                    an Airflow DAG that uses a shared database as job state, checking it every 10 seconds to
-                                    trigger dependent jobs, with built-in validation and QA at every stage.
-                                </li>
-                                <li>
-                                    Added a natural-language control layer integrated with Slack, letting teams trigger
-                                    runs, track status, receive error alerts, and resolve issues directly in chat; backed by
-                                    a custom orchestrator UI and FastAPI backend.
-                                </li>
-                                <li>
                                     Built LLM-powered automated tagging workflows integrated with Spark, combining NER,
                                     TF-IDF/KeyBERT keyword extraction, and embedding-based semantic search to tag content at
                                     scale; used zero/few-shot LLM prompting via API for context-aware classification,
-                                    reducing manual tagging effort by 70%.
+                                    reducing manual tagging effort by <strong>70%</strong>.
                                 </li>
                                 <li>
-                                    Automated data pipelines with Apache Airflow, orchestrating multi-step DAGs for
-                                    ingestion, transformation, and validation across 1M+ rows weekly; incorporated retry
-                                    logic, alerting, and dependency management to ensure fault-tolerant execution, cutting
-                                    manual effort by 60%.
-                                </li>
-                                <li>
-                                    Developed Spark-based enrichment pipelines handling 100GB+ datasets, applying
+                                    Developed Spark-based enrichment pipelines handling <strong>100GB+</strong> datasets, applying
                                     distributed joins and custom UDFs to enrich records against internally validated mapping
                                     files and LLM-generated annotations, ensuring consistent, high-quality feature
                                     enrichment at scale.
                                 </li>
-                                <li>
-                                    Built a data collection pipeline harvesting Google and YouTube search data using
-                                    Playwright for browser automation with header caching and intelligent request throttling
-                                    to avoid API rate limits; integrated LLM-based content classification and relevance
-                                    scoring, with data stored in S3 and PostgreSQL, improving ingestion speed by 40%.
-                                </li>
                             </ul>
+                            <details class="more">
+                                <summary><span class="closed">Show 4 more</span><span class="open">Show fewer</span></summary>
+                                <ul class="bullets">
+                                    <li>
+                                        Replaced manual VM- and command-driven runs across multiple repos with Jenkins jobs and
+                                        an Airflow DAG that uses a shared database as job state, checking it <strong>every 10 seconds</strong> to
+                                        trigger dependent jobs, with built-in validation and QA at every stage.
+                                    </li>
+                                    <li>
+                                        Added a natural-language control layer integrated with Slack, letting teams trigger
+                                        runs, track status, receive error alerts, and resolve issues directly in chat; backed by
+                                        a custom orchestrator UI and FastAPI backend.
+                                    </li>
+                                    <li>
+                                        Automated data pipelines with Apache Airflow, orchestrating multi-step DAGs for
+                                        ingestion, transformation, and validation across 1M+ rows weekly; incorporated retry
+                                        logic, alerting, and dependency management to ensure fault-tolerant execution, cutting
+                                        manual effort by <strong>60%</strong>.
+                                    </li>
+                                    <li>
+                                        Built a data collection pipeline harvesting Google and YouTube search data using
+                                        Playwright for browser automation with header caching and intelligent request throttling
+                                        to avoid API rate limits; integrated LLM-based content classification and relevance
+                                        scoring, with data stored in S3 and PostgreSQL, improving ingestion speed by <strong>40%</strong>.
+                                    </li>
+                                </ul>
+                            </details>
                             <ul class="chips" aria-label="Tools used">
                                 <li data-i="apacheairflow">Airflow</li>
                                 <li data-i="apachespark">Spark</li>
@@ -1202,15 +1305,15 @@
                             <ul class="bullets">
                                 <li>
                                     Managed 10M+ records across production datasets ensuring high availability; reduced data
-                                    retrieval errors by 25%.
+                                    retrieval errors by <strong>25%</strong>.
                                 </li>
                                 <li>
-                                    Engineered optimized real-time processing workflows increasing system throughput by 35%
+                                    Engineered optimized real-time processing workflows increasing system throughput by <strong>35%</strong>
                                     and improving response times by 20%.
                                 </li>
                                 <li>
                                     Built scalable pipelines automating data movement to production, cutting manual
-                                    processing time by 40% and enabling near real-time analytics.
+                                    processing time by <strong>40%</strong> and enabling near real-time analytics.
                                 </li>
                             </ul>
                         </article>
@@ -1226,6 +1329,13 @@
                             <div>
                                 <p class="when narrow">Oct 2023 – Dec 2023</p>
                                 <h3>Agentic RAG System</h3>
+                                <ol class="flow" aria-label="How it works, in order">
+                                    <li>5,000+ documents</li>
+                                    <li>SentencePiece</li>
+                                    <li>FAISS retrieval</li>
+                                    <li>HuggingFace Transformers</li>
+                                    <li>Streamlit app</li>
+                                </ol>
                                 <ul class="bullets">
                                     <li>
                                         Designed and built a Retrieval-Augmented Generation (RAG) agent using Python,
@@ -1262,6 +1372,13 @@
                             <div>
                                 <p class="when narrow">Oct 2023 – Dec 2023</p>
                                 <h3>Waste Management System: CNN Object Detection</h3>
+                                <ol class="flow" aria-label="How it works, in order">
+                                    <li>15,000 images</li>
+                                    <li>3× augmentation</li>
+                                    <li>CNN classifier</li>
+                                    <li>OpenCV real-time inference</li>
+                                    <li>10 waste categories</li>
+                                </ol>
                                 <ul class="bullets">
                                     <li>
                                         Trained a CNN to classify 10 waste material categories with 92% accuracy on 15,000
@@ -1290,6 +1407,13 @@
                             <div>
                                 <p class="when narrow">Jan 2025 – Mar 2025</p>
                                 <h3>Predictive Maintenance for IoT Devices</h3>
+                                <ol class="flow" aria-label="How it works, in order">
+                                    <li>Device sensor data</li>
+                                    <li>Rolling averages, FFT</li>
+                                    <li>Random Forest, XGBoost, LSTM</li>
+                                    <li>Flask on AWS</li>
+                                    <li>Streamlit dashboard</li>
+                                </ol>
                                 <ul class="bullets">
                                     <li>
                                         Engineered an ML system using Python, Scikit-learn, and TensorFlow to forecast IoT
@@ -1325,6 +1449,12 @@
                             <div>
                                 <p class="when narrow">Jul 2024 – Dec 2024</p>
                                 <h3>SpeakEasy: Real-Time Indian Language Translation</h3>
+                                <ol class="flow" aria-label="How it works, in order">
+                                    <li>100,000 sentence pairs</li>
+                                    <li>Fine-tuned transformer</li>
+                                    <li>6 Indian languages</li>
+                                    <li>CLI and web interface</li>
+                                </ol>
                                 <ul class="bullets">
                                     <li>
                                         Fine-tuned transformer models on 100,000 parallel sentence pairs across 6 Indian
@@ -1371,7 +1501,16 @@
                                 <p class="when narrow">Feb 2026</p>
                                 <h3>GATE 2026, DA qualified</h3>
                                 <p>Data Science and AI</p>
-                                <p class="when">Score: 476</p>
+                                <p class="when">Score: 476. Subjects covered:</p>
+                                <ul class="chips">
+                                    <li>Probability and Statistics</li>
+                                    <li>Linear Algebra</li>
+                                    <li>Calculus and Optimization</li>
+                                    <li>Programming, Data Structures and Algorithms</li>
+                                    <li>Database Management and Warehousing</li>
+                                    <li>Machine Learning</li>
+                                    <li>AI</li>
+                                </ul>
                             </article>
                         </div>
                     </div>
